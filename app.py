@@ -18,22 +18,20 @@ gc = sg.service_account("key.json")
 url = 'https://docs.google.com/spreadsheets/d/1FZblAsihwNUfUVNDvdRQQ3SHx1PeOficVXcPLsQep3s/edit?usp=sharing'
 
 
-#df principal
-@st.cache_data
-def load_data(dados):
-    sh = gc.open_by_url(url)   
-    ws = sh.get_worksheet(0)   
-    planilha = ws.get_all_values()   
-    df = pd.DataFrame(planilha[1:], columns=planilha[0])
-    return df
 
-df = load_data(url)
+sh = gc.open_by_url(url)   
+ws = sh.get_worksheet(0)   
+planilha = ws.get_all_values()   
+df = pd.DataFrame(planilha[1:], columns=planilha[0])
 
-df = df.drop(columns="IMAGEM")
+
+# df = load_data(url)
+
+# df = df.drop(columns="IMAGEM")
 
 
 
-dfeditar = df
+# dfeditar = df
 
 
 
