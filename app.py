@@ -8,7 +8,7 @@ st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="🟢", layo
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
-st.title("Ativar e inativar produtos",anchor=False)
+st.title("Conexão ao bando de dados na nuvem",anchor=False)
 st.divider()
 
 # col1, col2 = st.columns(2)
