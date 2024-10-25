@@ -2,8 +2,9 @@ import streamlit as st
 import pandas as pd
 import gspread as sg
 from gspread import Worksheet
+import psycopg2
 
-st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="🟢", layout="wide")
+st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide")
 
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
@@ -16,8 +17,8 @@ st.divider()
 # ----------------------------------------------------------------------------------------
 # Dados Saídas
 
-gc = sg.service_account("key.json")
-url = 'https://docs.google.com/spreadsheets/d/1FZblAsihwNUfUVNDvdRQQ3SHx1PeOficVXcPLsQep3s/edit?usp=sharing'
+# gc = sg.service_account("key.json")
+# url = 'https://docs.google.com/spreadsheets/d/1FZblAsihwNUfUVNDvdRQQ3SHx1PeOficVXcPLsQep3s/edit?usp=sharing'
 
 
 
@@ -60,16 +61,16 @@ url = 'https://docs.google.com/spreadsheets/d/1FZblAsihwNUfUVNDvdRQQ3SHx1PeOficV
 #     ws1.update_cell(int(index), 6, status)
 #     st.success("Edição salva!")
 
-import psycopg2
+# # -------------------------------------------------------------------------------------------
+# DATABASE POSTGRES NA NUVEM
 
-# Defina suas credenciais e informações de conexão
-host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'  # ex: 'host-do-seu-banco-de-dados.com'
+
+host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
 database = 'postgres'
 user = 'postgres'
 password = 'MeSaIkkB57YSOgLO'
-port = '5432'  # Porta padrão do PostgreSQL
+port = '5432'
 
-# Estabeleça a conexão
 try:
     conn = psycopg2.connect(
         host=host,
@@ -85,7 +86,7 @@ try:
 except Exception as e:
     st.write(f"Erro ao conectar: {e}")
 
-# Feche a conexão ao terminar
+
 if conn:
     conn.close()
 

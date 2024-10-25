@@ -2,6 +2,6 @@ header{
     display: none;
 }
 
-body{
+#root{
     background-color: aquamarine;
 }
