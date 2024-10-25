@@ -1,5 +1,4 @@
 streamlit
 pandas
-gspread
-datetime
+gspreadp
 psycopg2

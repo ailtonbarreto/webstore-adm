@@ -61,7 +61,6 @@ url = 'https://docs.google.com/spreadsheets/d/1FZblAsihwNUfUVNDvdRQQ3SHx1PeOficV
 #     st.success("Edição salva!")
 
 import psycopg2
-from psycopg2 import sql
 
 # Defina suas credenciais e informações de conexão
 host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'  # ex: 'host-do-seu-banco-de-dados.com'
