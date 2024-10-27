@@ -78,7 +78,10 @@ def load_data():
             password=password,
             port=port
         )        
-        query = "SELECT * FROM tembo.tb_integracao;"
+        # query = "SELECT * FROM tembo.tb_integracao;"
+        
+        query = "SELECT * FROM tembo.tb_vendas;"
+        
         df = pd.read_sql_query(query, conn)
     except Exception as e:
         st.write(f"Erro ao conectar: {e}")
