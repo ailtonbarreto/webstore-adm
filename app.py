@@ -28,7 +28,7 @@ def load_data():
         )        
         # query = "SELECT * FROM tembo.tb_integracao;"
         
-        query = "SELECT * FROM tembo.tb_integracao;"
+        query = "SELECT * FROM tembo.tb_vendas;"
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
