@@ -26,9 +26,10 @@ def load_data():
             password=password,
             port=port
         )        
-        # query = "SELECT * FROM tembo.tb_integracao;"
+        with open("select_bd_webstore.sql", "r") as file:
+            query = file.read()
         
-        query = "SELECT * FROM tembo.tb_vendas;"
+        # query = "SELECT * FROM tembo.tb_vendas"
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
@@ -41,7 +42,5 @@ def load_data():
 
 df = load_data()
 
-
-json_result = df.to_json(orient='records', lines=True)
 
 st.dataframe(df,hide_index=True,use_container_width=True)
