@@ -1,3 +1,3 @@
-SELECT * FROM tembo.tb_vendas;
+SELECT * FROM tembo.tb_venda;
 
 

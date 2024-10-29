@@ -29,8 +29,6 @@ def load_data():
         with open("select_bd_webstore.sql", "r") as file:
             query = file.read()
         
-        # query = "SELECT * FROM tembo.tb_vendas"
-        
         df = pd.read_sql_query(query, conn)
     except Exception as e:
         st.write(f"Erro ao conectar: {e}")
