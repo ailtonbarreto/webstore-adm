@@ -10,6 +10,10 @@ with open("style.css") as f:
 # -------------------------------------------------------------------------------------------------------
 # DATABASE POSTGRES NA NUVEM
 
+
+consulta = f'SELECT * FROM tembo.tb_venda'
+
+
 @st.cache_data
 def load_data():
     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
@@ -26,8 +30,8 @@ def load_data():
             password=password,
             port=port
         )        
-        with open("select_bd_webstore.sql", "r") as file:
-            query = file.read()
+      
+        query = consulta
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
