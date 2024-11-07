@@ -24,6 +24,7 @@ SELECT
     tembo.tb_venda."SKU_CLIENTE", 
     tembo.tb_cliente."CLIENTE", 
     tembo.tb_produto."DESCRICAO"
+    tembo.tb_produto."CATEGORIA"  
 FROM tembo.tb_venda
 JOIN tembo.tb_cliente ON tembo.tb_venda."SKU_CLIENTE" = tembo.tb_cliente."SKU_CLIENTE"
 JOIN tembo.tb_produto ON tembo.tb_venda."PARENT" = tembo.tb_produto."PARENT";
@@ -120,6 +121,10 @@ qtd_pedido_planejados = df_filtrado.query('STATUS == "PLANEJADO"')
 qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].unique().shape[0]
 
 
+qtd_pedido_aguardando_conf = df_filtrado.query('STATUS == "AGUARDANDO CONFIRMACAO"')
+qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].unique().shape[0]
+
+
 
 qtd_pedido_cancelado = (df_filtrado["STATUS"] == "CANCELADO").sum()
 
@@ -148,7 +153,7 @@ with card5:
     st.metric("Cancelados", f"{qtd_pedido_cancelado} 🔴".replace(',', 'X').replace('.', ',').replace('X', '.'))
     
 df_filtrado = df_filtrado.drop(columns=["data", "Ano","Mês","PARENT","SKU_CLIENTE"])
-df_filtrado = df_filtrado[["PEDIDO","EMISSAO","CLIENTE","DESCRICAO","QTD","VR_UNIT","TOTAL","STATUS"]]
+df_filtrado = df_filtrado[["PEDIDO","EMISSAO","CLIENTE","DESCRICAO","QTD","VR_UNIT","TOTAL","STATUS","CATEGORIA"]]
 
 st.dataframe(df_filtrado,hide_index=True,use_container_width=True)
 
