@@ -86,6 +86,7 @@ def determinar_mês(valor):
 
 df["Mês"] = df["Mês"].apply(determinar_mês)
 
+
 # ----------------------------------------------------------------------------------
 # filtros
 
@@ -146,7 +147,7 @@ with card4:
 with card5:
     st.metric("Cancelados", f"{qtd_pedido_cancelado} 🔴".replace(',', 'X').replace('.', ',').replace('X', '.'))
     
-df_filtrado = df_filtrado.drop(columns=["data", "Ano","Mês"])
+df_filtrado = df_filtrado.drop(columns=["data", "Ano","Mês","PARENT","SKU_CLIENTE"])
 
 st.dataframe(df_filtrado,hide_index=True,use_container_width=True)
 
