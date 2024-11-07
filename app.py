@@ -153,7 +153,7 @@ with card5:
     st.metric("Cancelados", f"{qtd_pedido_cancelado} 🔴".replace(',', 'X').replace('.', ',').replace('X', '.'))
     
 df_filtrado = df_filtrado.drop(columns=["data", "Ano","Mês","PARENT","SKU_CLIENTE"])
-df_filtrado = df_filtrado[["PEDIDO","EMISSAO","CLIENTE","DESCRICAO","QTD","VR_UNIT","TOTAL","STATUS","CATEGORIA"]]
+df_filtrado = df_filtrado[["PEDIDO","EMISSAO","CLIENTE","DESCRICAO","QTD","VR_UNIT","TOTAL","STATUS"]]
 
 st.dataframe(df_filtrado,hide_index=True,use_container_width=True)
 
