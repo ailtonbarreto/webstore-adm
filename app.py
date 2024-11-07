@@ -135,3 +135,7 @@ with card5:
 df_filtrado = df_filtrado.drop(columns=["data", "Ano","Mês"])
 
 st.dataframe(df_filtrado,hide_index=True,use_container_width=True)
+
+if st.button("Recarregar Dados"):
+    st.cache_data.clear()
+    st.rerun()
