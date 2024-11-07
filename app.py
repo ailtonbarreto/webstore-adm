@@ -103,7 +103,7 @@ df_filtrado["TOTAL"] = df_filtrado["QTD"] * df_filtrado["VR_UNIT"]
 # ----------------------------------------------------------------------------------
 # kpis
 
-qtd_pedidos = df_filtrado["SEQUENCIA"].unique().shape[0]
+qtd_pedidos = df_filtrado["PEDIDO"].unique().shape[0]
 
 total = df_filtrado["TOTAL"].sum()
 
@@ -113,10 +113,10 @@ qtd_aguardando_pagamento = (df_filtrado["STATUS"] =="AGUARDANDO PAGAMENTO").uniq
 
 
 qtd_pedido_concluido = df_filtrado.query('STATUS == "CONCLUIDO"')
-qtd_pedido_concluido = qtd_pedido_concluido["SEQUENCIA"].unique().shape[0]
+qtd_pedido_concluido = qtd_pedido_concluido["PEDIDO"].unique().shape[0]
 
 qtd_pedido_planejados = df_filtrado.query('STATUS == "PLANEJADO"')
-qtd_pedido_planejados = qtd_pedido_planejados["SEQUENCIA"].unique().shape[0]
+qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].unique().shape[0]
 
 
 
