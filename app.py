@@ -297,15 +297,6 @@ if st.button("Recarregar Dados"):
 # ---------------------------------------------------------------------------------------------------------
 # estilizacao
 
-hide_st_style = """
-            <style>
-            #MainMenu {display: none;}
-            footer {display: none;}
-            header {display: none;}
-            </style>
-            """
-st.markdown(hide_st_style, unsafe_allow_html=True)
-
 style1 = """
     <style>
     [data-testid="stColumn"]
