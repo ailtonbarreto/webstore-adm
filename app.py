@@ -308,9 +308,9 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 style1 = """
         <style>
-            [data-testid="stMetricLabel"]
+            [body]
             {
-            visibility: hidden;
+            background-color: #EAF7F5;
             }
         </style>
             """
