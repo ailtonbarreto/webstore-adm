@@ -324,8 +324,6 @@ style1 = """
     [class="stDataFrameGlideDataEditor"]
     {
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
     }
     </style>
 """
