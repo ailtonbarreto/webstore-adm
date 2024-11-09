@@ -321,7 +321,7 @@ st.markdown(style1, unsafe_allow_html=True)
 
 style1 = """
     <style>
-    [class="dvn-scroller stDataFrameGlideDataEditor"]
+    [class="dvn-scroller"]
     {
     background-color: #ffffff;
     padding: 20px;
