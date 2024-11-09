@@ -311,7 +311,6 @@ style1 = """
     [data-testid="stColumn"]
     {
     background-color: #ffffff;
-    opacity: 100%;
     padding: 20px;
     border-radius: 15px;
     }
