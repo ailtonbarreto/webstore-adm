@@ -289,7 +289,7 @@ with tab1:
         st.subheader("Valor Vendido Por Clientes",anchor=False)
         st.dataframe(df_tb,use_container_width=True,hide_index=True)
 
-with tab1:
-    if st.button("Recarregar Dados"):
-        st.cache_data.clear()
-        st.rerun()
+
+if st.button("Recarregar Dados"):
+    st.cache_data.clear()
+    st.rerun()
