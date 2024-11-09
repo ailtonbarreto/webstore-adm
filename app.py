@@ -310,7 +310,7 @@ style1 = """
     <style>
     [data-testid="stColumn"]
     {
-    background-color: #EAF7F5;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 15px;
     }
