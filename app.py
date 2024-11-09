@@ -318,3 +318,15 @@ style1 = """
 """
 st.markdown(style1, unsafe_allow_html=True)
 
+
+style1 = """
+    <style>
+    [class="dvn-scroller stDataFrameGlideDataEditor"]
+    {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    }
+    </style>
+"""
+st.markdown(style1, unsafe_allow_html=True)
