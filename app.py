@@ -18,7 +18,7 @@ with tab1:
     col3, col4= st.columns(2)
     
 with tab2:
-    cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2.5,2.5,2.5,2.5,2.5,1.2,1.2])
+    cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
 
     
 # -------------------------------------------------------------------------------------------------------
