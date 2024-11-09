@@ -1,7 +1,3 @@
-.stAppHeader {
-    display: none;
-}
-
-iframe{
-    background: aquamarine;
+.section {
+    background-color: black;
 }
