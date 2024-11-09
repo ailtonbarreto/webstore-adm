@@ -1,14 +1,16 @@
 SELECT 
-    tembo.tb_venda."PEDIDO", 
-    tembo.tb_venda."EMISSAO", 
-    tembo.tb_venda."PARENT", 
-    tembo.tb_venda."QTD",
-    tembo.tb_venda."VR_UNIT",
-    tembo.tb_venda."STATUS",
-    tembo.tb_venda."SKU_CLIENTE", 
-    tembo.tb_cliente."CLIENTE", 
-    tembo.tb_produto."DESCRICAO_PAI",
-    tembo.tb_produto."CATEGORIA"
-FROM tembo.tb_venda
-JOIN tembo.tb_cliente ON tembo.tb_venda."SKU_CLIENTE" = tembo.tb_cliente."SKU_CLIENTE"
-JOIN tembo.tb_produto ON tembo.tb_venda."PARENT" = tembo.tb_produto."PARENT";
+    v."PEDIDO",
+    v."SKU_CLIENTE",
+    v."EMISSAO",
+    v."PARENT",
+    p."DESCRICAO_PARENT",
+    v."QTD",
+    v."VR_UNIT",
+    v."STATUS"
+FROM 
+    tembo.tb_venda AS v
+LEFT JOIN (
+    SELECT DISTINCT ON ("PARENT") "PARENT", "DESCRICAO_PARENT"
+    FROM tembo.tb_produto
+    ORDER BY "PARENT"
+) AS p ON v."PARENT" = p."PARENT";
