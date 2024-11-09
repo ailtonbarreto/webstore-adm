@@ -13,7 +13,7 @@ with open("style.css") as f:
 tab1, tab2 = st.tabs(["Dashboard","Pedidos"])
 
 with tab1:
-    card1, card2, card3, card4, card5, card6, card7, = st.columns([2.5,2.5,2.5,2.5,2.5,1.2,1.2])
+    card1, card2, card3, card4, card5, card6, card7, = st.columns([2,2,2,2,2,1.5,1.5])
     col1, col2 = st.columns(2)
     col3, col4= st.columns(2)
     
