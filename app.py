@@ -305,3 +305,13 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+
+style1 = """
+        <style>
+            [data-testid="stMetricLabel"]
+            {
+            visibility: hidden;
+            }
+        </style>
+            """
+st.markdown(style1, unsafe_allow_html=True)
