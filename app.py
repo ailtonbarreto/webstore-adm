@@ -322,3 +322,15 @@ style2 = """
     </style>
 """
 st.markdown(style2, unsafe_allow_html=True)
+
+
+
+style3 = """
+    <style>
+    [data-testid="stBaseButton-elementToolbar"]
+    {
+    display: none;
+    }
+    </style>
+"""
+st.markdown(style3, unsafe_allow_html=True)
