@@ -311,12 +311,4 @@ style1 = """
 st.markdown(style1, unsafe_allow_html=True)
 
 
-style1 = """
-    <style>
-    [class="stDataFrameGlideDataEditor"]
-    {
-    background-color: #ffffff;
-    }
-    </style>
-"""
-st.markdown(style1, unsafe_allow_html=True)
+# 
