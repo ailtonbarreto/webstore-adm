@@ -316,7 +316,8 @@ style2 = """
     <style>
     [data-testid="stFullScreenFrame"]
     {
-    text-align: center;
+    display: flex;
+    align-items: center;
     }
     </style>
 """
