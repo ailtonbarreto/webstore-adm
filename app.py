@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import psycopg2
+import plotly_express as px
+import datetime
 
 st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide")
 
@@ -11,10 +13,14 @@ with open("style.css") as f:
 tab1, tab2 = st.tabs(["Dashboard","Pedidos"])
 
 with tab1:
-    card1, card2, card3, card4, card5, card6, card7,card8 = st.columns([2,2,2,2,2,2,1,1])
+    card1, card2, card3, card4, card5, card6, card7, = st.columns([2.5,2.5,2.5,2.5,2.5,1.2,1.2])
+    col1, col2 = st.columns(2)
+    col3, col4= st.columns(2)
+    
+with tab2:
+    cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2.5,2.5,2.5,2.5,2.5,1.2,1.2])
 
-
-
+    
 # -------------------------------------------------------------------------------------------------------
 # DATABASE POSTGRES NA NUVEM
 
@@ -73,9 +79,11 @@ def load_data():
 # ----------------------------------------------------------------------------------
 # ETL
 df = load_data()
-df["data"] = pd.to_datetime(df["EMISSAO"])
-df["Ano"] = df["data"].dt.year
-df["Mês"] = df["data"].dt.month
+df['EMISSAO'] = pd.to_datetime(df['EMISSAO'])
+df["Ano"] = df["EMISSAO"].dt.year
+df["Mês"] = df["EMISSAO"].dt.month
+df["Dia"] = df["EMISSAO"].dt.day
+
 
 def determinar_mês(valor):
     meses = {
@@ -97,25 +105,50 @@ def determinar_mês(valor):
 
 df["Mês"] = df["Mês"].apply(determinar_mês)
 
+# ----------------------------------------------------------------------------------
+
+today = datetime.datetime.now().date()
+inicio = today - datetime.timedelta(days=120)
+
 
 # ----------------------------------------------------------------------------------
-# filtros
+# filtros dash
+
 with tab1:
     
-    with card7:
-        filtro_inicio = st.date_input("Início",pd.to_datetime("2024-01-01").date(),format= "DD/MM/YYYY")
+    with card6:
+        filtro_inicio = st.date_input("Início",inicio,format= "DD/MM/YYYY")
         
-    with card8:
+    with card7:
         filtro_fim = st.date_input("Fim","today",format= "DD/MM/YYYY")
+        
 
-    df_filtrado = df.query('@filtro_inicio <= `EMISSAO` <= @filtro_fim')
+df_filtrado = df.query('@filtro_inicio <= `EMISSAO` <= @filtro_fim')
 
-    df_filtrado["TOTAL"] = df_filtrado["QTD"] * df_filtrado["VR_UNIT"]
+df_filtrado["TOTAL"] = df_filtrado["QTD"] * df_filtrado["VR_UNIT"]
+
+# ----------------------------------------------------------------------------------
+# filtros pedido
+
+with tab2:
+    
+    with cardpd6:
+        filtro_inicio2 = st.date_input("Data Início",inicio,format= "DD/MM/YYYY")
+        
+    with cardpd7:
+        filtro_fim2 = st.date_input("Data Fim","today",format= "DD/MM/YYYY")
 
 
+df_filtrado_ped = df.query('@filtro_inicio2 <= `EMISSAO` <= @filtro_fim2')
+
+
+df_filtrado_ped["TOTAL"] = df_filtrado_ped["QTD"] * df_filtrado_ped["VR_UNIT"]
+
+qtd_pedidos2 = df_filtrado_ped["PEDIDO"].nunique()
 
 # ----------------------------------------------------------------------------------
 # kpis
+
 
 qtd_pedidos = df_filtrado["PEDIDO"].nunique()
 
@@ -123,64 +156,140 @@ total = df_filtrado["TOTAL"].sum()
 
 ticket_medio = total / qtd_pedidos
 
-qtd_pg_aberto = df_filtrado.query('STATUS == "AGUARDANDO PAGAMENTO"')
-qtd_pg_aberto = qtd_pg_aberto["PEDIDO"].nunique()
 
-
-qtd_pedido_concluido = df_filtrado.query('STATUS == "CONCLUIDO"')
-qtd_pedido_concluido = qtd_pedido_concluido["PEDIDO"].nunique()
-
-qtd_pedido_planejados = df_filtrado.query('STATUS == "PLANEJADO"')
-qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].nunique()
-
-
-qtd_pedido_aguardando_conf = df_filtrado.query('STATUS == "AGUARDANDO CONFIRMACAO"')
-qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].nunique()
-
-
+qtd_clientes = df_filtrado["CLIENTE"].nunique()
 qtd_pedido_cancelado = df_filtrado.query('STATUS == "CANCELADO"')
 qtd_pedido_cancelado = qtd_pedido_cancelado["PEDIDO"].nunique()
 
+tx_cancelamento = qtd_pedido_cancelado / qtd_pedidos * 100
 
-total_aguardando= df_filtrado.query('STATUS == "AGUARDANDO PAGAMENTO"')
+# -----------------------------------------------------------------------------------
+
+qtd_pg_aberto = df_filtrado_ped.query('STATUS == "AGUARDANDO PAGAMENTO"')
+qtd_pg_aberto = qtd_pg_aberto["PEDIDO"].nunique()
+
+
+qtd_pedido_concluido = df_filtrado_ped.query('STATUS == "CONCLUIDO"')
+qtd_pedido_concluido = qtd_pedido_concluido["PEDIDO"].nunique()
+
+qtd_pedido_planejados = df_filtrado_ped.query('STATUS == "PLANEJADO"')
+qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].nunique()
+
+
+qtd_pedido_aguardando_conf = df_filtrado_ped.query('STATUS == "AGUARDANDO CONFIRMACAO"')
+qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].nunique()
+
+
+total_aguardando= df_filtrado_ped.query('STATUS == "AGUARDANDO PAGAMENTO"')
 total_aguardando_pagamento = total_aguardando["TOTAL"].sum()
+
 
 # --------------------------------------------------------------------------------------
 with tab1:
     with card1:
-        st.metric("QTD Pedidos",f"{qtd_pedidos:,.0f} 📄".replace(',', 'X').replace('.', ',').replace('X', '.'))
+        st.metric("Valor Vendido",f"💰{total:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
         
     with card2:
-        st.metric("Aguardando Confirmação", f"{qtd_pedido_aguardando_conf} 🟡".replace(',', 'X').replace('.', ',').replace('X', '.'))
+        
+        st.metric("QTD Pedidos",f"📄{qtd_pedidos:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
         
     with card3:
-        st.metric("Concluídos",f"{qtd_pedido_concluido:,.0f} 🟢".replace(',', 'X').replace('.', ',').replace('X', '.'))   
-        
-
+        st.metric("Ticket Médio", f"📈{ticket_medio:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+    
     with card4:
-        st.metric("Pagamento Em Aberto",f'{qtd_pg_aberto} 🔵')
-        
+        st.metric("QTD Clientes",f'👔{qtd_clientes:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
 
     with card5:
-        st.metric("Planejados", f"{qtd_pedido_planejados} 🟣".replace(',', 'X').replace('.', ',').replace('X', '.'))
+        st.metric("Tx Cancelamentos", f"🔴{tx_cancelamento:.2f}%")
         
+# ---------------------------------------------------------------------------------------
 
-    with card6:
-        st.metric("Cancelados", f"{qtd_pedido_cancelado} 🔴".replace(',', 'X').replace('.', ',').replace('X', '.'))
-    
-    st.dataframe(df_filtrado,hide_index=True,use_container_width=True)
-    
 with tab2:
-    pedido = st.text_input("PEDIDO")
-    df_pedido = df_filtrado.query('PEDIDO == @pedido')
-    st.dataframe(df_pedido,use_container_width=True)
+    with cardpd1:
+        st.metric("QTD Pedidos",f"📄{qtd_pedidos2:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+    with cardpd2:
+        st.metric("Concluídos",f"🟢{qtd_pedido_concluido:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
+    with cardpd3:
+        st.metric("Aguardando Confirmação",f"🟡{qtd_pedido_aguardando_conf:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+    with cardpd4:
+        st.metric("Pagamento Em Aberto",f"🔵{qtd_pg_aberto:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
+    with cardpd5:
+        st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
+# ---------------------------------------------------------------------------------------
+with tab2:
+    if df_filtrado_ped.empty:
+        st.error("Nenhum dado disponível.")
+    else:
+        df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
+        df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
+        st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
+
     
-# df_filtrado = df_filtrado.drop(columns=["data", "Ano","Mês","PARENT","SKU_CLIENTE"])
-# df_filtrado = df_filtrado[["PEDIDO","EMISSAO","SKU_CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
+# --------------------------------------------------------------------------------------
+# graficos
+barras_cores = "0F8F8F"
+
+df_linha = df_filtrado.groupby("Dia")["TOTAL"].sum().reset_index()
+
+
+graficocolunas = px.bar(df_linha,x="Dia",y="TOTAL",color_discrete_sequence=["#0F8F8F"])
+graficocolunas.update_yaxes(showgrid=False)
+graficocolunas.update_traces(showlegend=False)
+graficocolunas.update_yaxes(showgrid=False,visible=True,title="")
+graficocolunas.layout.xaxis.fixedrange = True
+graficocolunas.layout.yaxis.fixedrange = True
+
+# --------------------------------------------------------------------------------------
+
+df_categoria = df_filtrado.groupby("CATEGORIA")["TOTAL"].sum().reset_index()
+df_categoria = df_categoria.sort_values(by="TOTAL",ascending=True)
+
+grafico_barras = px.bar(df_categoria, x="TOTAL",y="CATEGORIA",orientation="h",color_discrete_sequence=["#0F8F8F"],
+                        text=df_categoria["TOTAL"].apply(lambda x: f'R$ {x:,.2f}'))
+grafico_barras.update_yaxes(showgrid=False)
+grafico_barras.update_traces(showlegend=False,textfont=dict(size=15,color='#ffffff'),textposition="auto")
+grafico_barras.update_yaxes(showgrid=False,visible=True,title="")
+grafico_barras.layout.xaxis.fixedrange = True
+grafico_barras.layout.yaxis.fixedrange = True
+
+# ---------------------------------------------------------------------------------------------------------
+# tabela
+
+df_tb = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
+df_tb = df_tb.sort_values(by="TOTAL",ascending=False)
+df_tb["TOTAL"] = df_tb["TOTAL"].apply(lambda x: f'R$ {x:,.2f}')
+
+
+# ---------------------------------------------------------------------------------------------------------
+# ranking produtos
+df_produto = df_filtrado.groupby("DESCRICAO_PARENT")["QTD"].count().reset_index()
+df_produto = df_produto.sort_values(by="QTD",ascending=False)
+
+
+# ---------------------------------------------------------------------------------------------------------
+
+with tab1:
+    with col4:
+        st.subheader("Valor Vendido Por Categoria",anchor=False)
+        st.plotly_chart(grafico_barras,use_container_width=True)
 
 
 
+with tab1:
+    with col1:
+        st.subheader("Valor Vendido No Período",anchor=False)
+        st.plotly_chart(graficocolunas,use_container_width=True)
+        
+    with col3:
+        st.subheader("Ranking De Produtos",anchor=False)
+        st.dataframe(df_produto,use_container_width=True,hide_index=True)
+        
+with tab1:
+    with col2:
+        st.subheader("Valor Vendido Por Clientes",anchor=False)
+        st.dataframe(df_tb,use_container_width=True,hide_index=True)
 
-if st.button("Recarregar Dados"):
-    st.cache_data.clear()
-    st.rerun()
+with tab1:
+    if st.button("Recarregar Dados"):
+        st.cache_data.clear()
+        st.rerun()
