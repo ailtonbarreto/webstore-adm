@@ -307,11 +307,15 @@ hide_st_style = """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 style1 = """
-        <style>
-            [body]
-            {
-            background-color: #EAF7F5;
-            }
-        </style>
-            """
+    <style>
+    [data-testid="stColumn"]
+    {
+    background-color: #ffffff;
+    opacity: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    }
+    </style>
+"""
 st.markdown(style1, unsafe_allow_html=True)
+
