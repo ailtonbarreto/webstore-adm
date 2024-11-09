@@ -8,7 +8,12 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
     
     
-card1, card2, card3, card4, card5, card6, card7,card8 = st.columns([2,2,2,2,2,2,1,1])
+tab1, tab2 = st.tabs(["Dashboard","Pedidos"])
+
+with tab1:
+    card1, card2, card3, card4, card5, card6, card7,card8 = st.columns([2,2,2,2,2,2,1,1])
+
+
 
 # -------------------------------------------------------------------------------------------------------
 # DATABASE POSTGRES NA NUVEM
@@ -92,79 +97,86 @@ df["Mês"] = df["Mês"].apply(determinar_mês)
 
 # ----------------------------------------------------------------------------------
 # filtros
-
-with card7:
-    filtro_inicio = st.date_input("Início",pd.to_datetime("2024-01-01").date(),format= "DD/MM/YYYY")
+with tab1:
     
-with card8:
-    filtro_fim = st.date_input("Fim","today",format= "DD/MM/YYYY")
+    with card7:
+        filtro_inicio = st.date_input("Início",pd.to_datetime("2024-01-01").date(),format= "DD/MM/YYYY")
+        
+    with card8:
+        filtro_fim = st.date_input("Fim","today",format= "DD/MM/YYYY")
 
-df_filtrado = df.query('@filtro_inicio <= `EMISSAO` <= @filtro_fim')
+    df_filtrado = df.query('@filtro_inicio <= `EMISSAO` <= @filtro_fim')
 
-df_filtrado["TOTAL"] = df_filtrado["QTD"] * df_filtrado["VR_UNIT"]
+    df_filtrado["TOTAL"] = df_filtrado["QTD"] * df_filtrado["VR_UNIT"]
+
 
 
 # ----------------------------------------------------------------------------------
 # kpis
 
-qtd_pedidos = df_filtrado["PEDIDO"].unique().shape[0]
+qtd_pedidos = df_filtrado["PEDIDO"].nunique()
 
 total = df_filtrado["TOTAL"].sum()
 
 ticket_medio = total / qtd_pedidos
 
-qtd_aguardando_pagamento = (df_filtrado["STATUS"] =="AGUARDANDO PAGAMENTO").unique().sum()
+qtd_pg_aberto = df_filtrado.query('STATUS == "AGUARDANDO PAGAMENTO"')
+qtd_pg_aberto = qtd_pg_aberto["PEDIDO"].nunique()
 
 
 qtd_pedido_concluido = df_filtrado.query('STATUS == "CONCLUIDO"')
-qtd_pedido_concluido = qtd_pedido_concluido["PEDIDO"].unique().shape[0]
+qtd_pedido_concluido = qtd_pedido_concluido["PEDIDO"].nunique()
 
 qtd_pedido_planejados = df_filtrado.query('STATUS == "PLANEJADO"')
-qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].unique().shape[0]
+qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].nunique()
 
 
 qtd_pedido_aguardando_conf = df_filtrado.query('STATUS == "AGUARDANDO CONFIRMACAO"')
-qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].unique().shape[0]
+qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].nunique()
 
 
-
-qtd_pedido_cancelado = (df_filtrado["STATUS"] == "CANCELADO").sum()
+qtd_pedido_cancelado = df_filtrado.query('STATUS == "CANCELADO"')
+qtd_pedido_cancelado = qtd_pedido_cancelado["PEDIDO"].nunique()
 
 
 total_aguardando= df_filtrado.query('STATUS == "AGUARDANDO PAGAMENTO"')
 total_aguardando_pagamento = total_aguardando["TOTAL"].sum()
 
 # --------------------------------------------------------------------------------------
+with tab1:
+    with card1:
+        st.metric("QTD Pedidos",f"{qtd_pedidos:,.0f} 📄".replace(',', 'X').replace('.', ',').replace('X', '.'))
+        
+    with card2:
+        st.metric("Aguardando Confirmação", f"{qtd_pedido_aguardando_conf} 🟡".replace(',', 'X').replace('.', ',').replace('X', '.'))
+        
+    with card3:
+        st.metric("Concluídos",f"{qtd_pedido_concluido:,.0f} 🟢".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+        
 
-with card1:
-    st.metric("QTD Pedidos",f"{qtd_pedidos:,.0f} 📄".replace(',', 'X').replace('.', ',').replace('X', '.'))
-    
-with card2:
-    st.metric("Aguardando Confirmação", f"{qtd_pedido_aguardando_conf} 🟡".replace(',', 'X').replace('.', ',').replace('X', '.'))
-    
-with card3:
-    st.metric("Concluídos",f"{qtd_pedido_concluido:,.0f} 🟢".replace(',', 'X').replace('.', ',').replace('X', '.'))   
-    
+    with card4:
+        st.metric("Pagamento Em Aberto",f'{qtd_pg_aberto} 🔵')
+        
 
-with card4:
-    st.metric("Pagamento Em Aberto",f'{qtd_aguardando_pagamento} 🔵')
-    
+    with card5:
+        st.metric("Planejados", f"{qtd_pedido_planejados} 🟣".replace(',', 'X').replace('.', ',').replace('X', '.'))
+        
 
-with card5:
-    st.metric("Planejados", f"{qtd_pedido_planejados} 🟣".replace(',', 'X').replace('.', ',').replace('X', '.'))
+    with card6:
+        st.metric("Cancelados", f"{qtd_pedido_cancelado} 🔴".replace(',', 'X').replace('.', ',').replace('X', '.'))
     
-
-with card6:
-    st.metric("Cancelados", f"{qtd_pedido_cancelado} 🔴".replace(',', 'X').replace('.', ',').replace('X', '.'))
+    st.dataframe(df_filtrado,hide_index=True,use_container_width=True)
     
-
+with tab2:
+    pedido = st.text_input("PEDIDO")
+    df_pedido = df_filtrado.query('PEDIDO == @pedido')
+    st.dataframe(df_pedido,use_container_width=True)
     
 # df_filtrado = df_filtrado.drop(columns=["data", "Ano","Mês","PARENT","SKU_CLIENTE"])
 # df_filtrado = df_filtrado[["PEDIDO","EMISSAO","SKU_CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
 
-st.dataframe(df_filtrado,hide_index=True,use_container_width=True)
 
-st.write(df.shape)
+
 
 if st.button("Recarregar Dados"):
     st.cache_data.clear()
