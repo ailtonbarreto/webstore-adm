@@ -22,7 +22,6 @@ with tab2:
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
     col1a, = st.columns(1)
     st.divider()
-    col1b, = st.columns(1)
 
     
 # -------------------------------------------------------------------------------------------------------
