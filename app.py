@@ -21,6 +21,7 @@ with tab1:
 with tab2:
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
     col1a, = st.columns(1)
+    col1b, = st.columns(1)
 
     
 # -------------------------------------------------------------------------------------------------------
@@ -221,6 +222,7 @@ with tab2:
 with tab2:
     with col1a:
         filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
+    with col1b:    
         if df_filtrado_ped.empty:
             st.error("Nenhum dado disponível.")
         else:
