@@ -26,6 +26,11 @@ vr_unit = st.number_input("Valor Unit")
 # Função para inserir dados (exemplo de INSERT)
 def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
     try:
+        # Garantir que os tipos estão corretos
+        sku = int(sku)  # Garantir que SKU seja inteiro
+        vr_unit = float(vr_unit)  # Garantir que VR_UNIT seja float
+
+        # Conexão com o banco de dados
         conn = psycopg2.connect(
             host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
             database='postgres',
