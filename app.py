@@ -99,7 +99,7 @@ def delete_order():
 
     filtro_ped = st.text_input("Pedido", placeholder="Pesquisar pedido")
     with tab2:
-        with col1b:
+        with col1a:
             if st.button("DELETAR"):
                 try:
                     # Tentando fazer a conexão com o banco de dados
