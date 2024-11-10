@@ -12,6 +12,7 @@ with open("style.css") as f:
 st.image("header.png",width=1300)
 
 parent = st.number_input("Parent", format="%.2f")
+parent = float(parent)
 
 sku = st.text_input("SKU")
 
