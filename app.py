@@ -53,9 +53,16 @@ LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 # -------------------------------------------------------------------------------------------------------
 # SELECT EXCLUIR PEDIDO
 
+with col1b:
+    st.subheader("Pesquisar Pedido",anchor=False)
+    filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
 
 
+delete = """
+DELETE FROM tembo.tb_venda
+WHERE "PEDIDO" = 'PED47117'
 
+"""
 
 
 # -------------------------------------------------------------------------------------------------------
@@ -238,8 +245,8 @@ with tab2:
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
     with col1b:
-        st.subheader("Pesquisar Pedido",anchor=False)
-        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
+        # st.subheader("Pesquisar Pedido",anchor=False)
+        # filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
         df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
         
