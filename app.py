@@ -60,11 +60,36 @@ with col1b:
 
 delete = """
 DELETE FROM tembo.tb_venda
-WHERE "PEDIDO" = 'PED47117'
+WHERE "PEDIDO" = '{filtro_ped}'
 
 """
 
+def delete_order():
+    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
+    database = 'postgres'
+    user = 'postgres'
+    password = 'MeSaIkkB57YSOgLO'
+    port = '5432'
 
+    try:
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            port=port
+        )        
+      
+        query = delete
+        
+        df = pd.read_sql_query(query, conn)
+    except Exception as e:
+        st.write(f"Erro ao conectar: {e}")
+    
+
+    if conn:
+        conn.close()
+    return df
 # -------------------------------------------------------------------------------------------------------
 
 @st.cache_data
@@ -245,11 +270,11 @@ with tab2:
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
     with col1b:
-        # st.subheader("Pesquisar Pedido",anchor=False)
-        # filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
         df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
-        
+    with col1b:
+        if st.button("DEL"):
+            delete_order() 
 # --------------------------------------------------------------------------------------
 # graficos
 barras_cores = "0F8F8F"
