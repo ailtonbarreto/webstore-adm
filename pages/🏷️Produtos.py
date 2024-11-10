@@ -66,21 +66,6 @@ def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
             conn.close()
 
 
-# Exemplo de captura dos dados no Streamlit
-parent = st.number_input("Parent", min_value=1)
-sku = st.text_input("SKU")
-descricao_parent = st.text_input("Descrição Parent")
-descricao = st.text_input("Descrição")
-categoria = st.text_input("Categoria")
-vr_unit = st.number_input("Valor Unit", format="%.2f")
-
-# Chama a função insert_data se todos os campos forem preenchidos
-if st.button("Inserir dados"):
-    if parent and sku and descricao and categoria and vr_unit and descricao_parent:
-        insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent)
-    else:
-        st.write("Por favor, preencha todos os campos.")
-
 
             
 if st.button("💾"):
