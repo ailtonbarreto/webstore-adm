@@ -21,7 +21,7 @@ with tab1:
 with tab2:
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
     col1a, = st.columns(1)
-    st.divider(a)
+    st.divider()
     col1b, = st.columns(1)
 
     
@@ -238,6 +238,7 @@ with tab2:
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
     with col1b:
+        st.subheader("Pesquisar Pedido")
         filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
         df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
