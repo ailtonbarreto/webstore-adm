@@ -231,13 +231,7 @@ with tab2:
             df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
-    # with col1b:
-    #     df_ped_filtered = df.query('PEDIDO == @filtro_ped')
-    #     df_ped_filtered["EMISSAO"] = df_ped_filtered["EMISSAO"].dt.strftime('%d/%m/%Y')
-    #     st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
-    
-    # if st.button(f'🗑️'):
-    #     delete_order() 
+
 # --------------------------------------------------------------------------------------
 # graficos
 barras_cores = "0F8F8F"
