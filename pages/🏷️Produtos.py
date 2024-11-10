@@ -23,15 +23,12 @@ categoria = st.text_input("Categoria")
 
 vr_unit = st.number_input("Valor Unit")
 
-# Função para inserir dados (exemplo de INSERT)
-import psycopg2
-import streamlit as st
 
 # Função de inserção
 def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
     try:
         # Verificando e mostrando os parâmetros antes de usar
-        st.write(f"Parâmetros recebidos: parent={parent}, sku={sku}, descricao={descricao}, categoria={categoria}, vr_unit={vr_unit}, descricao_parent={descricao_parent}")
+        
         
         # Garantir que os tipos estão corretos
         sku = st(sku)  # Garantir que SKU seja inteiro
@@ -65,9 +62,8 @@ def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
         if conn:
             conn.close()
 
-
-
-
-            
+      
 if st.button("💾"):
     insert_data()
+    
+st.write(parent, sku, descricao, categoria, vr_unit, descricao_parent)
