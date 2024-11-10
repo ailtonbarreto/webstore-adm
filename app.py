@@ -150,10 +150,7 @@ with tab2:
         filtro_fim2 = st.date_input("Data Fim","today",format= "DD/MM/YYYY")
 
 
-    with col1a:
-        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
-
-df_filtrado_ped = df.query('@filtro_inicio2 <= `EMISSAO` <= @filtro_fim2 & PEDIDO == @filtro_ped')
+df_filtrado_ped = df.query('@filtro_inicio2 <= `EMISSAO` <= @filtro_fim2')
 
 
 df_filtrado_ped["TOTAL"] = df_filtrado_ped["QTD"] * df_filtrado_ped["VR_UNIT"]
@@ -231,7 +228,8 @@ with tab2:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
 # ---------------------------------------------------------------------------------------
 with tab2:
-
+    with col1a:
+        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
         
     with col1b:    
         if df_filtrado_ped.empty:
