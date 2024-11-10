@@ -34,14 +34,14 @@ def insert_data(parent, sku, descricao_parent, descricao, categoria, vr_unit):
             port='5432'
         )
 
-        # Consulta SQL de INSERT com valores dinâmicos
-        insert_query = f"""
-        INSERT INTO tembo.tb_venda ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT")
-        VALUES ({parent}, '{sku}', '{descricao}', '{categoria}', '{vr_unit}', {descricao_parent});
+        # Usando placeholders para inserir os dados de forma segura
+        insert_query = """
+        INSERT INTO tembo.tb_venda ("PARENT", "SKU_CLIENTE", "DESCRICAO_PARENT", "DESCRICAO", "CATEGORIA", "VR_UNIT")
+        VALUES (%s, %s, %s, %s, %s, %s);
         """
 
         cursor = conn.cursor()
-        cursor.execute(insert_query)
+        cursor.execute(insert_query, (parent, sku, descricao_parent, descricao, categoria, vr_unit))
         conn.commit()
 
         st.write("Dados inseridos com sucesso!")
@@ -50,6 +50,7 @@ def insert_data(parent, sku, descricao_parent, descricao, categoria, vr_unit):
     finally:
         if conn:
             conn.close()
+
             
 if st.button("💾"):
     insert_data()
