@@ -11,7 +11,7 @@ with open("style.css") as f:
 
 st.image("header.png",width=1300)
     
-tab1, tab2,tab3 = st.tabs(["Dashboard","Pedidos","Clientes"])
+tab1, tab2,tab3 = st.tabs(["Dashboard","Pedidos"])
 
 with tab1:
     card1, card2, card3, card4, card5, card6, card7, = st.columns([2,2,2,2,2,1.5,1.5])
