@@ -315,9 +315,9 @@ with tab2:
             df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
-    with col1b:
-        df_ped_filtered = df.query('PEDIDO == @filtro_ped')
-        st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
+    # with col1b:
+        # df_ped_filtered = df.query('PEDIDO == @filtro_ped')
+        # st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
     # with col1b:
     #     if st.button("DEL"):
             # delete_order() 
