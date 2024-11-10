@@ -85,9 +85,9 @@ def delete_order():
 
             # Confirma se a conexão foi bem-sucedida
             if conn is not None:
-                with conn.cursor() as cursor:
+                with conn.cursor() as cursor1:
                     query = "DELETE FROM tembo.tb_venda WHERE PEDIDO = %s"
-                    cursor.execute(query, (filtro_ped,))
+                    cursor1.execute(query, (filtro_ped,))
                     conn.commit()  # Confirma a exclusão
 
                 st.success(f"Pedido {filtro_ped} excluído com sucesso.")
