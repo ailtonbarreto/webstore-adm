@@ -55,40 +55,13 @@ LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 
 with col1b:
     st.subheader("Pesquisar Pedido",anchor=False)
-    # filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
+    filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
 
 
-# delete = f"""
-#     DELETE FROM tembo.tb_venda
-#     WHERE "PEDIDO" = '{filtro_ped}';
-#         """
-
-# def delete_order():
-#     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
-#     database = 'postgres'
-#     user = 'postgres'
-#     password = 'MeSaIkkB57YSOgLO'
-#     port = '5432'
-
-#     try:
-#         conn = psycopg2.connect(
-#             host=host,
-#             database=database,
-#             user=user,
-#             password=password,
-#             port=port
-#         )        
-      
-#         query = delete
-        
-#         df = pd.read_sql_query(query, conn)
-#     except Exception as e:
-#         st.write(f"Erro ao conectar: {e}")
-    
-
-#     if conn:
-#         conn.close()
-
+delete = f"""
+    DELETE FROM tembo.tb_venda
+    WHERE "PEDIDO" = '{filtro_ped}';
+        """
 
 def delete_order():
     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
@@ -97,45 +70,24 @@ def delete_order():
     password = 'MeSaIkkB57YSOgLO'
     port = '5432'
 
-    filtro_ped = st.text_input("Pedido", placeholder="Pesquisar pedido")
-    with tab2:
-        with col1a:
-            if st.button("DELETAR"):
-                try:
-                    # Tentando fazer a conexão com o banco de dados
-                    conn = psycopg2.connect(
-                        host=host,
-                        database=database,
-                        user=user,
-                        password=password,
-                        port=port
-                    )
-                    
-                    # Verificando se a conexão foi estabelecida
-                    if conn is None:
-                        st.error("Falha ao conectar ao banco de dados. Conexão retornou None.")
-                        return  # Saia da função se a conexão não foi bem-sucedida
+    try:
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            port=port
+        )        
+      
+        query = delete
+        
+        df = pd.read_sql_query(query, conn)
+    except Exception as e:
+        st.write(f"Erro ao conectar: {e}")
+    
 
-                    with conn.cursor() as cursor:
-                        # Usando a interpolação correta para incluir a variável filtro_ped na string SQL
-                        query = f"""
-                        DELETE FROM tembo.tb_venda
-                        WHERE "PEDIDO" = '{filtro_ped}';
-                        """
-                        cursor.execute(query)  # Executando a query
-                        conn.commit()  # Confirma a transação
-
-                        st.success(f"Pedido {filtro_ped} excluído com sucesso.")
-
-                except psycopg2.OperationalError as e:
-                    st.error(f"Erro ao conectar ao banco de dados: {e}")
-                except Exception as e:
-                    st.error(f"Erro ao executar a query ou excluir o pedido: {e}")
-                finally:
-                    if conn:
-                        conn.close()
-
-
+    if conn:
+        conn.close()
 # -------------------------------------------------------------------------------------------------------
 
 @st.cache_data
@@ -315,12 +267,12 @@ with tab2:
             df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
-    # with col1b:
-        # df_ped_filtered = df.query('PEDIDO == @filtro_ped')
-        # st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
-    # with col1b:
-    #     if st.button("DEL"):
-            # delete_order() 
+    with col1b:
+        df_ped_filtered = df.query('PEDIDO == @filtro_ped')
+        st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
+    with col1b:
+        if st.button("DEL"):
+            delete_order() 
 # --------------------------------------------------------------------------------------
 # graficos
 barras_cores = "0F8F8F"
