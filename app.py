@@ -58,10 +58,9 @@ with col1b:
     filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
 
 
-delete = """
+delete = f"""
 DELETE FROM tembo.tb_venda
-WHERE "PEDIDO" = 'PED47117';
-
+WHERE "PEDIDO" = '{filtro_ped}';
 """
 
 def delete_order():
