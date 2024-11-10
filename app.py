@@ -271,7 +271,7 @@ with tab2:
         df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
     with col1b:
-        if st.button("DEL"):
+        if st.button(f'🗑️'):
             delete_order() 
 # --------------------------------------------------------------------------------------
 # graficos
