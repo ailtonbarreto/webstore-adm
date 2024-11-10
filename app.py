@@ -100,7 +100,7 @@ def delete_order():
     filtro_ped = st.text_input("Pedido", placeholder="Pesquisar pedido")
     with tab2:
         with col1b:
-            if st.button("Excluir Pedido"):
+            if st.button("DELETAR"):
                 try:
                     # Tentando fazer a conexão com o banco de dados
                     conn = psycopg2.connect(
