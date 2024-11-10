@@ -60,7 +60,7 @@ with col1b:
 
 delete = """
 DELETE FROM tembo.tb_venda
-WHERE "PEDIDO" = f'{filtro_ped}';
+WHERE "PEDIDO" = 'PED47117';
 
 """
 
