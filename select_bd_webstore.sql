@@ -17,5 +17,3 @@ LEFT JOIN (
     ORDER BY "PARENT"
 ) AS p ON v."PARENT" = p."PARENT"
 LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
-
-
