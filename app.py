@@ -239,6 +239,8 @@ with tab2:
     with col1b:
         filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
         df_ped_filtered = df_filtrado_ped.query('PEDIDO == @filtro_ped')
+        st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
+        
 # --------------------------------------------------------------------------------------
 # graficos
 barras_cores = "0F8F8F"
