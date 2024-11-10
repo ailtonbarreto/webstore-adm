@@ -17,6 +17,8 @@ with tab1:
     card1, card2, card3, card4, card5, card6, card7, = st.columns([2,2,2,2,2,1.5,1.5])
     col1, col2 = st.columns(2)
     col3, col4= st.columns(2)
+    st.divider()
+    
     
 with tab2:
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
@@ -301,7 +303,7 @@ with tab1:
         st.dataframe(df_tb,use_container_width=True,hide_index=True)
 
 
-if st.button("🔁"):
+if st.button("🔁 Atualizar Dados"):
     st.cache_data.clear()
     st.rerun()
     
