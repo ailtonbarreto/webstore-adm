@@ -220,6 +220,7 @@ with tab2:
 # ---------------------------------------------------------------------------------------
 with tab2:
     with col1a:
+        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
         if df_filtrado_ped.empty:
             st.error("Nenhum dado disponível.")
         else:
