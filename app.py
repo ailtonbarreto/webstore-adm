@@ -259,8 +259,7 @@ with tab2:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
 # ---------------------------------------------------------------------------------------
 with tab2:
-    if st.button(f'🗑️'):
-        delete_order() 
+    
     with col1a:    
         if df_filtrado_ped.empty:
             st.error("Nenhum dado disponível.")
@@ -272,7 +271,8 @@ with tab2:
         df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
     
-
+    if st.button(f'🗑️'):
+        delete_order() 
 # --------------------------------------------------------------------------------------
 # graficos
 barras_cores = "0F8F8F"
