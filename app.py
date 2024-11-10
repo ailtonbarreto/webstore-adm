@@ -147,7 +147,6 @@ def determinar_mês(valor):
 
 df["Mês"] = df["Mês"].apply(determinar_mês)
 
-# ----------------------------------------------------------------------------------
 
 today = datetime.datetime.now().date()
 inicio = today - datetime.timedelta(days=120)
