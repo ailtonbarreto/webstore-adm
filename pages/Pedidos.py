@@ -170,3 +170,59 @@ with col1a:
         st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
 
 # --------------------------------------------------------------------------------------
+if st.button("🔁"):
+    st.cache_data.clear()
+    st.rerun()
+    
+
+# ---------------------------------------------------------------------------------------------------------
+# estilizacao
+
+style1 = """
+    <style>
+    [data-testid="stColumn"]
+    {
+    background-color: #ffffff;
+    padding: 0.5vw 0.5vw;
+    border-radius: 15px;
+    box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+    </style>
+"""
+st.markdown(style1, unsafe_allow_html=True)
+
+
+style2 = """
+    <style>
+    [data-testid="stFullScreenFrame"]
+    {
+    display: flex;
+    justify-content: center;
+    }
+    </style>
+"""
+st.markdown(style2, unsafe_allow_html=True)
+
+
+
+style3 = """
+    <style>
+    [data-testid="stBaseButton-elementToolbar"]
+    {
+    display: none;
+    }
+    </style>
+"""
+st.markdown(style3, unsafe_allow_html=True)
+
+
+
+style4 = """
+    <style>
+    [data-testid="stMetricValue"]
+    {
+    margin-top: 0.4vw;
+    }
+    </style>
+"""
+st.markdown(style4, unsafe_allow_html=True)
