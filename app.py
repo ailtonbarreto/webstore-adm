@@ -389,7 +389,6 @@ style4 = """
     [data-testid="stMetricValue"]
     {
     margin-top: 0.4vw;
-    font-size: 1.5vw;
     }
     </style>
 """
