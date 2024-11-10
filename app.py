@@ -338,7 +338,7 @@ with tab1:
         st.dataframe(df_tb,use_container_width=True,hide_index=True)
 
 
-if st.button("Recarregar Dados"):
+if st.button("🔁"):
     st.cache_data.clear()
     st.rerun()
     
