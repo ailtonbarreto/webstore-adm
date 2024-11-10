@@ -24,7 +24,7 @@ categoria = st.text_input("Categoria")
 vr_unit = st.number_input("Valor Unit")
 
 # Função para inserir dados (exemplo de INSERT)
-def insert_data(parent, sku, descricao_parent, descricao, categoria, vr_unit):
+def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
     try:
         conn = psycopg2.connect(
             host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
@@ -34,14 +34,15 @@ def insert_data(parent, sku, descricao_parent, descricao, categoria, vr_unit):
             port='5432'
         )
 
-        # Usando placeholders para inserir os dados de forma segura
+        # Consulta SQL de INSERT com placeholders para garantir a segurança e ordem correta das colunas
         insert_query = """
-        INSERT INTO tembo.tb_venda ("PARENT", "SKU", "DESCRICAO_PARENT", "DESCRICAO", "CATEGORIA", "VR_UNIT")
+        INSERT INTO tembo.tb_venda ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT")
         VALUES (%s, %s, %s, %s, %s, %s);
         """
 
+        # Executando a query com os dados capturados
         cursor = conn.cursor()
-        cursor.execute(insert_query, (parent, sku, descricao_parent, descricao, categoria, vr_unit))
+        cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent))
         conn.commit()
 
         st.write("Dados inseridos com sucesso!")
