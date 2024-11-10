@@ -20,6 +20,7 @@ with tab1:
     
 with tab2:
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
+    col1, = st.columns(1)
 
     
 # -------------------------------------------------------------------------------------------------------
@@ -218,12 +219,13 @@ with tab2:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
 # ---------------------------------------------------------------------------------------
 with tab2:
-    if df_filtrado_ped.empty:
-        st.error("Nenhum dado disponível.")
-    else:
-        df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
-        df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
-        st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
+    with col1:
+        if df_filtrado_ped.empty:
+            st.error("Nenhum dado disponível.")
+        else:
+            df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
+            df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
+            st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
 
     
 # --------------------------------------------------------------------------------------
