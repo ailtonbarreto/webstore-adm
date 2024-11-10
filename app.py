@@ -59,7 +59,7 @@ with col1b:
 
 
 delete = """
-DELETE tembo.tb_venda
+DELETE FROM tembo.tb_venda
 WHERE "PEDIDO" = '{filtro_ped}'
 
 """
