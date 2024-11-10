@@ -336,3 +336,15 @@ style3 = """
     </style>
 """
 st.markdown(style3, unsafe_allow_html=True)
+
+
+
+style4 = """
+    <style>
+    [data-testid="stMetricValue"]
+    {
+    font-size: 0.5vw;
+    }
+    </style>
+"""
+st.markdown(style4, unsafe_allow_html=True)
