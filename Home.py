@@ -42,7 +42,6 @@ LEFT JOIN (
 LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 """
 
-
 # -------------------------------------------------------------------------------------------------------
 
 @st.cache_data
