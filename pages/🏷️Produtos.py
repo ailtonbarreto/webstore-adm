@@ -1,42 +1,29 @@
 import streamlit as st
-import pandas as pd
 import psycopg2
-import datetime
-
 
 st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide")
 
 with open("style.css") as f:
-    st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-st.image("header.png",width=1300)
+st.image("header.png", width=1300)
 
-parent = st.number_input("Parent", format="%.2f")
-parent = int(parent)
+# Entrada dos dados
+parent = st.number_input("Parent", format="%.0f", step=1)  # Use 0 casas decimais e um incremento de 1
+parent = int(parent)  # Garantir que o valor é um inteiro
 
 sku = st.text_input("SKU")
-sku = str(sku)
 
 descricao_parent = st.text_input("Descrição Parent")
-
 descricao = st.text_input("Descrição")
-
 categoria = st.text_input("Categoria")
 
-vr_unit = st.number_input("Valor Unit")
-vr_unit = float(vr_unit)
-
+vr_unit = st.number_input("Valor Unit", format="%.2f")
+vr_unit = float(vr_unit)  # Garantir que o valor é float
 
 # Função de inserção
 def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
     try:
-        # Verificando e mostrando os parâmetros antes de usar
-        
-        
-        # Garantir que os tipos estão corretos
-          # Garantir que SKU seja inteiro
-        
-
         # Conexão com o banco de dados
         conn = psycopg2.connect(
             host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
@@ -64,8 +51,13 @@ def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
         if conn:
             conn.close()
 
-      
-if st.button("💾"):
-    insert_data()
-    
-st.write(parent, sku, descricao, categoria, vr_unit, descricao_parent)
+# Botão para inserir os dados
+if st.button("💾 Inserir Dados"):
+    # Verifica se todos os campos foram preenchidos
+    if sku and descricao and categoria and vr_unit > 0:  # Verificação para garantir que os campos necessários sejam preenchidos
+        insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent)
+    else:
+        st.write("Por favor, preencha todos os campos necessários.")
+
+# Exibindo os dados inseridos para confirmação
+st.write("Dados inseridos:", parent, sku, descricao, categoria, vr_unit, descricao_parent)
