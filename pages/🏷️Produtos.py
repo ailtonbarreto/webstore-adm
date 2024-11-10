@@ -15,6 +15,7 @@ parent = st.number_input("Parent", format="%.2f")
 parent = int(parent)
 
 sku = st.text_input("SKU")
+sku = str(sku)
 
 descricao_parent = st.text_input("Descrição Parent")
 
@@ -33,7 +34,7 @@ def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
         
         
         # Garantir que os tipos estão corretos
-        sku = st(sku)  # Garantir que SKU seja inteiro
+          # Garantir que SKU seja inteiro
         
 
         # Conexão com o banco de dados
