@@ -55,7 +55,7 @@ LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 
 with col1b:
     st.subheader("Pesquisar Pedido",anchor=False)
-    filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
+    # filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
 
 
 # delete = f"""
