@@ -51,19 +51,6 @@ LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 """
 
 # -------------------------------------------------------------------------------------------------------
-# SELECT EXCLUIR PEDIDO
-
-with col1b:
-    st.subheader("Pesquisar Pedido",anchor=False)
-    filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
-
-
-delete = """
-DELETE FROM tembo.tb_venda
-WHERE "PEDIDO" = '{filtro_ped}'
-
-"""
-
 def delete_order():
     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
     database = 'postgres'
@@ -71,24 +58,32 @@ def delete_order():
     password = 'MeSaIkkB57YSOgLO'
     port = '5432'
 
-    try:
-        conn = psycopg2.connect(
-            host=host,
-            database=database,
-            user=user,
-            password=password,
-            port=port
-        )        
-      
-        query = delete
-        
-        df = pd.read_sql_query(query, conn)
-    except Exception as e:
-        st.write(f"Erro ao conectar: {e}")
-    
+    filtro_ped = st.text_input("Pedido", placeholder="Pesquisar pedido")
 
-    if conn:
-        conn.close()
+    if st.button("Excluir Pedido"):
+        try:
+            conn = psycopg2.connect(
+                host=host,
+                database=database,
+                user=user,
+                password=password,
+                port=port
+            )
+
+            # Cria um cursor para executar a query
+            with conn.cursor() as cursor:
+                query = "DELETE FROM tembo.tb_venda WHERE PEDIDO = %s"
+                cursor.execute(query, (filtro_ped,))
+                conn.commit()  # Confirma a transação
+
+            st.success(f"Pedido {filtro_ped} excluído com sucesso.")
+        
+        except Exception as e:
+            st.write(f"Erro ao conectar ou excluir pedido: {e}")
+
+        finally:
+            if conn:
+                conn.close()
 # -------------------------------------------------------------------------------------------------------
 
 @st.cache_data
