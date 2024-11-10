@@ -228,17 +228,16 @@ with tab2:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
 # ---------------------------------------------------------------------------------------
 with tab2:
-    with col1a:
-        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
-        
-    with col1b:    
+    
+    with col1a:    
         if df_filtrado_ped.empty:
             st.error("Nenhum dado disponível.")
         else:
             df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
-
+    with col1b:
+        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
     
 # --------------------------------------------------------------------------------------
 # graficos
