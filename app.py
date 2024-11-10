@@ -238,7 +238,7 @@ with tab2:
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
     with col1b:
         filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
-        df_ped_filtered = df_filtrado_ped.query('PEDIDO == @filtro_ped')
+        df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
         
 # --------------------------------------------------------------------------------------
