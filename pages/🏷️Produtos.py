@@ -23,6 +23,7 @@ descricao = st.text_input("Descrição")
 categoria = st.text_input("Categoria")
 
 vr_unit = st.number_input("Valor Unit")
+vr_unit = float(vr_unit)
 
 
 # Função de inserção
@@ -33,8 +34,7 @@ def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
         
         # Garantir que os tipos estão corretos
         sku = st(sku)  # Garantir que SKU seja inteiro
-        vr_unit = float(vr_unit)  # Garantir que VR_UNIT seja float
-        parent = int(parent)
+        
 
         # Conexão com o banco de dados
         conn = psycopg2.connect(
