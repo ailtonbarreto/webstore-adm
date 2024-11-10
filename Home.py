@@ -4,7 +4,7 @@ import psycopg2
 import plotly_express as px
 import datetime
 
-st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide")
+st.set_page_config(page_title="ERP MODELO", page_icon="📊", layout="wide")
 
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
@@ -121,9 +121,6 @@ with card7:
 df_filtrado = df.query('@filtro_inicio <= `EMISSAO` <= @filtro_fim')
 
 df_filtrado["TOTAL"] = df_filtrado["QTD"] * df_filtrado["VR_UNIT"]
-
-# ----------------------------------------------------------------------------------
-# filtros pedido
 
 
 # ----------------------------------------------------------------------------------
