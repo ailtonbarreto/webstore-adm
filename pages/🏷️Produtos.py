@@ -35,7 +35,7 @@ def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
 
         # Consulta SQL de INSERT com placeholders
         insert_query = """
-        INSERT INTO tembo.tb_venda ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT")
+        INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT")
         VALUES (%s, %s, %s, %s, %s, %s);
         """
 
