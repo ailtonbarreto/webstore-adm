@@ -20,7 +20,7 @@ with tab1:
     
 with tab2:
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
-    col1, = st.columns(1)
+    col1a, = st.columns(1)
 
     
 # -------------------------------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ with tab2:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
 # ---------------------------------------------------------------------------------------
 with tab2:
-    with col1:
+    with col1a:
         if df_filtrado_ped.empty:
             st.error("Nenhum dado disponível.")
         else:
