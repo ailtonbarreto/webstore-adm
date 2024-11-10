@@ -245,7 +245,7 @@ graficocolunas.layout.yaxis.fixedrange = True
 df_categoria = df_filtrado.groupby("CATEGORIA")["TOTAL"].sum().reset_index()
 df_categoria = df_categoria.sort_values(by="TOTAL",ascending=True)
 
-grafico_barras = px.bar(df_categoria, x="TOTAL",y="CATEGORIA",orientation="h",color_discrete_sequence=["#0F8F8F"],
+grafico_barras = px.bar(df_categoria, x="TOTAL",y="CATEGORIA",orientation="h",color_discrete_sequence=["#EAF7F5"],
                         text=df_categoria["TOTAL"].apply(lambda x: f'R$ {x:,.2f}'))
 grafico_barras.update_yaxes(showgrid=False)
 grafico_barras.update_traces(showlegend=False,textfont=dict(size=15,color='#29BE4E'),textposition="auto")
