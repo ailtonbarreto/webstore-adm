@@ -155,4 +155,18 @@ with cardpd3:
 with cardpd4:
     st.metric("Pagamento Em Aberto",f"🔵{qtd_pg_aberto:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
 with cardpd5:
-    st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
+    st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.')) 
+    
+# ---------------------------------------------------------------------------------------
+
+    
+with col1a:    
+    if df_filtrado_ped.empty:
+        st.error("Nenhum dado disponível.")
+    else:
+        st.subheader("Pedidos No Período",anchor=False)
+        df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
+        df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
+        st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
+
+# --------------------------------------------------------------------------------------
