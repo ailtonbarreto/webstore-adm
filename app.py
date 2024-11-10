@@ -25,7 +25,7 @@ with tab2:
 
     
 # -------------------------------------------------------------------------------------------------------
-# DATABASE POSTGRES NA NUVEM
+# SELECT CARREGAR DATAFRAME
 
 consulta = """
 SELECT 
@@ -49,7 +49,15 @@ LEFT JOIN (
 LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 """
 
+# -------------------------------------------------------------------------------------------------------
+# SELECT EXCLUIR PEDIDO
 
+
+
+
+
+
+# -------------------------------------------------------------------------------------------------------
 
 @st.cache_data
 def load_data():
@@ -142,6 +150,9 @@ with tab2:
         filtro_fim2 = st.date_input("Data Fim","today",format= "DD/MM/YYYY")
 
 
+    with col1a:
+        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
+
 df_filtrado_ped = df.query('@filtro_inicio2 <= `EMISSAO` <= @filtro_fim2')
 
 
@@ -220,8 +231,8 @@ with tab2:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
 # ---------------------------------------------------------------------------------------
 with tab2:
-    with col1a:
-        filtro_ped = st.text_input("Pedido",placeholder="Pesquisar pedido")
+
+        
     with col1b:    
         if df_filtrado_ped.empty:
             st.error("Nenhum dado disponível.")
