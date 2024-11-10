@@ -45,33 +45,33 @@ LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 
 # -------------------------------------------------------------------------------------------------------
 
-# @st.cache_data
-# def load_data():
-#     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
-#     database = 'postgres'
-#     user = 'postgres'
-#     password = 'MeSaIkkB57YSOgLO'
-#     port = '5432'
+@st.cache_data
+def load_data():
+    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
+    database = 'postgres'
+    user = 'postgres'
+    password = 'MeSaIkkB57YSOgLO'
+    port = '5432'
 
-#     try:
-#         conn = psycopg2.connect(
-#             host=host,
-#             database=database,
-#             user=user,
-#             password=password,
-#             port=port
-#         )        
+    try:
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            port=port
+        )        
       
-#         query = consulta
+        query = consulta
         
-#         df = pd.read_sql_query(query, conn)
-#     except Exception as e:
-#         st.write(f"Erro ao conectar: {e}")
+        df = pd.read_sql_query(query, conn)
+    except Exception as e:
+        st.write(f"Erro ao conectar: {e}")
     
 
-#     if conn:
-#         conn.close()
-#     return df
+    if conn:
+        conn.close()
+    return df
 
 # ----------------------------------------------------------------------------------
 # ETL
