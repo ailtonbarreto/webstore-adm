@@ -248,7 +248,7 @@ df_categoria = df_categoria.sort_values(by="TOTAL",ascending=True)
 grafico_barras = px.bar(df_categoria, x="TOTAL",y="CATEGORIA",orientation="h",color_discrete_sequence=["#0F8F8F"],
                         text=df_categoria["TOTAL"].apply(lambda x: f'R$ {x:,.2f}'))
 grafico_barras.update_yaxes(showgrid=False)
-grafico_barras.update_traces(showlegend=False,textfont=dict(size=15,color='#ffffff'),textposition="auto")
+grafico_barras.update_traces(showlegend=False,textfont=dict(size=15,color='#29BE4E'),textposition="auto")
 grafico_barras.update_yaxes(showgrid=False,visible=True,title="")
 grafico_barras.layout.xaxis.fixedrange = True
 grafico_barras.layout.yaxis.fixedrange = True
