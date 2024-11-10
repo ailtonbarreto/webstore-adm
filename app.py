@@ -59,9 +59,9 @@ with col1b:
 
 
 delete = f"""
-DELETE FROM tembo.tb_venda
-WHERE "PEDIDO" = '{filtro_ped}';
-"""
+    DELETE FROM tembo.tb_venda
+    WHERE "PEDIDO" = '{filtro_ped}';
+        """
 
 def delete_order():
     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
