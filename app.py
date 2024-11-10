@@ -317,9 +317,9 @@ with tab2:
     with col1b:
         df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
-    with col1b:
-        if st.button("DEL"):
-            delete_order() 
+    # with col1b:
+    #     if st.button("DEL"):
+            # delete_order() 
 # --------------------------------------------------------------------------------------
 # graficos
 barras_cores = "0F8F8F"
