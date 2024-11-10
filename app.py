@@ -270,7 +270,7 @@ with tab2:
         df_ped_filtered = df.query('PEDIDO == @filtro_ped')
         # df_ped_filtered = df_ped_filtered[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
         df_ped_filtered["EMISSAO"] = df_ped_filtered["EMISSAO"].dt.strftime('%d/%m/%Y')
-        
+        df_ped_filtered["TOTAL"] = df_ped_filtered["QTD"] * df_ped_filtered["VR_UNIT"]
         st.dataframe(df_ped_filtered, use_container_width=True, hide_index=True)
     
     # if st.button(f'🗑️'):
