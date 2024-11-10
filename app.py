@@ -124,7 +124,7 @@ with tab1:
     with card6:
         filtro_inicio = st.date_input("Início",inicio,format= "DD/MM/YYYY")
         
-    # with card7:
+    with card7:
         filtro_fim = st.date_input("Fim","today",format= "DD/MM/YYYY")
         
 
