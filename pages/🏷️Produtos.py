@@ -55,7 +55,7 @@ with tab1:
     
     produto_filtro = st.text_input("Pesquisar")
     
-    df_produto = df.query('PARENT == @produto_filtro')
+    df_produto = df.query('PARENT == 18')
     
     df_produto
     
