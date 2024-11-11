@@ -8,56 +8,64 @@ with open("style.css") as f:
 
 st.image("header.png", width=1300)
 
-# Entrada dos dados
-parent = st.number_input("Parent", format="%.0f", step=1)  # Use 0 casas decimais e um incremento de 1
-parent = int(parent)  # Garantir que o valor é um inteiro
 
-sku = st.text_input("SKU")
+tab1, tab2 = st.tabs(["Visão Geral", "Cadastrar Produto"])
 
-descricao_parent = st.text_input("Descrição Parent")
-descricao = st.text_input("Descrição")
-categoria = st.text_input("Categoria")
+with tab1:
+    st.write("🚧Em construção")
 
-vr_unit = st.number_input("Valor Unit", format="%.2f")
-vr_unit = float(vr_unit)  # Garantir que o valor é float
 
-# Função de inserção
-def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
-    try:
-        # Conexão com o banco de dados
-        conn = psycopg2.connect(
-            host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
-            database='postgres',
-            user='postgres',
-            password='MeSaIkkB57YSOgLO',
-            port='5432'
-        )
+# ------------------------------------------------------------------------------------------------------------------
+with tab2:
+    parent = st.number_input("Parent", format="%.0f", step=1)
+    parent = int(parent)
 
-        # Consulta SQL de INSERT com placeholders
-        insert_query = """
-        INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT")
-        VALUES (%s, %s, %s, %s, %s, %s);
-        """
+    sku = st.text_input("SKU")
 
-        # Executando a query com os dados capturados
-        cursor = conn.cursor()
-        cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent))
-        conn.commit()
+    descricao_parent = st.text_input("Descrição Parent")
+    descricao = st.text_input("Descrição")
+    categoria = st.text_input("Categoria")
 
-        st.write("Dados inseridos com sucesso!")
-    except Exception as e:
-        st.write(f"Erro ao inserir dados: {e}")
-    finally:
-        if conn:
-            conn.close()
+    vr_unit = st.number_input("Valor Unit", format="%.2f")
+    vr_unit = float(vr_unit)
 
-# Botão para inserir os dados
-if st.button("💾 Inserir Dados"):
-    # Verifica se todos os campos foram preenchidos
-    if sku and descricao and categoria and vr_unit > 0:  # Verificação para garantir que os campos necessários sejam preenchidos
-        insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent)
-    else:
-        st.write("Por favor, preencha todos os campos necessários.")
+    # Função de inserção
+    def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
+        try:
+ 
+            conn = psycopg2.connect(
+                host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+                database='postgres',
+                user='postgres',
+                password='MeSaIkkB57YSOgLO',
+                port='5432'
+            )
 
-# Exibindo os dados inseridos para confirmação
-st.write("Dados inseridos:", parent, sku, descricao, categoria, vr_unit, descricao_parent)
+
+            insert_query = """
+            INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT")
+            VALUES (%s, %s, %s, %s, %s, %s);
+            """
+
+  
+            cursor = conn.cursor()
+            cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent))
+            conn.commit()
+
+            st.write("Dados inseridos com sucesso!")
+        except Exception as e:
+            st.write(f"Erro ao inserir dados: {e}")
+        finally:
+            if conn:
+                conn.close()
+
+ 
+    if st.button("💾 Inserir Dados"):
+ 
+        if sku and descricao and categoria and vr_unit > 0:
+            insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent)
+        else:
+            st.write("Por favor, preencha todos os campos necessários.")
+
+
+    st.write("Dados inseridos:", parent, sku, descricao, categoria, vr_unit, descricao_parent)
