@@ -17,7 +17,7 @@ with tab1:
 
 # ------------------------------------------------------------------------------------------------------------------
 with tab2:
-    parent = st.number_input("Parent", format="%.0f", step=1)
+    parent = st.number_input("Parent", step=1)
     parent = int(parent)
 
     sku = st.text_input("SKU")
