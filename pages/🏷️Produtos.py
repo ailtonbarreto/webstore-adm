@@ -64,7 +64,7 @@ with tab1:
        
         if not df_produto.empty:
             st.subheader(F"PRODUTO {df_produto.DESCRICAO}",anchor=False)
-            st.image(f'{df_produto.IMAGEM}')
+            st.image(f'{df_produto.IMAGEM}',width=200)
         else:
             st.write("Nenhum produto encontrado para a pesquisa.")
 
