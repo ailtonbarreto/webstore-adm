@@ -59,7 +59,7 @@ with tab1:
     
     if produto_filtro:
        
-        df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro)
+        df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro)]
         
        
         if not df_produto.empty:
