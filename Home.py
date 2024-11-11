@@ -4,12 +4,14 @@ import psycopg2
 import plotly_express as px
 import datetime
 
-st.set_page_config(page_title="ERP MODELO", page_icon="📊", layout="wide")
+st.set_page_config(page_title="ERP MODELO", page_icon="📊", layout="wide",initial_sidebar_state="collaped")
 
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
 st.image("header.png",width=1300)
+
+
     
 
 card1, card2, card3, card4, card5, card6, card7, = st.columns([2,2,2,2,2,1.5,1.5])
