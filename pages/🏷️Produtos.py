@@ -56,7 +56,9 @@ with tab1:
     produto_filtro = st.text_input("Pesquisar")
     
     df_produto = df.query('PARENT == @produto_filtro')
+    
     df_produto
+    
     if st.button("🔁"):
         st.cache_data.clear()
         st.rerun()
