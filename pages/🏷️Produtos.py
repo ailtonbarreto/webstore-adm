@@ -59,7 +59,7 @@ with tab1:
     
     if produto_filtro:
         # Filtra pela coluna SKU ou Produto
-        df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro) | df['DESCRICAO'].str.contains(produto_filtro, case=False)]
+        df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro) | df['SKU'].str.contains(produto_filtro, case=False)]
         
         # Exibir o dataframe filtrado
         if not df_produto.empty:
