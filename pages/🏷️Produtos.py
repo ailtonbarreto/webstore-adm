@@ -60,7 +60,7 @@ with tab2:
                 conn.close()
 
  
-    if st.button("💾 Inserir Dados"):
+    if st.button("💾"):
  
         if sku and descricao and categoria and vr_unit > 0:
             insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent)
