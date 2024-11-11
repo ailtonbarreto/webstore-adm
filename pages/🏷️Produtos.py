@@ -51,19 +51,26 @@ df = load_produtos()
 # -------------------------------------------------------------------------------------------------------
 
 with tab1:
-    st.dataframe(df,use_container_width=True)
+    # Exibir o dataframe completo
+    st.dataframe(df, use_container_width=True)
     
-    produto_filtro = st.text_input("Pesquisar")
-    produto_filtro = str(produto_filtro)
+    # Entrada de texto para pesquisar
+    produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
+    
+    if produto_filtro:
+        # Filtra pela coluna SKU ou Produto
+        df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro) | df['Produto'].str.contains(produto_filtro, case=False)]
+        
+        # Exibir o dataframe filtrado
+        if not df_produto.empty:
+            st.dataframe(df_produto, use_container_width=True)
+        else:
+            st.write("Nenhum produto encontrado para a pesquisa.")
 
-
-    df_produto = df.query('SKU == @produto_filtro')
-    
-    df_produto
-    
+    # Botão para limpar o cache e reiniciar o app
     if st.button("🔁"):
-        st.cache_data.clear()
-        st.rerun()
+        st.cache_data.clear()  # Limpar o cache, caso esteja usando cache de dados
+        st.rerun()  # Reiniciar a aplicação
 
 
 # ------------------------------------------------------------------------------------------------------------------
