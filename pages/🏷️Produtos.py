@@ -52,7 +52,7 @@ df = load_produtos()
 
 with tab1:
     # Exibir o dataframe completo
-    st.dataframe(df, use_container_width=True)
+    # st.dataframe(df, use_container_width=True)
     
     # Entrada de texto para pesquisar
     produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
@@ -69,9 +69,9 @@ with tab1:
             st.write("Nenhum produto encontrado para a pesquisa.")
 
 
-    if st.button("🔁"):
-        st.cache_data.clear()
-        st.rerun()
+if st.button("🔁"):
+    st.cache_data.clear()
+    st.rerun()
 
 
 # ------------------------------------------------------------------------------------------------------------------
