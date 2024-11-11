@@ -54,6 +54,7 @@ with tab1:
     st.dataframe(df,use_container_width=True)
     
     produto_filtro = st.text_input("Pesquisar")
+    produto_filtro = str(produto_filtro)
 
 
     df_produto = df.query('SKU == @produto_filtro')
