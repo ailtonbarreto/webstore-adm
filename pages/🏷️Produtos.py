@@ -67,5 +67,3 @@ with tab2:
         else:
             st.write("Por favor, preencha todos os campos necessários.")
 
-
-    st.write("Dados inseridos:", parent, sku, descricao, categoria, vr_unit, descricao_parent)
