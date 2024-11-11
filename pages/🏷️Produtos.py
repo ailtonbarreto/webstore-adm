@@ -53,10 +53,10 @@ df = load_produtos()
 with tab1:
     st.dataframe(df,use_container_width=True)
     
-    produto_filtro = st.number_input("Pesquisar", format="%.0f")
+    produto_filtro = st.text_input("Pesquisar")
 
-    
-    df_produto = df.query('PARENT == @produto_filtro')
+
+    df_produto = df.query('SKU == @produto_filtro')
     
     df_produto
     
