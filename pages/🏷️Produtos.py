@@ -63,7 +63,7 @@ with tab1:
         
        
         if not df_produto.empty:
-            # st.subheader(F"PRODUTO {df_produto.DESCRICAO}",anchor=False)
+            st.subheader(df_produto.iloc[0]['DESCRICAO'],anchor=False)
             st.image(df_produto.iloc[0]['IMAGEM'], width=200)
         else:
             st.write("Nenhum produto encontrado para a pesquisa.")
