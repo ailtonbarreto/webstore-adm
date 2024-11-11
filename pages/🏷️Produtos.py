@@ -16,11 +16,6 @@ with tab1:
     st.write("🚧Em construção")
 
 # -------------------------------------------------------------------------------------------------------
-# SELECT CARREGAR DATAFRAME
-
-consulta = """
-SELECT * FROM tembo.tb_produto;"
-"""
 
 # -------------------------------------------------------------------------------------------------------
 
@@ -41,7 +36,7 @@ def load_produtos():
             port=port
         )        
       
-        query = consulta
+        query = "SELECT * FROM tembo.tb_produto;"
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
