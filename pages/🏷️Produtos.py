@@ -53,7 +53,7 @@ df = load_produtos()
 with tab1:
     st.dataframe(df,use_container_width=True)
     
-    produto_filtro = st.number_input("Pesquisar")
+    produto_filtro = st.number_input("Pesquisar").as_integer_ratio()
     
     df_produto = df.query('PARENT == @produto_filtro')
     
