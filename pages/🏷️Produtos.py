@@ -19,7 +19,7 @@ with tab1:
 # SELECT CARREGAR DATAFRAME
 
 consulta = """
-SELECT * FROM tembo.tb_produtoç"
+SELECT * FROM tembo.tb_produto;"
 """
 
 # -------------------------------------------------------------------------------------------------------
