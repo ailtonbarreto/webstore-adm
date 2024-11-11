@@ -12,8 +12,7 @@ st.image("header.png", width=1300)
 
 tab1, tab2 = st.tabs(["Visão Geral", "Cadastrar Produto"])
 
-with tab1:
-    st.write("🚧Em construção")
+
 
 # -------------------------------------------------------------------------------------------------------
 
