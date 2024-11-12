@@ -134,8 +134,8 @@ style1 = """
     [data-testid="stColumn"]
     {
     background-color: #ffffff;
-    display: flex;
-    justify-content: center;
+    # display: flex;
+    # justify-content: center;
     padding: 0.5vw 0.5vw;
     border-radius: 15px;
     text-align: center;
@@ -144,3 +144,5 @@ style1 = """
     </style>
 """
 st.markdown(style1, unsafe_allow_html=True)
+
+data-testid="stFullScreenFrame"
