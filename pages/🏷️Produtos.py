@@ -136,6 +136,7 @@ style1 = """
     background-color: #ffffff;
     padding: 0.5vw 0.5vw;
     border-radius: 15px;
+    text-align: center;
     box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.3);
     }
     </style>
