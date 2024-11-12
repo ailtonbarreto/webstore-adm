@@ -134,8 +134,6 @@ style1 = """
     [data-testid="stColumn"]
     {
     background-color: #ffffff;
-    # display: flex;
-    # justify-content: center;
     padding: 0.5vw 0.5vw;
     border-radius: 15px;
     text-align: center;
@@ -145,4 +143,17 @@ style1 = """
 """
 st.markdown(style1, unsafe_allow_html=True)
 
-# data-testid="stFullScreenFrame"
+style2 = """
+    <style>
+    [data-testid="stFullScreenFrame"]
+    {
+    background-color: #ffffff;
+    padding: 0.5vw 0.5vw;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+    </style>
+"""
+st.markdown(style2, unsafe_allow_html=True)
+
