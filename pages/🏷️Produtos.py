@@ -10,7 +10,7 @@ with open("style.css") as f:
 st.image("header.png", width=1300)
 
 
-tab1, tab2 = st.tabs(["Visão Geral", "Cadastrar Produto"])
+tab1, tab2 = st.tabs(["Pesquisar Produto", "Cadastrar Produto"])
 
 
 # -------------------------------------------------------------------------------------------------------
