@@ -13,9 +13,6 @@ st.image("header.png", width=1300)
 tab1, tab2 = st.tabs(["Visão Geral", "Cadastrar Produto"])
 
 
-
-
-
 # -------------------------------------------------------------------------------------------------------
 
 @st.cache_data
@@ -69,9 +66,9 @@ with tab1:
             st.write("Nenhum produto encontrado para a pesquisa.")
 
 
-if st.button("🔁"):
-    st.cache_data.clear()
-    st.rerun()
+    if st.button("🔁"):
+        st.cache_data.clear()
+        st.rerun()
 
 
 # ------------------------------------------------------------------------------------------------------------------
