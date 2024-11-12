@@ -145,4 +145,4 @@ style1 = """
 """
 st.markdown(style1, unsafe_allow_html=True)
 
-data-testid="stFullScreenFrame"
+# data-testid="stFullScreenFrame"
