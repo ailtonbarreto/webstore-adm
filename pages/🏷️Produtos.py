@@ -134,6 +134,8 @@ style1 = """
     [data-testid="stColumn"]
     {
     background-color: #ffffff;
+    display: flex;
+    justify-content: center;
     padding: 0.5vw 0.5vw;
     border-radius: 15px;
     text-align: center;
