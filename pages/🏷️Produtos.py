@@ -48,27 +48,27 @@ df = load_produtos()
 # -------------------------------------------------------------------------------------------------------
 
 with tab1:
-    # Exibir o dataframe completo
-    # st.dataframe(df, use_container_width=True)
-    
+
+    col1, = st.columns(1)
+    with col1:
     # Entrada de texto para pesquisar
-    produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
-    
-    if produto_filtro:
-       
-        df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro) | df['SKU'].str.contains(produto_filtro, case=False)]
+        produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
         
-       
-        if not df_produto.empty:
-            st.subheader(df_produto.iloc[0]['DESCRICAO'],anchor=False)
-            st.image(df_produto.iloc[0]['IMAGEM'], width=200)
-        else:
-            st.write("Nenhum produto encontrado para a pesquisa.")
+        if produto_filtro:
+        
+            df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro) | df['SKU'].str.contains(produto_filtro, case=False)]
+            
+        
+            if not df_produto.empty:
+                st.subheader(df_produto.iloc[0]['DESCRICAO'],anchor=False)
+                st.image(df_produto.iloc[0]['IMAGEM'], width=200)
+            else:
+                st.write("Nenhum produto encontrado para a pesquisa.")
 
 
-    if st.button("🔁"):
-        st.cache_data.clear()
-        st.rerun()
+        if st.button("🔁"):
+            st.cache_data.clear()
+            st.rerun()
 
 
 # ------------------------------------------------------------------------------------------------------------------
