@@ -239,7 +239,7 @@ style1 = """
     [data-testid="stColumn"]
     {
     background-color: #ffffff;
-    padding: 0vw 1vw;
+    padding: 0.5vw 1vw;
     border-radius: 15px;
     box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.3);
     }
