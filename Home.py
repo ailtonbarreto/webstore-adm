@@ -282,3 +282,14 @@ style4 = """
     </style>
 """
 st.markdown(style4, unsafe_allow_html=True)
+
+
+style5 = """
+    <style>
+    [data-testid="stBaseButton-secondary"]
+    {
+    background-color: #0F8F8F;
+    }
+    </style>
+"""
+st.markdown(style5, unsafe_allow_html=True)
