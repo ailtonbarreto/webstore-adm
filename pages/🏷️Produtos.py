@@ -51,27 +51,29 @@ df = load_produtos()
 
 with tab1:
     col1, = st.columns(1)
+    col2, = st.columns(1)
+    
 
     with col1:
 
         produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
+        with col2:
+            if produto_filtro:
+        
+                df_produto = df[
+                    df['SKU'].astype(str).str.contains(produto_filtro, case=False) |
+                    df['DESCRICAO'].str.contains(produto_filtro, case=False)
+                ]
 
-        if produto_filtro:
-      
-            df_produto = df[
-                df['SKU'].astype(str).str.contains(produto_filtro, case=False) |
-                df['DESCRICAO'].str.contains(produto_filtro, case=False)
-            ]
-
-            if not df_produto.empty:
-                st.write(f"**Foram encontrados {len(df_produto)} produto(s):**")
-                for index, row in df_produto.iterrows():
-                    st.subheader(row['DESCRICAO'], anchor=False)
-                    st.image(row['IMAGEM'], width=200)
-                    st.text(f"SKU: {row['SKU']}")
-                    st.markdown("---")
-            else:
-                st.write("Nenhum produto encontrado.")
+                if not df_produto.empty:
+                    st.write(f"**Foram encontrados {len(df_produto)} produto(s):**")
+                    for index, row in df_produto.iterrows():
+                        st.subheader(row['DESCRICAO'], anchor=False)
+                        st.image(row['IMAGEM'], width=200)
+                        st.text(f"SKU: {row['SKU']}")
+                        st.markdown("---")
+                else:
+                    st.write("Nenhum produto encontrado.")
 
 
 
