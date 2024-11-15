@@ -47,24 +47,28 @@ df = load_produtos()
 
 # -------------------------------------------------------------------------------------------------------
 
-with tab1:
 
-    col1, = st.columns(1)
-    col2, = st.columns(1)
+with tab1:
+    col1, col2 = st.columns(2)  # Cria duas colunas para layout
+
     with col1:
-    # Entrada de texto para pesquisar
+        # Entrada de texto para pesquisa
         produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
-        
-        if produto_filtro:
-        
-            df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro) | df['SKU'].str.contains(produto_filtro, case=False)]
-            
+
+        if produto_filtro:  # Verifica se há algo no campo de pesquisa
+            # Filtra pelo SKU ou pelo nome (case insensitive)
+            df_produto = df[
+                df['SKU'].astype(str).str.contains(produto_filtro, case=False) |
+                df['DESCRICAO'].str.contains(produto_filtro, case=False)
+            ]
+
             with col2:
-                if not df_produto.empty:
-                    st.subheader(df_produto.iloc[0]['DESCRICAO'],anchor=False)
+                if not df_produto.empty:  # Se houver resultados
+                    st.subheader(df_produto.iloc[0]['DESCRICAO'], anchor=False)
                     st.image(df_produto.iloc[0]['IMAGEM'], width=400)
                 else:
-                    st.write("Nenhum produto encontrado para a pesquisa.")
+                    st.write("Nenhum produto encontrado.")
+
 
 
     if st.button("🔁"):
