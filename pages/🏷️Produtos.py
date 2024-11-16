@@ -91,7 +91,7 @@ with tab2:
     with col1:
         descricao_parent = st.text_input("Descrição Parent")
         descricao = st.text_input("Descrição")
-        categoria = st.text_input("Categoria")
+        categoria = st.selectbox("Categoria",["Chapéu","Roupas","Mochila","Tênis"])
         url = st.text_input("URL da Imagem")
         vr_unit = st.number_input("Valor Unit", format="%.2f")
         vr_unit = float(vr_unit)
