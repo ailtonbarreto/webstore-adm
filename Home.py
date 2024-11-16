@@ -163,12 +163,12 @@ with card5:
         
 # --------------------------------------------------------------------------------------
 # graficos
-barras_cores = "0F8F8F"
+barras_cores = "0B1548"
 
 df_linha = df_filtrado.groupby("Dia")["TOTAL"].sum().reset_index()
 
 
-graficocolunas = px.bar(df_linha,x="Dia",y="TOTAL",color_discrete_sequence=["#0F8F8F"])
+graficocolunas = px.bar(df_linha,x="Dia",y="TOTAL",color_discrete_sequence=["#0B1548"])
 graficocolunas.update_yaxes(showgrid=False)
 graficocolunas.update_traces(showlegend=False)
 graficocolunas.update_yaxes(showgrid=False,visible=True,title="")
@@ -180,7 +180,7 @@ graficocolunas.layout.yaxis.fixedrange = True
 df_categoria = df_filtrado.groupby("CATEGORIA")["TOTAL"].sum().reset_index()
 df_categoria = df_categoria.sort_values(by="TOTAL",ascending=True)
 
-grafico_barras = px.bar(df_categoria, x="TOTAL",y="CATEGORIA",orientation="h",color_discrete_sequence=["#0F8F8F"],
+grafico_barras = px.bar(df_categoria, x="TOTAL",y="CATEGORIA",orientation="h",color_discrete_sequence=["#0B1548"],
                         text=df_categoria["TOTAL"].apply(lambda x: f'R$ {x:,.2f}'))
 grafico_barras.update_yaxes(showgrid=False)
 grafico_barras.update_traces(showlegend=False,textfont=dict(size=15,color='#0B6262'),textposition="auto")
