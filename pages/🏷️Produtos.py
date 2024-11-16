@@ -56,7 +56,8 @@ with tab1:
         produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
         with col3:
             if produto_filtro:
-        
+                st.subheader("Produtos",anchor=False)
+                
                 df_produto = df[
                     df['SKU'].astype(str).str.contains(produto_filtro, case=False) |
                     df['DESCRICAO'].str.contains(produto_filtro, case=False)
@@ -64,7 +65,8 @@ with tab1:
 
                 if not df_produto.empty:
                     with col2:
-                        st.subheader(f"**Foram encontrados {len(df_produto)} produto(s)**",anchor=False)
+                        st.subheader("Resultado da Pesquisa",anchor=False)
+                        st.subheader(f"{len(df_produto)} produto(s)**",anchor=False)
                     for index, row in df_produto.iterrows():
                         st.subheader(row['DESCRICAO'], anchor=False)
                         st.image(row['IMAGEM'], width=200)
