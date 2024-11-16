@@ -109,30 +109,28 @@ with tab2:
 
             cursor = conn.cursor()
 
-            # Consulta para pegar o maior SKU atual
             cursor.execute("SELECT MAX(\"SKU\") FROM tembo.tb_produto")
             max_sku = cursor.fetchone()[0]
 
-            # Se não houver SKU registrado, o primeiro SKU será 1
-            if max_sku is None:
-                sku = 1
-            else:
-                sku = max_sku + 1
+        
+        
+            sku = "1-teste"
+      
+       
 
-            # Consulta para pegar o maior valor de "parent"
             cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto")
             max_parent = cursor.fetchone()[0]
 
-            # Se não houver "parent" registrado, o primeiro "parent" será 1
+         
             if max_parent is None:
                 parent = 1
             else:
                 parent = max_parent + 1
 
-            # Garantindo que os valores sejam do tipo esperado
-            sku = int(sku)  # Garante que sku é um inteiro
-            parent = int(parent)  # Garante que parent é um inteiro
-            vr_unit = float(vr_unit)  # Garante que o valor unitário é um float
+           
+   
+            parent = int(parent)
+            vr_unit = float(vr_unit)
 
             # Inserção de dados com o SKU e PARENT gerados automaticamente
             insert_query = """
