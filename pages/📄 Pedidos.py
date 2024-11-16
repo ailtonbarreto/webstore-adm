@@ -169,7 +169,7 @@ with col1a:
         st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
 
 # --------------------------------------------------------------------------------------
-if st.button("🔁"):
+if st.button("🔁 Atualizar"):
     st.cache_data.clear()
     st.rerun()
     
