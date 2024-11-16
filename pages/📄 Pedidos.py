@@ -13,10 +13,6 @@ with open("style.css") as f:
 
 tab1, tab2 = st.tabs(["Pedidos", "Alterar Status"])
 
-with tab1:
-    cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
-
-
 
 st.divider()
 
@@ -111,55 +107,55 @@ inicio = today - datetime.timedelta(days=120)
 
 # ----------------------------------------------------------------------------------
 # filtros pedido
-
-
+with tab1:
+    cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
     
-with cardpd6:
-    filtro_inicio2 = st.date_input("Data Início",inicio,format= "DD/MM/YYYY")
+    with cardpd6:
+        filtro_inicio2 = st.date_input("Data Início",inicio,format= "DD/MM/YYYY")
+            
+    with cardpd7:
+        filtro_fim2 = st.date_input("Data Fim","today",format= "DD/MM/YYYY")
+
+
+    df_filtrado_ped = df.query('@filtro_inicio2 <= `EMISSAO` <= @filtro_fim2')
+
+
+    df_filtrado_ped["TOTAL"] = df_filtrado_ped["QTD"] * df_filtrado_ped["VR_UNIT"]
+
+    qtd_pedidos2 = df_filtrado_ped["PEDIDO"].nunique()
+
+    qtd_pg_aberto = df_filtrado_ped.query('STATUS == "AGUARDANDO PAGAMENTO"')
+    qtd_pg_aberto = qtd_pg_aberto["PEDIDO"].nunique()
+
+
+    qtd_pedido_concluido = df_filtrado_ped.query('STATUS == "CONCLUIDO"')
+    qtd_pedido_concluido = qtd_pedido_concluido["PEDIDO"].nunique()
+
+    qtd_pedido_planejados = df_filtrado_ped.query('STATUS == "PLANEJADO"')
+    qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].nunique()
+
+
+    qtd_pedido_aguardando_conf = df_filtrado_ped.query('STATUS == "AGUARDANDO CONFIRMACAO"')
+    qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].nunique()
+
+
+    total_aguardando= df_filtrado_ped.query('STATUS == "AGUARDANDO PAGAMENTO"')
+    total_aguardando_pagamento = total_aguardando["TOTAL"].sum()
+
+
+    # ---------------------------------------------------------------------------------------
+
+    with cardpd1:
+        st.metric("QTD Pedidos",f"📄{qtd_pedidos2:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+    with cardpd2:
+        st.metric("Concluídos",f"🟢{qtd_pedido_concluido:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
+    with cardpd3:
+        st.metric("Aguardando Confirmação",f"🟡{qtd_pedido_aguardando_conf:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+    with cardpd4:
+        st.metric("Pagamento Em Aberto",f"🔵{qtd_pg_aberto:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
+    with cardpd5:
+        st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.')) 
         
-with cardpd7:
-    filtro_fim2 = st.date_input("Data Fim","today",format= "DD/MM/YYYY")
-
-
-df_filtrado_ped = df.query('@filtro_inicio2 <= `EMISSAO` <= @filtro_fim2')
-
-
-df_filtrado_ped["TOTAL"] = df_filtrado_ped["QTD"] * df_filtrado_ped["VR_UNIT"]
-
-qtd_pedidos2 = df_filtrado_ped["PEDIDO"].nunique()
-
-qtd_pg_aberto = df_filtrado_ped.query('STATUS == "AGUARDANDO PAGAMENTO"')
-qtd_pg_aberto = qtd_pg_aberto["PEDIDO"].nunique()
-
-
-qtd_pedido_concluido = df_filtrado_ped.query('STATUS == "CONCLUIDO"')
-qtd_pedido_concluido = qtd_pedido_concluido["PEDIDO"].nunique()
-
-qtd_pedido_planejados = df_filtrado_ped.query('STATUS == "PLANEJADO"')
-qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].nunique()
-
-
-qtd_pedido_aguardando_conf = df_filtrado_ped.query('STATUS == "AGUARDANDO CONFIRMACAO"')
-qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].nunique()
-
-
-total_aguardando= df_filtrado_ped.query('STATUS == "AGUARDANDO PAGAMENTO"')
-total_aguardando_pagamento = total_aguardando["TOTAL"].sum()
-
-
-# ---------------------------------------------------------------------------------------
-
-with cardpd1:
-    st.metric("QTD Pedidos",f"📄{qtd_pedidos2:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
-with cardpd2:
-    st.metric("Concluídos",f"🟢{qtd_pedido_concluido:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
-with cardpd3:
-    st.metric("Aguardando Confirmação",f"🟡{qtd_pedido_aguardando_conf:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
-with cardpd4:
-    st.metric("Pagamento Em Aberto",f"🔵{qtd_pg_aberto:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
-with cardpd5:
-    st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.')) 
-    
 # ---------------------------------------------------------------------------------------
 
     
