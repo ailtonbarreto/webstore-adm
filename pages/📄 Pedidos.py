@@ -11,7 +11,7 @@ with open("style.css") as f:
 
 
 
-tab1, tab2 = st.tabs["Pedidos", "Alterar Status"]
+tab1, tab2 = st.tabs(["Pedidos", "Alterar Status"])
 
 with tab1:
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
