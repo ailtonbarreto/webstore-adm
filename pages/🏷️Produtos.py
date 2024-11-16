@@ -78,7 +78,7 @@ with tab1:
 
 
 
-    if st.button("🔁"):
+    if st.button("🔁 Atualizar"):
         st.cache_data.clear()
         st.rerun()
 
