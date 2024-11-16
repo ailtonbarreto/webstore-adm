@@ -67,7 +67,7 @@ with tab1:
 
                 if not df_produto.empty:
                     with col2:
-                        st.write(f"{len(df_produto)} produto(s)**",anchor=False)
+                        st.write(f"{len(df_produto)} produto(s)",anchor=False)
                     for index, row in df_produto.iterrows():
                         st.subheader(row['DESCRICAO'], anchor=False)
                         st.image(row['IMAGEM'], width=200)
