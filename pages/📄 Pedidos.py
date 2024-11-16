@@ -172,9 +172,9 @@ with tab1:
         df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
         st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
         
-# with tab2:
-#     filtro_pedido = st.text_input("Pedido")
-#     st.dataframe(df)
+with tab2:
+    filtro_pedido = st.text_input("Pedido")
+    st.dataframe(df)
 
 # --------------------------------------------------------------------------------------
 if st.button("🔁 Atualizar"):
