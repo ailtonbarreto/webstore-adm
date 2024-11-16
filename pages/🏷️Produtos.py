@@ -98,7 +98,7 @@ with tab2:
     # Função de inserção
     def insert_data(descricao, categoria, vr_unit, descricao_parent, url):
         try:
-            # Conectando ao banco de dados
+   
             conn = psycopg2.connect(
                 host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
                 database='postgres',
@@ -132,7 +132,7 @@ with tab2:
             parent = int(parent)
             vr_unit = float(vr_unit)
 
-            # Inserção de dados com o SKU e PARENT gerados automaticamente
+    
             insert_query = """
             INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT", "IMAGEM")
             VALUES (%s, %s, %s, %s, %s, %s, %s);
