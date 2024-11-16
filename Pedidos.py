@@ -111,13 +111,13 @@ inicio = today - datetime.timedelta(days=120)
 # filtros pedido
 with tab1:
     
-    cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
+    cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, cardpd8= st.columns([2,2,2,2,2,2,1.5,1.5])
     col1, = st.columns(1)
     
-    with cardpd6:
+    with cardpd7:
         filtro_inicio2 = st.date_input("Data Início",inicio,format= "DD/MM/YYYY")
             
-    with cardpd7:
+    with cardpd8:
         filtro_fim2 = st.date_input("Data Fim","today",format= "DD/MM/YYYY")
 
 
@@ -146,6 +146,8 @@ with tab1:
     total_aguardando= df_filtrado_ped.query('STATUS == "AGUARDANDO PAGAMENTO"')
     total_aguardando_pagamento = total_aguardando["TOTAL"].sum()
 
+    total_cancelado= df_filtrado_ped.query('STATUS == "CANCELADO"')
+    total_cancelado = total_aguardando["PEDIDO"].sum()
 
     # ---------------------------------------------------------------------------------------
 
@@ -159,7 +161,8 @@ with tab1:
         st.metric("Pagamento Em Aberto",f"🔵{qtd_pg_aberto:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))  
     with cardpd5:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.')) 
-        
+    with cardpd6:
+        st.metric("Cancelados",f"🔴{total_cancelado:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))     
 # ---------------------------------------------------------------------------------------
 
     
