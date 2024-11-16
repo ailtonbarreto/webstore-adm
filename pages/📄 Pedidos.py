@@ -9,7 +9,7 @@ st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layo
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
-st.image("header.png",width=300)
+st.sidebar.image("header.png",width=300,use_column_width=True)
 
 
 cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
