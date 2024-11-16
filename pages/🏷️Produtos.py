@@ -46,18 +46,17 @@ def load_produtos():
 df = load_produtos()
 
 # -------------------------------------------------------------------------------------------------------
-
-
+# PESQUISAR PRODUTO
 
 with tab1:
     col1, = st.columns(1)
     col2, = st.columns(1)
+    col3, = st.columns(1)
     
-
     with col1:
 
         produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", "")
-        with col2:
+        with col3:
             if produto_filtro:
         
                 df_produto = df[
@@ -66,7 +65,8 @@ with tab1:
                 ]
 
                 if not df_produto.empty:
-                    st.subheader(f"**Foram encontrados {len(df_produto)} produto(s):**",anchor=False)
+                    with col2:
+                        st.subheader(f"**Foram encontrados {len(df_produto)} produto(s):**",anchor=False)
                     for index, row in df_produto.iterrows():
                         st.subheader(row['DESCRICAO'], anchor=False)
                         st.image(row['IMAGEM'], width=200)
@@ -74,8 +74,6 @@ with tab1:
                         st.markdown("---")
                 else:
                     st.write("Nenhum produto encontrado.")
-
-
 
 
     if st.button("🔁 Atualizar"):
