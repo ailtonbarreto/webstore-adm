@@ -288,7 +288,7 @@ style5 = """
     <style>
     [data-testid="stBaseButton-secondary"]
     {
-    background: #0F8F8F;
+    background: #0B1548;
     }
     </style>
 """
