@@ -224,7 +224,7 @@ with tab2:
                     cursor.close()
                     conn.close()
         df_pedido = df.query('PEDIDO == @filtro_pedido')
-        st.dataframe(df["STATUS"])
+        st.dataframe(df["STATUS"].unique())
             
         st.dataframe(df_pedido,use_container_width=True)
         if st.button("💾 Salvar"):
