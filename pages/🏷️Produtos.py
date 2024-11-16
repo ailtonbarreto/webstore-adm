@@ -87,10 +87,7 @@ with tab1:
 # CADASTRAR PRODUTO
 
 with tab2:
-    parent = st.number_input("Parent", step=1)
-    parent = int(parent)
-
-    # O SKU será gerado automaticamente
+    # O valor de "parent" será gerado automaticamente
     descricao_parent = st.text_input("Descrição Parent")
     descricao = st.text_input("Descrição")
     categoria = st.text_input("Categoria")
@@ -99,8 +96,9 @@ with tab2:
     vr_unit = float(vr_unit)
 
     # Função de inserção
-    def insert_data(parent, descricao, categoria, vr_unit, descricao_parent, url):
+    def insert_data(descricao, categoria, vr_unit, descricao_parent, url):
         try:
+            # Conectando ao banco de dados
             conn = psycopg2.connect(
                 host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
                 database='postgres',
@@ -109,8 +107,9 @@ with tab2:
                 port='5432'
             )
 
-            # Consulta para pegar o maior SKU atual
             cursor = conn.cursor()
+
+            # Consulta para pegar o maior SKU atual
             cursor.execute("SELECT MAX(\"SKU\") FROM tembo.tb_produto")
             max_sku = cursor.fetchone()[0]
 
@@ -120,14 +119,28 @@ with tab2:
             else:
                 sku = max_sku + 1
 
-            # Inserção de dados com o SKU gerado automaticamente
+            # Consulta para pegar o maior valor de "parent"
+            cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto")
+            max_parent = cursor.fetchone()[0]
+
+            # Se não houver "parent" registrado, o primeiro "parent" será 1
+            if max_parent is None:
+                parent = 1
+            else:
+                parent = max_parent + 1
+
+            # Garantindo que os valores sejam do tipo esperado
+            sku = int(sku)  # Garante que sku é um inteiro
+            parent = int(parent)  # Garante que parent é um inteiro
+            vr_unit = float(vr_unit)  # Garante que o valor unitário é um float
+
+            # Inserção de dados com o SKU e PARENT gerados automaticamente
             insert_query = """
             INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT", "IMAGEM")
             VALUES (%s, %s, %s, %s, %s, %s, %s);
             """
 
-            # Garantir que o sku seja um número inteiro
-            cursor.execute(insert_query, (parent, int(sku), descricao, categoria, vr_unit, descricao_parent, url))
+            cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent, url))
             conn.commit()
 
             st.write("Dados inseridos com sucesso!")
@@ -139,7 +152,7 @@ with tab2:
 
     if st.button("💾 Salvar"):
         if descricao and categoria and vr_unit > 0:
-            insert_data(parent, descricao, categoria, vr_unit, descricao_parent, url)
+            insert_data(descricao, categoria, vr_unit, descricao_parent, url)
         else:
             st.write("Por favor, preencha todos os campos necessários.")
 
