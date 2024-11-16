@@ -180,7 +180,7 @@ with tab2:
     with col2:
         novo_status = st.selectbox(
             "Status",
-            ["PEDIDO CANCELADO", "PEDIDO CONFIRMADO", "PAGAMENTO CONFIRMADO", "PEDIDO CONCLUIDO"]
+            ["CANCELADO", "PEDIDO CONFIRMADO", "PAGAMENTO CONFIRMADO", "PEDIDO CONCLUIDO"]
         )
     with col3:
         def update_pedido(filtro_pedido, novo_status):
@@ -224,6 +224,7 @@ with tab2:
                     cursor.close()
                     conn.close()
         df_pedido = df.query('PEDIDO == @filtro_pedido')
+        st.dataframe(df["STATUS"])
             
         st.dataframe(df_pedido,use_container_width=True)
         if st.button("💾 Salvar"):
