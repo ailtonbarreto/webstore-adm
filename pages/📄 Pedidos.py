@@ -10,7 +10,6 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
 
-
 tab1, tab2 = st.tabs(["Pedidos", "Alterar Status"])
 
 
@@ -41,6 +40,9 @@ LEFT JOIN (
 ) AS p ON v."PARENT" = p."PARENT"
 LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 """
+
+
+
 
 # -------------------------------------------------------------------------------------------------------
 
@@ -108,7 +110,9 @@ inicio = today - datetime.timedelta(days=120)
 # ----------------------------------------------------------------------------------
 # filtros pedido
 with tab1:
+    
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
+    col1, = st.columns(1)
     
     with cardpd6:
         filtro_inicio2 = st.date_input("Data Início",inicio,format= "DD/MM/YYYY")
@@ -159,18 +163,75 @@ with tab1:
 # ---------------------------------------------------------------------------------------
 
     
-  
-    if df_filtrado_ped.empty:
-        st.error("Nenhum dado disponível.")
-    else:
-        st.subheader("Pedidos No Período",anchor=False)
-        df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
-        df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
-        st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
-        
+    with col1:
+        if df_filtrado_ped.empty:
+            st.error("Nenhum dado disponível.")
+        else:
+            st.subheader("Pedidos No Período",anchor=False)
+            df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
+            df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
+            st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
+            
 with tab2:
-    filtro_pedido = st.text_input("Pedido")
-    st.dataframe(df)
+    col1, col2 = st.columns(2)
+    col3, = st.columns(1)
+    with col1:
+        filtro_pedido = st.text_input("Pedido")
+    with col2:
+        novo_status = st.selectbox(
+            "Status",
+            ["PEDIDO CANCELADO", "PEDIDO CONFIRMADO", "PAGAMENTO CONFIRMADO", "PEDIDO CONCLUIDO"]
+        )
+    with col3:
+        def update_pedido(filtro_pedido, novo_status):
+            host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
+            database = 'postgres'
+            user = 'postgres'
+            password = 'MeSaIkkB57YSOgLO'
+            port = '5432'
+
+            try:
+                conn = psycopg2.connect(
+                    host=host,
+                    database=database,
+                    user=user,
+                    password=password,
+                    port=port
+                )
+                cursor = conn.cursor()
+
+                # Atualiza o pedido com o novo status
+                query = f"""
+                UPDATE tembo.tb_venda
+                SET "STATUS" = '{novo_status}'
+                WHERE "PEDIDO" = '{filtro_pedido}';
+                """
+                cursor.execute(query)
+                conn.commit()
+                st.success("Pedido atualizado com sucesso!")
+
+                # Consulta atualizada
+                consulta_query = f"""
+                SELECT * FROM tembo.tb_venda WHERE "PEDIDO" = '{filtro_pedido}';
+                """
+                df = pd.read_sql_query(consulta_query, conn)
+                return df
+
+            except Exception as e:
+                st.error(f"Erro ao conectar: {e}")
+            finally:
+                if conn:
+                    cursor.close()
+                    conn.close()
+        df_pedido = df.query('PEDIDO == @filtro_pedido')
+            
+        st.dataframe(df_pedido,use_container_width=True)
+        if st.button("💾 Salvar"):
+            if filtro_pedido:
+                df_pedido_filtrado = update_pedido(filtro_pedido, novo_status)
+            else:
+                st.warning("Por favor, insira um número de pedido válido.")
+
 
 # --------------------------------------------------------------------------------------
 if st.button("🔁 Atualizar"):
