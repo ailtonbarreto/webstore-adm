@@ -187,7 +187,7 @@ if st.button("🔁 Atualizar"):
 
 style1 = """
     <style>
-    [class="stColumn"]
+    [data-testid="stColumn"]
     {
     background-color: #ffffff;
     padding: 0.5vw 0.5vw;
