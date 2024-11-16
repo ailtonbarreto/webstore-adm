@@ -10,7 +10,7 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
 cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
-tab1, tab2 = st.tabs["Pedidos", "Alterar Status"]
+tab1, tab2 = st.tabs(["Pedidos", "Alterar Status"])
 st.divider()
 
 
