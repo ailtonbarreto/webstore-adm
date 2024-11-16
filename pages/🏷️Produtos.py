@@ -90,6 +90,7 @@ with tab2:
     parent = st.number_input("Parent", step=1)
     parent = int(parent)
 
+    # O SKU será gerado automaticamente
     descricao_parent = st.text_input("Descrição Parent")
     descricao = st.text_input("Descrição")
     categoria = st.text_input("Categoria")
@@ -97,7 +98,7 @@ with tab2:
     vr_unit = st.number_input("Valor Unit", format="%.2f")
     vr_unit = float(vr_unit)
 
-
+    # Função de inserção
     def insert_data(parent, descricao, categoria, vr_unit, descricao_parent, url):
         try:
             conn = psycopg2.connect(
@@ -108,21 +109,25 @@ with tab2:
                 port='5432'
             )
 
+            # Consulta para pegar o maior SKU atual
             cursor = conn.cursor()
             cursor.execute("SELECT MAX(\"SKU\") FROM tembo.tb_produto")
             max_sku = cursor.fetchone()[0]
 
+            # Se não houver SKU registrado, o primeiro SKU será 1
             if max_sku is None:
                 sku = 1
             else:
                 sku = max_sku + 1
 
+            # Inserção de dados com o SKU gerado automaticamente
             insert_query = """
             INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT", "IMAGEM")
             VALUES (%s, %s, %s, %s, %s, %s, %s);
             """
 
-            cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent, url))
+            # Garantir que o sku seja um número inteiro
+            cursor.execute(insert_query, (parent, int(sku), descricao, categoria, vr_unit, descricao_parent, url))
             conn.commit()
 
             st.write("Dados inseridos com sucesso!")
