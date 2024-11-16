@@ -225,7 +225,7 @@ with tab2:
                     conn.close()
         df_pedido = df.query('PEDIDO == @filtro_pedido')
         st.subheader("Resultado Da Pesquisa", anchor=False)
-        df_pedido = df_pedido[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
+        df_pedido = df_pedido.drop(columns=["Ano","Mês"])
         st.dataframe(df_pedido,use_container_width=True,hide_index=True)
         if st.button("💾 Salvar"):
             if filtro_pedido:
