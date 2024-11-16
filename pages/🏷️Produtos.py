@@ -84,25 +84,22 @@ with tab1:
 
 
 # ------------------------------------------------------------------------------------------------------------------
+# CADASTRAR PRODUTO
+
 with tab2:
     parent = st.number_input("Parent", step=1)
     parent = int(parent)
-
-    sku = st.text_input("SKU")
 
     descricao_parent = st.text_input("Descrição Parent")
     descricao = st.text_input("Descrição")
     categoria = st.text_input("Categoria")
     url = st.text_input("URL da Imagem")
-    
-
     vr_unit = st.number_input("Valor Unit", format="%.2f")
     vr_unit = float(vr_unit)
 
-    # Função de inserção
-    def insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent):
+
+    def insert_data(parent, descricao, categoria, vr_unit, descricao_parent, url):
         try:
- 
             conn = psycopg2.connect(
                 host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
                 database='postgres',
@@ -111,15 +108,21 @@ with tab2:
                 port='5432'
             )
 
+            cursor = conn.cursor()
+            cursor.execute("SELECT MAX(\"SKU\") FROM tembo.tb_produto")
+            max_sku = cursor.fetchone()[0]
+
+            if max_sku is None:
+                sku = 1
+            else:
+                sku = max_sku + 1
 
             insert_query = """
-            INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT","IMAGEM")
+            INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT", "IMAGEM")
             VALUES (%s, %s, %s, %s, %s, %s, %s);
             """
 
-  
-            cursor = conn.cursor()
-            cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent,url))
+            cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent, url))
             conn.commit()
 
             st.write("Dados inseridos com sucesso!")
@@ -129,13 +132,12 @@ with tab2:
             if conn:
                 conn.close()
 
- 
     if st.button("💾 Salvar"):
- 
-        if sku and descricao and categoria and vr_unit > 0:
-            insert_data(parent, sku, descricao, categoria, vr_unit, descricao_parent)
+        if descricao and categoria and vr_unit > 0:
+            insert_data(parent, descricao, categoria, vr_unit, descricao_parent, url)
         else:
             st.write("Por favor, preencha todos os campos necessários.")
+
 
 # ---------------------------------------------------------------------------------------------------------
 # estilizacao
