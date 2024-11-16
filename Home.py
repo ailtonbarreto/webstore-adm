@@ -284,12 +284,3 @@ style4 = """
 st.markdown(style4, unsafe_allow_html=True)
 
 
-style5 = """
-    <style>
-    [data-testid="stBaseButton-secondary"]
-    {
-    background: #0B1548;
-    }
-    </style>
-"""
-st.markdown(style5, unsafe_allow_html=True)
