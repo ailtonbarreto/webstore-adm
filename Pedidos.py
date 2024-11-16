@@ -147,7 +147,7 @@ with tab1:
     total_aguardando_pagamento = total_aguardando["TOTAL"].sum()
 
     total_cancelado= df_filtrado_ped.query('STATUS == "CANCELADO"')
-    total_cancelado = total_aguardando["PEDIDO"].sum()
+    total_cancelado = total_cancelado["PEDIDO"].nunique()
 
     # ---------------------------------------------------------------------------------------
 
