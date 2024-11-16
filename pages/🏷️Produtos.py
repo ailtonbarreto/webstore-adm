@@ -49,9 +49,9 @@ df = load_produtos()
 # PESQUISAR PRODUTO
 
 with tab1:
-    col1, = st.columns(1)
-    col2, = st.columns(1)
+    col1, col2 = st.columns(2)
     col3, = st.columns(1)
+
     
     with col1:
 
