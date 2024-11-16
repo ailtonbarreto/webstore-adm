@@ -10,7 +10,7 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
 cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7, = st.columns([2,2,2,2,2,1.5,1.5])
-col1a, = st.columns(1)
+tab1, tab2 = st.tabs["Pedidos", "Alterar Status"]
 st.divider()
 
 
@@ -156,7 +156,7 @@ with cardpd5:
 # ---------------------------------------------------------------------------------------
 
     
-with col1a:    
+with tab1:    
     if df_filtrado_ped.empty:
         st.error("Nenhum dado disponível.")
     else:
