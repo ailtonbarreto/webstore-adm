@@ -116,7 +116,6 @@ with tab2:
         
             sku = "1-teste"
       
-       
 
             cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto")
             max_parent = cursor.fetchone()[0]
