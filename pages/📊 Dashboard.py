@@ -165,8 +165,7 @@ barras_cores = "0B1548"
 
 df_linha = df_filtrado.groupby("Dia")["TOTAL"].sum().reset_index()
 
-
-graficocolunas = px.area(df_linha,x="Dia",y="TOTAL",color_discrete_sequence=["#0B1548"])
+graficocolunas = px.bar(df_linha,x="Dia",y="TOTAL",color_discrete_sequence=["#0B1548"])
 graficocolunas.update_yaxes(showgrid=False)
 graficocolunas.update_traces(showlegend=False)
 graficocolunas.update_yaxes(showgrid=False,visible=True,title="")
