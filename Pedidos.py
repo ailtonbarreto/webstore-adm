@@ -183,7 +183,7 @@ with tab2:
     with col2:
         novo_status = st.selectbox(
             "Status",
-            ["AGUARDANDO PAGAMENTO", "AGUARDANDO CONFIRMACAO", "AGUARDANDO PAGAMENTO","PLANEJADO" ,"CONCLUIDO"]
+            ["AGUARDANDO CONFIRMACAO", "AGUARDANDO PAGAMENTO","PLANEJADO" ,"CONCLUIDO"]
         )
     with col3:
         def update_pedido(filtro_pedido, novo_status):
