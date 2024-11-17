@@ -71,7 +71,7 @@ with tab1:
                     for index, row in df_produto.iterrows():
                         st.image(row['IMAGEM'], width=200)
                         st.subheader(row['DESCRICAO'], anchor=False)
-                        st.text(f"SKU: {row['SKU']}")
+                        st.write(f"SKU: {row['SKU']}")
                         st.markdown("---")
                 else:
                     st.write("Nenhum produto encontrado.")
