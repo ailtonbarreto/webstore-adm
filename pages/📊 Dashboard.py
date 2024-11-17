@@ -168,7 +168,7 @@ df_linha = df_filtrado.groupby("Dia")["TOTAL"].sum().reset_index()
 todos_os_dias = pd.DataFrame({"Dia": range(1, 31 + 1)})
 
 
-df_linha = todos_os_dias.merge(df, on="Dia", how="left").fillna(0)
+df_linha = todos_os_dias.merge(df_linha, on="Dia", how="left").fillna(0)
 
 
 graficocolunas = px.bar(df_linha,x="Dia",y="TOTAL",color_discrete_sequence=["#0B1548"])
