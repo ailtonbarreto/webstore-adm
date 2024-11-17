@@ -163,20 +163,31 @@ with card5:
 # graficos
 barras_cores = "0B1548"
 
+# Agrupar os dados para somar os valores de 'TOTAL' por cada dia
 df_linha = df_filtrado.groupby("Dia")["TOTAL"].sum().reset_index()
 
+# Criar um DataFrame contendo todos os dias do mês (de 1 a 31)
 todos_os_dias = pd.DataFrame({"Dia": range(1, 31 + 1)})
 
-
+# Mesclar os dias existentes no agrupamento com os dias do mês
+# Preencher os valores ausentes em 'TOTAL' com 0
 df_linha = todos_os_dias.merge(df_linha, on="Dia", how="left").fillna(0)
 
+# Criar o gráfico de barras com Plotly Express
+graficocolunas = px.bar(
+    df_linha,
+    x="Dia",
+    y="TOTAL",
+    color_discrete_sequence=["#0B1548"]  # Definir a cor das barras
+)
 
-graficocolunas = px.bar(df_linha,x="Dia",y="TOTAL",color_discrete_sequence=["#0B1548"])
-graficocolunas.update_yaxes(showgrid=False)
-graficocolunas.update_traces(showlegend=False)
-graficocolunas.update_yaxes(showgrid=False,visible=True,title="")
-graficocolunas.layout.xaxis.fixedrange = True
-graficocolunas.layout.yaxis.fixedrange = True
+# Personalizar o gráfico
+graficocolunas.update_yaxes(showgrid=False)  # Remover a grade do eixo Y
+graficocolunas.update_traces(showlegend=False)  # Ocultar a legenda
+graficocolunas.update_yaxes(visible=True, title="")  # Tornar o eixo Y visível sem título
+graficocolunas.layout.xaxis.fixedrange = True  # Impedir zoom no eixo X
+graficocolunas.layout.yaxis.fixedrange = True  # Impedir zoom no eixo Y
+
 
 # --------------------------------------------------------------------------------------
 
