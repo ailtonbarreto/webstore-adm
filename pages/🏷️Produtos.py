@@ -69,8 +69,8 @@ with tab1:
                     with col2:
                         st.write(f"{len(df_produto)} produto(s)",anchor=False)
                     for index, row in df_produto.iterrows():
-                        st.subheader(row['DESCRICAO'], anchor=False)
                         st.image(row['IMAGEM'], width=200)
+                        st.subheader(row['DESCRICAO'], anchor=False)
                         st.text(f"SKU: {row['SKU']}")
                         st.markdown("---")
                 else:
