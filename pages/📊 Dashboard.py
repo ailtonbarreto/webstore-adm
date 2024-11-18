@@ -106,19 +106,19 @@ df["Mês"] = df["Mês"].apply(determinar_mês)
 today = datetime.datetime.now().date()
 inicio = today - datetime.timedelta(days=120)
 
-
+meses = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"]
 # ----------------------------------------------------------------------------------
 # filtros dash
 
 
 with card6:
-    filtro_inicio = st.date_input("Início",inicio,format= "DD/MM/YYYY")
+    filtro_ano = st.selectbox("Ano",df["Ano"].unique())
         
 with card7:
-    filtro_fim = st.date_input("Fim","today",format= "DD/MM/YYYY")
+    filtro_mes = st.selectbox("Mês",meses)
         
 
-df_filtrado = df.query('@filtro_inicio <= `EMISSAO` <= @filtro_fim')
+df_filtrado = df.query('Ano == @filtro_ano & Mês == @filtro_mes')
 
 df_filtrado["TOTAL"] = df_filtrado["QTD"] * df_filtrado["VR_UNIT"]
 
