@@ -106,7 +106,6 @@ df["Mês"] = df["Mês"].apply(determinar_mês)
 mes = datetime.datetime.now().month
 
 
-
 meses = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"]
 
 mes_atual = determinar_mês(mes)
@@ -118,7 +117,7 @@ with card6:
     filtro_ano = st.selectbox("Ano",df["Ano"].unique())
         
 with card7:
-    filtro_mes = st.selectbox("Mês",meses,placeholder=mes_atual)
+    filtro_mes = st.selectbox("Mês",meses,index=mes-1)
         
 
 df_filtrado = df.query('Ano == @filtro_ano & Mês == @filtro_mes')
