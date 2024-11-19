@@ -103,10 +103,13 @@ def determinar_mês(valor):
 df["Mês"] = df["Mês"].apply(determinar_mês)
 
 
-today = datetime.datetime.now().date()
-inicio = today - datetime.timedelta(days=120)
+mes = datetime.datetime.now().month
+
+
 
 meses = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"]
+
+mes_atual = determinar_mês(mes)
 # ----------------------------------------------------------------------------------
 # filtros dash
 
@@ -115,7 +118,7 @@ with card6:
     filtro_ano = st.selectbox("Ano",df["Ano"].unique())
         
 with card7:
-    filtro_mes = st.selectbox("Mês",meses)
+    filtro_mes = st.selectbox("Mês",meses,placeholder=mes_atual)
         
 
 df_filtrado = df.query('Ano == @filtro_ano & Mês == @filtro_mes')
