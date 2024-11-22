@@ -69,9 +69,6 @@ with tab1:
             else:
                 with col2:
                     st.metric("Nenhum produto encontrado.")
-        else:
-            with col1:
-                st.write("Digite um termo para buscar.")
 
     if st.button("🔁 Atualizar"):
         st.cache_data.clear()
