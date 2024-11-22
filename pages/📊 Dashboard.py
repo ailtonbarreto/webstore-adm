@@ -156,7 +156,7 @@ with card3:
     st.metric("Ticket Médio", f"📈{ticket_medio:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
     
 with card4:
-    st.metric("QTD Clientes",f'👔{qtd_clientes:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
+    st.metric("QTD Clientes",f'🫱🏻‍🫲🏻{qtd_clientes:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
 
 with card5:
     st.metric("Tx Cancelamentos", f"🔴{tx_cancelamento:.2f}%")
