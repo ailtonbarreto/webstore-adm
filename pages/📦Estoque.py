@@ -50,6 +50,8 @@ df = load_estoque()
 
 with tab1:
     col1,  = st.columns(1)
+    col2,  = st.columns(1)
+    
 
     with col1:
         st.subheader("Pesquisa", anchor=False)
@@ -62,12 +64,12 @@ with tab1:
             df_produto = df.query('SKU == @produto_filtro')
 
             if not df_produto.empty:
-                with col1:
+                with col2:
                     df_qtd = df_produto.query('SKU == @produto_filtro')
-                    df_qtd = df_qtd.groupby("SKU")["QTD"].sum().reset_index()
-                    df_qtd["QTD"]
+                    df_qtd = df_qtd["QTD"].sum()
+                    st.metric("Estoque",df_qtd)
             else:
-                with col1:
+                with col2:
                     st.write("Nenhum produto encontrado.")
         else:
             with col1:
