@@ -49,9 +49,7 @@ df = load_estoque()
 # PESQUISAR PRODUTO
 
 with tab1:
-    col1,  = st.columns(1)
-    col2,  = st.columns(1)
-    
+    col1, col2  = st.columns(2)
 
     with col1:
         st.subheader("Pesquisa", anchor=False)
@@ -70,7 +68,7 @@ with tab1:
                     st.metric("Estoque",df_qtd)
             else:
                 with col2:
-                    st.write("Nenhum produto encontrado.")
+                    st.metric("Nenhum produto encontrado.")
         else:
             with col1:
                 st.write("Digite um termo para buscar.")
