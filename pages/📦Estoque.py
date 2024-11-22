@@ -65,7 +65,7 @@ with tab1:
                 with col1:
                     df_qtd = df_produto.query('SKU == @produto_filtro')
                     df_qtd = df_qtd.groupby("SKU")["QTD"].sum().reset_index()
-                    df_qtd
+                    df_qtd["QTD"]
             else:
                 with col1:
                     st.write("Nenhum produto encontrado.")
