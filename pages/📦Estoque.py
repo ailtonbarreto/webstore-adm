@@ -65,9 +65,11 @@ with tab1:
                 with col2:
                     df_qtd = df_produto.query('SKU == @produto_filtro')
                     df_qtd = df_qtd["QTD"].sum()
+                    st.subheader("Pesquisa", anchor=False)
                     st.metric("Estoque",df_qtd)
             else:
                 with col2:
+                    st.subheader("Resultado", anchor=False)
                     st.metric("Nenhum produto encontrado.")
 
     if st.button("🔁 Atualizar"):
