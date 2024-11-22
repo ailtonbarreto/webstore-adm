@@ -52,10 +52,9 @@ with tab1:
     col1,  = st.columns(1)
 
     with col1:
-        st.subheader("Resultado da Pesquisa")
+        st.subheader("Pesquisa", anchor=False)
 
     with col1:
-        st.subheader("Produtos",anchor=False)
         produto_filtro = st.selectbox("Pesquisar pelo SKU", df["SKU"].unique(),placeholder="Digite e tecle Enter")
 
         if produto_filtro:
