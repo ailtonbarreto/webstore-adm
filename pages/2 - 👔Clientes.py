@@ -8,7 +8,7 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 
-tab1, tab2 = st.tabs(["Pesquisar Produto", "Cadastrar Produto"])
+tab1, tab2 = st.tabs(["Pesquisar Cliente", "Cadastrar Cliente", "Editar Cliente"])
 
 
 # -------------------------------------------------------------------------------------------------------
@@ -43,4 +43,4 @@ def load_clientes():
 
 df = load_clientes()
 
-st.dataframe(df)
+st.dataframe(df,use_container_width=True,hide_index=True)
