@@ -107,7 +107,8 @@ with tab3:
     col1, col2 = st.columns(2)
     
     with col1:
-        cliente = st.selectbox("Cliente",[""] + df["CLIENTE"].unique())
+        lista = [""] + df["CLIENTE"].unique().tolist()
+        cliente = st.selectbox("Cliente",lista)
 
 
 
