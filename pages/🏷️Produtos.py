@@ -53,17 +53,14 @@ with tab1:
     with col2:
         st.subheader("Resultado da Pesquisa",anchor=False)
     with col3:
-        st.subheader("Produtos",anchor=False)
+        st.subheader("Produto",anchor=False)
     with col1:
 
-        produto_filtro = st.text_input("Pesquise pelo Nome do Produto", placeholder="Digite e tecle Enter")
+        produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
         with col3:
             if produto_filtro:
                 
-                df_produto = df[
-                    df['SKU'].astype(str).str.contains(produto_filtro, case=False) |
-                    df['DESCRICAO'].str.contains(produto_filtro, case=False)
-                ]
+                df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro, case=False)]
 
                 if not df_produto.empty:
                     with col2:
