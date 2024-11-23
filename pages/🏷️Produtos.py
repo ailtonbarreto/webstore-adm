@@ -134,6 +134,7 @@ with tab2:
         if st.button("Salvar 💾"):
             if descricao_parent and categoria and vr_unit > 0 and url:
                 insert_data(descricao_parent, categoria, vr_unit, url)
+                st.rerun()
             else:
                 st.warning("Por favor, preencha todos os campos necessários.")
 
