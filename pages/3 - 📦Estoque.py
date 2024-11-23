@@ -58,6 +58,7 @@ with tab1:
 
     with col1:
         produto_filtro = st.text_input("Pesquisar pelo SKU",placeholder="Digite e tecle Enter")
+        produto_filtro = produto_filtro.upper()
 
         if produto_filtro:
    
