@@ -68,7 +68,7 @@ with tab1:
                 with col2:
                     df_qtd = df_produto.query('SKU == @produto_filtro')
                     df_qtd = df_qtd["QTD"].sum()
-                    st.metric("Estoque",f'{df_qtd:.0f}')
+                    st.metric("Estoque",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
             else:
                 with col2:
                     st.metric("Nenhum produto encontrado.")
