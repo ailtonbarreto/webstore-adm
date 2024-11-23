@@ -65,7 +65,6 @@ with tab1:
 
                 if not df_produto.empty:
                     with col3:
-                       
                         for index, row in df_produto.iterrows():
                             st.image(row['IMAGEM'], width=200)
                             st.subheader(row['DESCRICAO'], anchor=False)
