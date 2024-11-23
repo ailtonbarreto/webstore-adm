@@ -141,7 +141,7 @@ with tab2:
                     conn.close()
 
         if st.button("💾 Salvar"):
-            if descricao_parent and categoria and vr_unit > 0:
+            if vr_unit > 0:
                 insert_data(categoria, vr_unit, descricao_parent, url)
             else:
                 st.write("Por favor, preencha todos os campos necessários.")
