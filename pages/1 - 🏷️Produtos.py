@@ -75,7 +75,7 @@ with tab1:
 
     with col3:
         st.subheader("Infomações",anchor=False)
-        st.write(produto_filtro)
+       
 
     if st.button("🔁 Atualizar"):
         st.cache_data.clear()
