@@ -54,7 +54,7 @@ with tab1:
         st.subheader("Resultado da Pesquisa",anchor=False)
         
     with col3:
-        st.subheader("Produto",anchor=False)
+        st.subheader("Infomações",anchor=False)
         
     with col1:
         produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
@@ -70,7 +70,6 @@ with tab1:
                         st.image(row['IMAGEM'], width=200)
                         st.subheader(row['DESCRICAO'], anchor=False)
                         st.write(f"SKU: {row['SKU']}")
-                        st.markdown("---")
                 else:
                     st.write("Nenhum produto encontrado.")
 
