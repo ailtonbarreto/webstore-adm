@@ -104,7 +104,7 @@ df["Mês"] = df["Mês"].apply(determinar_mês)
 # INSERIR PEDIDO
 
 with tab3:
-    cliente = st.selectbox("Cliente",df["Cliente"].unique())
+    cliente = st.selectbox("Cliente",df["CLIENTE"].unique())
 
 
 
