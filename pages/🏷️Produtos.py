@@ -75,7 +75,6 @@ with tab1:
 
     with col3:
         st.subheader("Infomações",anchor=False)
-        df_produto
 
     if st.button("🔁 Atualizar"):
         st.cache_data.clear()
