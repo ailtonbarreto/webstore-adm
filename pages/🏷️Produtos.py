@@ -85,21 +85,21 @@ with tab1:
 # ------------------------------------------------------------------------------------------------------------------
 # CADASTRAR PRODUTO
 
-with tab2:
+import streamlit as st
+import psycopg2
+
+# Interface de cadastro
+with st.tab("Cadastrar Produto"):
     col1, = st.columns(1)
-    
+
     with col1:
         descricao_parent = st.text_input("Descrição")
-        categoria = st.selectbox("Categoria",["Chapéu","Roupas","Mochila","Tênis"])
+        categoria = st.selectbox("Categoria", ["Chapéu", "Roupas", "Mochila", "Tênis"])
         vr_unit = st.number_input("Valor Unit", format="%.2f")
-        vr_unit = float(vr_unit)
         url = st.text_input("URL da Imagem")
 
-
-        
         def insert_data(descricao_parent, categoria, vr_unit, url):
             try:
-    
                 conn = psycopg2.connect(
                     host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
                     database='postgres',
@@ -110,21 +110,13 @@ with tab2:
 
                 cursor = conn.cursor()
 
+                # Obtém o maior valor de "PARENT"
                 cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto_parent")
                 max_parent = cursor.fetchone()[0]
 
-            
-                if max_parent is None:
-                    parent = 1
-                else:
-                    parent = max_parent + 1
+                parent = max_parent + 1 if max_parent else 1
 
-            
-    
-                parent = int(parent)
-                vr_unit = float(vr_unit)
-
-        
+                # Query de inserção
                 insert_query = """
                 INSERT INTO tembo.tb_produto_parent ("PARENT", "DESCRICAO_PARENT", "CATEGORIA", "VR_UNIT", "IMAGEM")
                 VALUES (%s, %s, %s, %s, %s);
@@ -133,18 +125,21 @@ with tab2:
                 cursor.execute(insert_query, (parent, descricao_parent, categoria, vr_unit, url))
                 conn.commit()
 
-                st.write("Dados inseridos com sucesso!")
+                st.success("Dados inseridos com sucesso!")
             except Exception as e:
-                st.write(f"Erro ao inserir dados: {e}")
+                st.error(f"Erro ao inserir dados: {str(e)}")
             finally:
+                if cursor:
+                    cursor.close()
                 if conn:
                     conn.close()
 
-        if st.button("💾 Salvar"):
-            if vr_unit > 0:
-                insert_data(categoria, vr_unit, descricao_parent, url)
+        # Botão de salvar
+        if st.button("Salvar 💾"):
+            if descricao_parent and categoria and vr_unit > 0 and url:
+                insert_data(descricao_parent, categoria, vr_unit, url)
             else:
-                st.write("Por favor, preencha todos os campos necessários.")
+                st.warning("Por favor, preencha todos os campos necessários.")
 
 
 # ---------------------------------------------------------------------------------------------------------
