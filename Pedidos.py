@@ -188,7 +188,7 @@ with tab1:
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
     with col2:
         st.subheader("Total",anchor=False)
-        st.metric(f"R$ {total_total:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')) 
+        st.metric("",f"R$ {total_total:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')) 
     
 # ---------------------------------------------------------------------------------------
 # ALTERAR STATUS DOS PEDIDOS
