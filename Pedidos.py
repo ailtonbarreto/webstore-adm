@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import psycopg2
-import datetime
 
 
 st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide",initial_sidebar_state="collapsed")
@@ -100,6 +99,24 @@ def determinar_mês(valor):
 
 
 df["Mês"] = df["Mês"].apply(determinar_mês)
+
+# -------------------------------------------------------------------------------------------------------
+# INSERIR PEDIDO
+
+with tab3:
+    cliente = st.selectbox("Cliente",df["Cliente"].unique())
+
+
+
+insert = """
+    INSERT INTO tembo.tb_venda ("PEDIDO", "EMISSAO", "ENTREGA", 
+    "SKU_CLIENTE", "SKU", "PARENT", "QTD", "VR_UNIT", "SEQUENCIA", "STATUS")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    RETURNING *;
+    """
+
+
+
 
 # ----------------------------------------------------------------------------------
 # filtros pedido
