@@ -145,7 +145,7 @@ tx_cancelamento = qtd_pedido_cancelado / qtd_pedidos * 100
 # --------------------------------------------------------------------------------------
 
 with card1:
-    st.metric("Valor Vendido",f"💰{total:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
+    st.metric("Valor Vendido",f"💰R$ {total:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
         
 with card2:
         
