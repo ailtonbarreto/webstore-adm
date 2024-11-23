@@ -120,11 +120,13 @@ insert = """
     """
 
 # ----------------------------------------------------------------------------------
-# filtros pedido
+# PEDIDOS
+
 with tab1:
     
     cardpd1, cardpd2, cardpd3, cardpd4, cardpd5, cardpd6, cardpd7 = st.columns([2,2,2,2,2,1.5,1.5])
     col1, = st.columns(1)
+    col2, = st.columns(1)
     
     with cardpd6:
         filtro_inicio2 = st.date_input("Data Início","today",format= "DD/MM/YYYY")
@@ -160,6 +162,8 @@ with tab1:
 
     total_cancelado= df_filtrado_ped.query('STATUS == "CANCELADO"')
     total_cancelado = total_cancelado["PEDIDO"].nunique()
+    
+    total_total = df_filtrado_ped["TOTAL"].sum()
 
     # ---------------------------------------------------------------------------------------
 
@@ -173,10 +177,7 @@ with tab1:
         st.metric("Planejados",f"🟣{qtd_pedido_planejados:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
     with cardpd5:
         st.metric("Cancelados",f"🔴{total_cancelado:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.')) 
-    
-# ---------------------------------------------------------------------------------------
 
-    
     with col1:
         if df_filtrado_ped.empty:
             st.error("Nenhum dado disponível.")
@@ -185,7 +186,13 @@ with tab1:
             df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
-            
+    with col2:
+        st.write("Total", total_total)     
+    
+# ---------------------------------------------------------------------------------------
+# ALTERAR STATUS DOS PEDIDOS
+
+           
 with tab2:
     col1, col2 = st.columns(2)
     col3, = st.columns(1)
