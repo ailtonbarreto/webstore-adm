@@ -52,18 +52,19 @@ with tab1:
 
     with col2:
         st.subheader("Resultado da Pesquisa",anchor=False)
+        
     with col3:
         st.subheader("Produto",anchor=False)
+        
     with col1:
-
         produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
-        with col3:
+        with col2:
             if produto_filtro:
                 
                 df_produto = df[df['SKU'].astype(str).str.contains(produto_filtro, case=False)]
 
                 if not df_produto.empty:
-                    with col2:
+                    with col3:
                         st.write(f"{len(df_produto)} produto(s)",anchor=False)
                     for index, row in df_produto.iterrows():
                         st.image(row['IMAGEM'], width=200)
