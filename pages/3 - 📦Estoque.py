@@ -54,7 +54,7 @@ with tab1:
     with col1:
         st.subheader("Pesquisa", anchor=False)
     with col2:
-        st.subheader("Resultado", anchor=False)
+        st.subheader("Estoque", anchor=False)
 
     with col1:
         produto_filtro = st.text_input("Pesquisar pelo SKU",placeholder="Digite e tecle Enter")
@@ -68,7 +68,7 @@ with tab1:
                 with col2:
                     df_qtd = df_produto.query('SKU == @produto_filtro')
                     df_qtd = df_qtd["QTD"].sum()
-                    st.metric("Estoque",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
+                    st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
             else:
                 with col2:
                     st.metric("Nenhum produto encontrado.")
