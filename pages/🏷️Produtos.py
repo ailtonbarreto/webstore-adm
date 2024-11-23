@@ -89,15 +89,15 @@ with tab2:
     col1, = st.columns(1)
     
     with col1:
-        descricao_parent = st.text_input("Descrição Parent")
-        descricao = st.text_input("Descrição")
+        descricao_parent = st.text_input("Descrição")
         categoria = st.selectbox("Categoria",["Chapéu","Roupas","Mochila","Tênis"])
-        url = st.text_input("URL da Imagem")
         vr_unit = st.number_input("Valor Unit", format="%.2f")
         vr_unit = float(vr_unit)
+        url = st.text_input("URL da Imagem")
+
 
         
-        def insert_data(descricao, categoria, vr_unit, descricao_parent, url):
+        def insert_data(descricao_parent, categoria, vr_unit, url):
             try:
     
                 conn = psycopg2.connect(
@@ -110,15 +110,10 @@ with tab2:
 
                 cursor = conn.cursor()
 
-                cursor.execute("SELECT MAX(\"SKU\") FROM tembo.tb_produto")
+                cursor.execute("SELECT MAX(\"SKU\") FROM tembo.tb_produto_parent")
                 max_sku = cursor.fetchone()[0]
 
-            
-            
-                sku = "1-teste"
-        
-
-                cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto")
+                cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto_parent")
                 max_parent = cursor.fetchone()[0]
 
             
@@ -134,11 +129,11 @@ with tab2:
 
         
                 insert_query = """
-                INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "DESCRICAO_PARENT", "IMAGEM")
-                VALUES (%s, %s, %s, %s, %s, %s, %s);
+                INSERT INTO tembo.tb_produto_parent ("PARENT", "DESCRICAO_PARENT", "CATEGORIA", "VR_UNIT", "IMAGEM")
+                VALUES (%s, %s, %s, %s, %s);
                 """
 
-                cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit, descricao_parent, url))
+                cursor.execute(insert_query, (parent, descricao_parent, categoria, vr_unit, url))
                 conn.commit()
 
                 st.write("Dados inseridos com sucesso!")
@@ -149,8 +144,8 @@ with tab2:
                     conn.close()
 
         if st.button("💾 Salvar"):
-            if descricao and categoria and vr_unit > 0:
-                insert_data(descricao, categoria, vr_unit, descricao_parent, url)
+            if descricao_parent and categoria and vr_unit > 0:
+                insert_data(categoria, vr_unit, descricao_parent, url)
             else:
                 st.write("Por favor, preencha todos os campos necessários.")
 
