@@ -110,9 +110,6 @@ with tab2:
 
                 cursor = conn.cursor()
 
-                cursor.execute("SELECT MAX(\"SKU\") FROM tembo.tb_produto_parent")
-                max_sku = cursor.fetchone()[0]
-
                 cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto_parent")
                 max_parent = cursor.fetchone()[0]
 
