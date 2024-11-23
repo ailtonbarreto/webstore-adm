@@ -48,7 +48,9 @@ df = load_produtos()
 
 with tab1:
     col1, = st.columns(1)
-    col2, col3 = st.columns(2)
+    col2, = st.columns(1)
+    col3, = st.columns(1)
+    
 
     with col2:
         st.subheader("Resultado da Pesquisa",anchor=False)
