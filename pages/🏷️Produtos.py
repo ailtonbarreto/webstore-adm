@@ -85,11 +85,9 @@ with tab1:
 # ------------------------------------------------------------------------------------------------------------------
 # CADASTRAR PRODUTO
 
-import streamlit as st
-import psycopg2
 
 # Interface de cadastro
-with st.tab("Cadastrar Produto"):
+with tab2:
     col1, = st.columns(1)
 
     with col1:
