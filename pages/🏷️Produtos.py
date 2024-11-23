@@ -56,7 +56,7 @@ with tab1:
         st.subheader("Produtos",anchor=False)
     with col1:
 
-        produto_filtro = st.text_input("Pesquisar pelo SKU ou Nome do Produto", placeholder="Digite e tecle Enter")
+        produto_filtro = st.text_input("Pesquise pelo Nome do Produto", placeholder="Digite e tecle Enter")
         with col3:
             if produto_filtro:
                 

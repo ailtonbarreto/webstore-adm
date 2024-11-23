@@ -75,7 +75,6 @@ def load_data():
 # ----------------------------------------------------------------------------------
 # ETL
 df = load_data()
-# df = []
 df['EMISSAO'] = pd.to_datetime(df['EMISSAO'])
 df["Ano"] = df["EMISSAO"].dt.year
 df["Mês"] = df["EMISSAO"].dt.month
