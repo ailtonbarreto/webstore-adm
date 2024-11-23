@@ -55,8 +55,7 @@ with tab1:
     with col2:
         st.subheader("Resultado da Pesquisa",anchor=False)
         
-    with col3:
-        st.subheader("Infomações",anchor=False)
+
         
     with col1:
         produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
@@ -74,6 +73,9 @@ with tab1:
                 else:
                     st.write("Nenhum produto encontrado.")
 
+    with col3:
+        st.subheader("Infomações",anchor=False)
+        df_produto
 
     if st.button("🔁 Atualizar"):
         st.cache_data.clear()
