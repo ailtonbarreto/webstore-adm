@@ -67,8 +67,8 @@ with tab1:
                     with col3:
                         st.write(f"{len(df_produto)} produto(s)",anchor=False)
                     for index, row in df_produto.iterrows():
-                        st.subheader(row['DESCRICAO'], anchor=False)
                         st.image(row['IMAGEM'], width=200)
+                        st.subheader(row['DESCRICAO'], anchor=False)
                         st.write(f"SKU: {row['SKU']}")
                 else:
                     st.write("Nenhum produto encontrado.")
