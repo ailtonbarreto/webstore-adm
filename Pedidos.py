@@ -102,8 +102,8 @@ def determinar_mês(valor):
 df["Mês"] = df["Mês"].apply(determinar_mês)
 
 
-today = datetime.datetime.now().date()
-inicio = today - datetime.timedelta(days=120)
+# today = datetime.datetime.now().date()
+# inicio = today - datetime.timedelta(days=120)
 
 # ----------------------------------------------------------------------------------
 # filtros pedido
@@ -113,7 +113,7 @@ with tab1:
     col1, = st.columns(1)
     
     with cardpd6:
-        filtro_inicio2 = st.date_input("Data Início",inicio,format= "DD/MM/YYYY")
+        filtro_inicio2 = st.date_input("Data Início","today",format= "DD/MM/YYYY")
             
     with cardpd7:
         filtro_fim2 = st.date_input("Data Fim","today",format= "DD/MM/YYYY")
