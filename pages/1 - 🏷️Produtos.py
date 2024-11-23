@@ -58,7 +58,7 @@ with tab1:
     with col1:
         produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
         produto_filtro = produto_filtro.upper()
-        st.write(produto_filtro)
+        
         with col2:
             if produto_filtro:
                 
@@ -75,6 +75,7 @@ with tab1:
 
     with col3:
         st.subheader("Infomações",anchor=False)
+        st.write(produto_filtro)
 
     if st.button("🔁 Atualizar"):
         st.cache_data.clear()
