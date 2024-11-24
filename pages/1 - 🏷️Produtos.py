@@ -100,6 +100,7 @@ with tab2:
     col1, = st.columns(1)
 
     with col1:
+        tipo = st.selectbox("Tipo",["Produto Pai","Produto Variação"])
         descricao_parent = st.text_input("Descrição")
         categoria = st.selectbox("Categoria", ["Chapéu", "Roupas", "Mochila", "Tênis"])
         vr_unit = st.number_input("Valor Unit", format="%.2f")
