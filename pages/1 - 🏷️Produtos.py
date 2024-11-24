@@ -114,7 +114,7 @@ with tab2:
         else:
             produto_pai = st.selectbox("Produto Pai",df["DESCRICAO_PARENT"].unique())
             df_parent = df.query('DESCRICAO_PARENT == @produto_pai')
-            parent = df_parent["PARENT"]
+            parent = df_parent["PARENT"].values
             st.write(parent)
             categoria = df_parent["CATEGORIA"].values
             vr_unit = df_parent["VR_UNIT"].values
