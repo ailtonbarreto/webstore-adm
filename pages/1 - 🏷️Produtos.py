@@ -30,22 +30,26 @@ def load_produtos():
             port=port
         )        
         
-        query = """
-                SELECT 
-                    cp."PARENT",
-                    p."SKU",
-                    p."DESCRICAO",
-                    cp."IMAGEM",
-                    cp."CATEGORIA",
-                    cp."VR_UNIT",
-                    cp."DESCRICAO_PARENT"
-                FROM 
-                    tembo.tb_produto AS p
-                JOIN 
-                    tembo.tb_produto_parent AS cp
-                ON 
-                    p."PARENT" = cp."PARENT";
-                """
+        # query = """
+        #         SELECT 
+        #             cp."PARENT",
+        #             p."SKU",
+        #             p."DESCRICAO",
+        #             cp."IMAGEM",
+        #             cp."CATEGORIA",
+        #             cp."VR_UNIT",
+        #             cp."DESCRICAO_PARENT"
+        #         FROM 
+        #             tembo.tb_produto AS p
+        #         JOIN 
+        #             tembo.tb_produto_parent AS cp
+        #         ON 
+        #             p."PARENT" = cp."PARENT";
+        #         """
+        
+        
+        query = pd.read_sql_query("select_bd_webstore.sql",con=conn)
+        
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
