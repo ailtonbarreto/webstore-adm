@@ -111,11 +111,7 @@ with tab2:
                 variacao = st.selectbox("Variação", ["UN", "P", "M", "G", "GG", "EG", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44"])
                 sku = f"{parent}-{variacao}"
                 descricao = f"{produto_pai}-{variacao}"
-                st.write(f"PARENT: {parent}")
-                st.write(f"SKU: {sku}")
-                st.write(f"DESCRIÇÃO: {descricao}")
-                st.write(f"CATEGORIA: {categoria}")
-                st.write(f"VR_UNIT: {vr_unit}")
+
 
         # Função para Inserir Produto Pai
     def insert_parent(descricao_parent, categoria, vr_unit, url):
