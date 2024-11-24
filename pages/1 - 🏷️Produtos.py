@@ -183,35 +183,42 @@ with tab2:
             st.write(f"**Categoria:** {categoria}")
             st.write(f"**Valor Unitário:** {vr_unit}")
 
-            def insert_variacao(parent, sku, descricao, categoria, vr_unit):
-                try:
-                    conn = psycopg2.connect(
-                        host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
-                        database='postgres',
-                        user='postgres',
-                        password='MeSaIkkB57YSOgLO',
-                        port='5432'
-                    )
+            # Função para Inserir Produto Variação no Banco
+        def insert_variacao(parent, sku, descricao, categoria, vr_unit):
+            try:
+                conn = psycopg2.connect(
+                    host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+                    database='postgres',
+                    user='postgres',
+                    password='MeSaIkkB57YSOgLO',
+                    port='5432'
+                )
 
-                    cursor1 = conn.cursor()
+                cursor1 = conn.cursor()
 
-                    # Inserir a variação
-                    insert_query1 = """
-                    INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
-                    VALUES (%s, %s, %s, %s, %s);
-                    """
+                # Convertendo os tipos corretamente
+                parent = int(parent)  # Garantir que parent seja um número inteiro
+                vr_unit = float(vr_unit)  # Garantir que vr_unit seja um número decimal
+                sku = str(sku)  # Garantir que sku seja uma string
+                descricao = str(descricao)  # Garantir que descricao seja uma string
 
-                    cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit))
-                    conn.commit()
+                # Inserir a variação
+                insert_query1 = """
+                INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
+                VALUES (%s, %s, %s, %s, %s);
+                """
 
-                    st.success("Produto Variação inserido com sucesso!")
-                except Exception as e:
-                    st.error(f"Erro ao inserir Produto Variação: {str(e)}")
-                finally:
-                    if cursor1:
-                        cursor1.close()
-                    if conn:
-                        conn.close()
+                cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit))
+                conn.commit()
+
+                st.success("Produto Variação inserido com sucesso!")
+            except Exception as e:
+                st.error(f"Erro ao inserir Produto Variação: {str(e)}")
+            finally:
+                if cursor1:
+                    cursor1.close()
+                if conn:
+            conn.close()
 
             # Botão para cadastrar a Variação
             if st.button("Cadastrar Produto Variação 💾"):
