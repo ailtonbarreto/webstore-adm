@@ -179,8 +179,8 @@ with tab2:
             if st.button("Cadastrar Produto 💾"):
                 if descricao_parent and categoria and vr_unit > 0 and url:
                     insert_parent(descricao_parent, categoria, vr_unit, url)
-                    st.rerun()
                     st.success("Produto inserido com sucesso!")
+                    st.rerun()
                 else:
                     st.warning("Por favor, preencha todos os campos necessários.")
     else:
