@@ -191,14 +191,14 @@ with tab2:
                     conn.close()
 
     if tipo == "Produto Pai":
-            if st.button("Cadastrar Produto Pai 💾"):
+            if st.button("Cadastrar Produto 💾"):
                 if descricao_parent and categoria and vr_unit > 0 and url:
                     insert_parent(descricao_parent, categoria, vr_unit, url)
                     st.rerun()
                 else:
                     st.warning("Por favor, preencha todos os campos necessários.")
     else:
-            if st.button("Cadastrar Produto Variação 💾"):
+            if st.button("Cadastrar Variação 💾"):
                 if sku and descricao and categoria and vr_unit > 0:
                     insert_variacao(parent, sku, descricao, categoria, vr_unit)
                     st.rerun()
