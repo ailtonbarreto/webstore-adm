@@ -120,6 +120,7 @@ with tab2:
             url = df_parent["IMAGEM"].values[0]
             variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
             sku = f"{parent}-{variacao}"
+            descricao = f"{produto_pai}-{variacao}"
             st.write(sku)
 
 
@@ -163,17 +164,53 @@ with tab2:
                     conn.close()
 
 # ------------------------------------------------------------------------------------------------------
+#INSERIR PRODUTO VARIACAO
 
+        def insert_variacao(parent, sku, descricao, categoria,vr_unit):
+            try:
+                conn = psycopg2.connect(
+                    host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+                    database='postgres',
+                    user='postgres',
+                    password='MeSaIkkB57YSOgLO',
+                    port='5432'
+                )
+
+                cursor = conn.cursor()
+
+                insert_query = """
+                INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
+                VALUES (%s, %s, %s, %s, %s);
+                """
+
+                cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit))
+                conn.commit()
+
+                st.success("Dados inseridos com sucesso!")
+            except Exception as e:
+                st.error(f"Erro ao inserir dados: {str(e)}")
+            finally:
+                if cursor:
+                    cursor.close()
+                if conn:
+                    conn.close()
 
 
         # Botão de salvar
-        if st.button("Salvar 💾"):
-            if descricao_parent and categoria and vr_unit > 0 and url:
-                insert_parent(descricao_parent, categoria, vr_unit, url)
+        
+        if tipo == "Produto Pai": 
+            if st.button("Cadastrar Produto 💾"):
+                if descricao_parent and categoria and vr_unit > 0 and url:
+                    insert_parent(descricao_parent, categoria, vr_unit, url)
+                    st.rerun()
+                else:
+                    st.warning("Por favor, preencha todos os campos necessários.")
+        else:
+            if st.button("Cadastrar Varição 💾"):
+                insert_variacao(parent, sku, categoria, vr_unit)
                 st.rerun()
             else:
                 st.warning("Por favor, preencha todos os campos necessários.")
-
 
 # ---------------------------------------------------------------------------------------------------------
 # estilizacao
