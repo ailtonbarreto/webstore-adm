@@ -110,6 +110,8 @@ with tab2:
             url = st.text_input("URL da Imagem")
         else:
             produto_pai = st.selectbox("Produto Pai",df_produto["DESCRICAO_PARENT"])
+            variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
+
 
 
         def insert_data(descricao_parent, categoria, vr_unit, url):
