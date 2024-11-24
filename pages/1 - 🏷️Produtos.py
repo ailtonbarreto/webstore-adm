@@ -101,10 +101,15 @@ with tab2:
 
     with col1:
         tipo = st.selectbox("Tipo",["Produto Pai","Produto Variação"])
-        descricao_parent = st.text_input("Descrição")
-        categoria = st.selectbox("Categoria", ["Chapéu", "Roupas", "Mochila", "Tênis"])
-        vr_unit = st.number_input("Valor Unit", format="%.2f")
-        url = st.text_input("URL da Imagem")
+
+        if tipo == "Produto Pai":
+            descricao_parent = st.text_input("Descrição")
+            categoria = st.selectbox("Categoria", ["Chapéu", "Roupas", "Mochila", "Tênis"])
+            vr_unit = st.number_input("Valor Unit", format="%.2f")
+            url = st.text_input("URL da Imagem")
+        else:
+            produto_pai = st.selectbox("Produto Pai",df_produto["DESCRICAO"])
+
 
         def insert_data(descricao_parent, categoria, vr_unit, url):
             try:
