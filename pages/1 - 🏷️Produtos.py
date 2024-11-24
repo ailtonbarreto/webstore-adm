@@ -118,13 +118,7 @@ with tab2:
 
     def insert_parent(descricao_parent, categoria, vr_unit, url):
    
-        conn = psycopg2.connect(
-                    host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
-                    database='postgres',
-                    user='postgres',
-                    password='MeSaIkkB57YSOgLO',
-                    port='5432'
-                )
+        conn = psycopg2.connect(host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',database='postgres',user='postgres',password='MeSaIkkB57YSOgLO',port='5432')
 
         cursor = conn.cursor()
 
@@ -185,7 +179,7 @@ with tab2:
             if st.button("Cadastrar Produto 💾"):
                 if descricao_parent and categoria and vr_unit > 0 and url:
                     insert_parent(descricao_parent, categoria, vr_unit, url)
-                    # st.rerun()
+                    st.rerun()
                     st.success("Produto inserido com sucesso!")
                 else:
                     st.warning("Por favor, preencha todos os campos necessários.")
