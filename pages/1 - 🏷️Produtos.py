@@ -34,7 +34,8 @@ def load_produtos():
                 SELECT 
                 p."SKU",
                 p."DESCRICAO",
-                cp."IMAGEM"
+                cp."IMAGEM",
+                cp."DESCRICAO_PARENT"
             FROM 
                 tembo.tb_produto AS p
             JOIN 
