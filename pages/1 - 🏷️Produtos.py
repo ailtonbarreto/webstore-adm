@@ -178,12 +178,12 @@ with tab2:
 
                 cursor1 = conn.cursor()
 
-                insert_query = """
+                insert_query1 = """
                 INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
                 VALUES (%s, %s, %s, %s, %s);
                 """
 
-                cursor1.execute(insert_query, (parent, sku, descricao, categoria, vr_unit))
+                cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit))
                 conn.commit()
 
                 st.success("Dados inseridos com sucesso!")
