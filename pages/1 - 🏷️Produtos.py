@@ -121,7 +121,7 @@ with tab2:
             variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
             sku = f"{parent}-{variacao}"
             descricao = f"{produto_pai}-{variacao}"
-            st.write(sku)
+            st.write(parent,sku,descricao,categoria,vr_unit)
 
 
 # ----------------------------------------------------------------------------------------------
