@@ -113,12 +113,12 @@ with tab2:
                 descricao = f"{produto_pai}-{variacao}"
                 
                
-  
+# ---------------------------------------------------------------------------------------------------
+# CADASTRAR PRODUTO PAI
 
-        # Função para Inserir Produto Pai
     def insert_parent(descricao_parent, categoria, vr_unit, url):
-            try:
-                conn = psycopg2.connect(
+   
+        conn = psycopg2.connect(
                     host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
                     database='postgres',
                     user='postgres',
@@ -126,36 +126,32 @@ with tab2:
                     port='5432'
                 )
 
-                cursor = conn.cursor()
+        cursor = conn.cursor()
 
-                # Obtém o maior valor de "PARENT"
-                cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto_parent")
-                max_parent = cursor.fetchone()[0]
+        cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto_parent")
+        max_parent = cursor.fetchone()[0]
 
-                parent = max_parent + 1 if max_parent else 1
+        parent = max_parent + 1 if max_parent else 1
 
-                # Query de inserção
-                insert_query = """
+        insert_query = """
                 INSERT INTO tembo.tb_produto_parent ("PARENT", "DESCRICAO_PARENT", "CATEGORIA", "VR_UNIT", "IMAGEM")
                 VALUES (%s, %s, %s, %s, %s);
                 """
 
-                cursor.execute(insert_query, (parent, descricao_parent, categoria, vr_unit, url))
-                conn.commit()
+        cursor.execute(insert_query, (parent, descricao_parent, categoria, vr_unit, url))
+        conn.commit()
 
-                st.success("Produto Pai inserido com sucesso!")
-            except Exception as e:
-                st.error(f"Erro ao inserir Produto Pai: {str(e)}")
-            finally:
-                if cursor:
-                    cursor.close()
-                if conn:
-                    conn.close()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
+# ---------------------------------------------------------------------------------------------------
+#CADASTRAR VARIACAO
 
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
-            try:
-                conn = psycopg2.connect(
+            
+        conn = psycopg2.connect(
                     host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
                     database='postgres',
                     user='postgres',
@@ -163,36 +159,34 @@ with tab2:
                     port='5432'
                 )
 
-                cursor1 = conn.cursor()
+        cursor1 = conn.cursor()
 
-                parent = int(parent)
-                sku = str(sku)
-                descricao = str(descricao)
-                vr_unit = float(vr_unit)
+        parent = int(parent)
+        sku = str(sku)
+        descricao = str(descricao)
+        vr_unit = float(vr_unit)
 
 
-                insert_query1 = """
-                INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
-                VALUES (%s, %s, %s, %s, %s);
-                """
+        insert_query1 = """
+        INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
+        VALUES (%s, %s, %s, %s, %s);
+        """
 
-                cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit))
-                conn.commit()
+        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit))
+        conn.commit()
 
-                st.success("Produto Variação inserido com sucesso!")
-            except Exception as e:
-                st.error(f"Erro ao inserir Produto Variação: {str(e)}")
-            finally:
-                if cursor1:
-                    cursor1.close()
-                if conn:
-                    conn.close()
+   
+        if cursor1:
+         cursor1.close()
+        if conn:
+         conn.close()
 
     if tipo == "Produto Pai":
             if st.button("Cadastrar Produto 💾"):
                 if descricao_parent and categoria and vr_unit > 0 and url:
                     insert_parent(descricao_parent, categoria, vr_unit, url)
-                    st.rerun()
+                    # st.rerun()
+                    st.success("Produto inserido com sucesso!")
                 else:
                     st.warning("Por favor, preencha todos os campos necessários.")
     else:
