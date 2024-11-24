@@ -77,9 +77,9 @@ with tab1:
         st.subheader("Infomações",anchor=False)
        
 
-    if st.button("🔁 Atualizar"):
-        st.cache_data.clear()
-        st.rerun()
+if st.button("🔁 Atualizar"):
+    st.cache_data.clear()
+    st.rerun()
 
 
 # ------------------------------------------------------------------------------------------------------------------
