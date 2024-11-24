@@ -9,10 +9,10 @@ st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layo
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Tabs para "Pesquisar Produto" e "Cadastrar Produto"
+
 tab1, tab2 = st.tabs(["Pesquisar Produto", "Cadastrar Produto"])
 
-# Função para carregar os produtos do banco de dados
+
 @st.cache_data
 def load_produtos():
     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
@@ -149,7 +149,7 @@ def insert_parent(descricao_parent, categoria, vr_unit, url):
         if conn:
             conn.close()
 
-# Função para Inserir Produto Variação
+
 def insert_variacao(parent, sku, descricao, categoria, vr_unit):
     try:
         conn = psycopg2.connect(
@@ -162,13 +162,12 @@ def insert_variacao(parent, sku, descricao, categoria, vr_unit):
 
         cursor1 = conn.cursor()
 
-        # Garantir que os dados estejam nos tipos corretos
         parent = int(parent)
         sku = str(sku)
         descricao = str(descricao)
         vr_unit = float(vr_unit)
 
-        # Query de inserção
+
         insert_query1 = """
         INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
         VALUES (%s, %s, %s, %s, %s);
@@ -186,7 +185,6 @@ def insert_variacao(parent, sku, descricao, categoria, vr_unit):
         if conn:
             conn.close()
 
-# Botão para cadastrar Produto Pai
 if tipo == "Produto Pai":
     if st.button("Cadastrar Produto Pai 💾"):
         if descricao_parent and categoria and vr_unit > 0 and url:
@@ -195,7 +193,6 @@ if tipo == "Produto Pai":
         else:
             st.warning("Por favor, preencha todos os campos necessários.")
 else:
-    # Botão para cadastrar Produto Variação
     if st.button("Cadastrar Produto Variação 💾"):
         if sku and descricao and categoria and vr_unit > 0:
             insert_variacao(parent, sku, descricao, categoria, vr_unit)
