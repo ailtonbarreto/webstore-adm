@@ -178,7 +178,7 @@ with tab2:
 
             # Mostrar os dados gerados
             st.write(f"**Parent:** {parent}")
-            st.write(f"**SKU Gerado:** {sku}")
+            st.write(f"**SKU:** {sku}")
             st.write(f"**Descrição:** {descricao}")
             st.write(f"**Categoria:** {categoria}")
             st.write(f"**Valor Unitário:** {vr_unit}")
