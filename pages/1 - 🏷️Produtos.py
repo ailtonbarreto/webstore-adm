@@ -109,7 +109,7 @@ with tab2:
             vr_unit = st.number_input("Valor Unit", format="%.2f")
             url = st.text_input("URL da Imagem")
         else:
-            produto_pai = st.selectbox("Produto Pai",df_produto["PARENT"])
+            produto_pai = st.selectbox("Produto Pai",df_produto["PDESCRICAO_PARENT"])
 
 
         def insert_data(descricao_parent, categoria, vr_unit, url):
