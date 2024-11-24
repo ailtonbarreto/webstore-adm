@@ -32,10 +32,11 @@ def load_produtos():
       
         query = """
                 SELECT 
-                p."SKU",
-                p."DESCRICAO",
-                cp."IMAGEM",
-                cp."DESCRICAO_PARENT"
+	                cp."PARENT",
+                    p."SKU",
+                    p."DESCRICAO",
+                    cp."IMAGEM",
+	                cp."DESCRICAO_PARENT"
             FROM 
                 tembo.tb_produto AS p
             JOIN 
