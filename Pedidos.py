@@ -183,7 +183,7 @@ with tab1:
             st.error("Nenhum dado disponível.")
         else:
             st.subheader("Pedidos No Período",anchor=False)
-            df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","TOTAL","STATUS"]]
+            df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO","QTD","VR_UNIT","TOTAL","STATUS"]]
             df_filtrado_ped["EMISSAO"] = df_filtrado_ped["EMISSAO"].dt.strftime('%d/%m/%Y')
             st.dataframe(df_filtrado_ped, use_container_width=True, hide_index=True)
     with col2:
