@@ -112,7 +112,7 @@ with tab2:
                 sku = f"{parent}-{variacao}"
                 descricao = f"{produto_pai}-{variacao}"
                 
-                st.write(f"SKU Produto: {sku}")
+               
   
 
         # Função para Inserir Produto Pai
