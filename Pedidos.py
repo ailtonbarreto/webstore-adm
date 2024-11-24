@@ -248,7 +248,7 @@ with tab2:
         df_pedido = df.query('PEDIDO == @filtro_pedido')
         st.subheader("Resultado Da Pesquisa", anchor=False)
         df_pedido = df_pedido.drop(columns=["SKU_CLIENTE","Ano","Mês","Dia"])
-        df_pedido = df_pedido[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO_PARENT","QTD","VR_UNIT","STATUS"]]
+        df_pedido = df_pedido[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO","QTD","VR_UNIT","STATUS"]]
         df_pedido["EMISSAO"] = df_pedido["EMISSAO"].dt.strftime('%d/%m/%Y')
         st.dataframe(df_pedido,use_container_width=True,hide_index=True)
         if st.button("💾 Salvar"):
