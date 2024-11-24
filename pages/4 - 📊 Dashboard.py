@@ -211,7 +211,7 @@ with col4:
 
 
 with col1:
-    st.subheader(f"Valor Vendas diárias de {filtro_mes}/{filtro_ano}",anchor=False)
+    st.subheader(f"Faturamento Diário De {filtro_mes}/{filtro_ano}",anchor=False)
     st.plotly_chart(graficocolunas,use_container_width=True)
         
 with col3:
