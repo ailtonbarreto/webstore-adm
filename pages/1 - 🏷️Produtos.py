@@ -207,7 +207,7 @@ with tab2:
                     st.warning("Por favor, preencha todos os campos necessários.")
         else:
             if st.button("Cadastrar Varição 💾"):
-                insert_variacao(parent, sku, categoria, vr_unit)
+                insert_variacao(parent, sku, descricao,categoria, vr_unit)
                 st.rerun()
             else:
                 st.warning("Por favor, preencha todos os campos necessários.")
