@@ -90,7 +90,7 @@ with tab1:
 
 with tab2:
     
-    col1 = st.columns(1)
+    col1, = st.columns(1)
     
     with col1:
 
