@@ -217,7 +217,7 @@ with tab2:
             if st.button("Cadastrar Produto Variação 💾"):
                 if sku and descricao and categoria and vr_unit > 0:
                     insert_variacao(parent, sku, descricao, categoria, vr_unit)
-                    st.rerun()
+                    # st.rerun()
                 else:
                     st.warning("Por favor, preencha todos os campos necessários.")
 
