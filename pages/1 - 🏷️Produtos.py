@@ -51,7 +51,7 @@ def load_produtos():
         query = pd.read_sql_query("select_bd_webstore.sql",con=conn)
         
         
-        df = pd.read_sql_query(query, conn)
+        # df = pd.read_sql_query(query, conn)
     except Exception as e:
         st.write(f"Erro ao conectar: {e}")
     finally:
