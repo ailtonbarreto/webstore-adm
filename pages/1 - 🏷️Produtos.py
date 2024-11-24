@@ -30,7 +30,18 @@ def load_produtos():
             port=port
         )        
       
-        query = "SELECT * FROM tembo.tb_produto;"
+        query = """
+                SELECT 
+                p."SKU",
+                p."DESCRICAO",
+                cp."IMAGEM"
+            FROM 
+                tembo.tb_produto AS p
+            JOIN 
+            tembo.tb_produto_parent AS cp
+            ON 
+            p."PARENT" = cp."PARENT";
+                """
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
