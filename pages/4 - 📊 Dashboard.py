@@ -196,7 +196,7 @@ df_tb["TOTAL"] = df_tb["TOTAL"].apply(lambda x: f'R$ {x:,.2f}')
 
 # ---------------------------------------------------------------------------------------------------------
 # ranking produtos
-df_produto = df_filtrado.groupby("DESCRICAO_PARENT")["QTD"].count().reset_index()
+df_produto = df_filtrado.groupby("DESCRICAO")["QTD"].count().reset_index()
 df_produto = df_produto.sort_values(by="QTD",ascending=False)
 
 
