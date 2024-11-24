@@ -114,7 +114,7 @@ with tab2:
                 
                
 # ---------------------------------------------------------------------------------------------------
-# CADASTRAR PRODUTO PAI
+# FUNCAO CADASTRAR PRODUTO PAI
 
     def insert_parent(descricao_parent, categoria, vr_unit, url):
    
@@ -141,7 +141,7 @@ with tab2:
             conn.close()
 
 # ---------------------------------------------------------------------------------------------------
-#CADASTRAR VARIACAO
+# FUNCAO CADASTRAR VARIACAO
 
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
             
