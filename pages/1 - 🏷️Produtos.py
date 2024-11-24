@@ -109,7 +109,7 @@ with tab2:
             vr_unit = st.number_input("Valor Unit", format="%.2f")
             url = st.text_input("URL da Imagem")
         else:
-            produto_pai = st.selectbox("Produto Pai",df_produto["DESCRICAO_PARENT"])
+            produto_pai = st.selectbox("Produto Pai",df["DESCRICAO_PARENT"])
             variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
 
 
