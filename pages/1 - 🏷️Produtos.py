@@ -112,7 +112,11 @@ with tab2:
             produto_pai = st.selectbox("Produto Pai",df["DESCRICAO_PARENT"].unique())
             variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
 
-# --------------------------------------------------------------------------------------------------------------------
+
+
+
+
+# ----------------------------------------------------------------------------------------------
 #INSERIR PRODUTO PAI
 
         def insert_parent(descricao_parent, categoria, vr_unit, url):
@@ -150,6 +154,16 @@ with tab2:
                     cursor.close()
                 if conn:
                     conn.close()
+
+# ------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
         # Botão de salvar
         if st.button("Salvar 💾"):
