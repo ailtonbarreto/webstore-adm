@@ -216,11 +216,11 @@ with tab2:
 
             # Botão para cadastrar a Variação
             if st.button("Cadastrar Produto Variação 💾"):
-                if sku and descricao and categoria and vr_unit > 0:
-                    insert_variacao(parent, sku, descricao, categoria, vr_unit)
-                    st.rerun()
-                else:
-                    st.warning("Por favor, preencha todos os campos necessários.")
+                # if sku and descricao and categoria and vr_unit > 0:
+                insert_variacao(parent, sku, descricao, categoria, vr_unit)
+                st.rerun()
+            else:
+                st.warning("Por favor, preencha todos os campos necessários.")
 
 
 # ---------------------------------------------------------------------------------------------------------
