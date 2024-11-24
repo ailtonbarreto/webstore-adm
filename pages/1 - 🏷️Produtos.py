@@ -120,7 +120,8 @@ with tab2:
             vr_unit = df_parent["VR_UNIT"].values
             url = df_parent["IMAGEM"].values
             variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
-
+            sku = parent + "-" + variacao
+            st.write(sku)
 
 
 # ----------------------------------------------------------------------------------------------
