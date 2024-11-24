@@ -112,7 +112,7 @@ with tab2:
         else:
             produto_pai = st.selectbox("Produto Pai",df["DESCRICAO_PARENT"].unique())
             df_parent = df.query('DESCRICAO_PARENT == @produto_pai')
-            df_parent["PARENT"]
+            df_parent["PARENT"][0]
             variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
 
 
