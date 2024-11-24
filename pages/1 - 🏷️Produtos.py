@@ -176,28 +176,28 @@ with tab2:
                     port='5432'
                 )
 
-                cursor = conn.cursor()
+                cursor1 = conn.cursor()
 
                 insert_query = """
                 INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
                 VALUES (%s, %s, %s, %s, %s);
                 """
 
-                cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit))
+                cursor1.execute(insert_query, (parent, sku, descricao, categoria, vr_unit))
                 conn.commit()
 
                 st.success("Dados inseridos com sucesso!")
             except Exception as e:
                 st.error(f"Erro ao inserir dados: {str(e)}")
             finally:
-                if cursor:
-                    cursor.close()
+                if cursor1:
+                    cursor1.close()
                 if conn:
                     conn.close()
 
 
         # Botão de salvar
-        
+
         if tipo == "Produto Pai": 
             if st.button("Cadastrar Produto 💾"):
                 if descricao_parent and categoria and vr_unit > 0 and url:
