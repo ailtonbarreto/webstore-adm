@@ -68,14 +68,14 @@ with tab1:
         produto_filtro = produto_filtro.upper()
         
     with col2:
-        st.subheader("Resultado da Pesquisa")
+        st.subheader("Resultado da Pesquisa",anchor=False)
         
         if produto_filtro:
             df_produto = df.query('SKU == @produto_filtro')
             if not df_produto.empty:
                 for index, row in df_produto.iterrows():
                     st.image(row['IMAGEM'], width=500)
-                    st.subheader(row['DESCRICAO'])
+                    st.subheader(row['DESCRICAO'],anchor=False)
                     st.write(f"SKU: {row['SKU']}")
             else:
                 st.write("Nenhum produto encontrado.")
