@@ -173,8 +173,8 @@ with tab2:
             url = df_parent["IMAGEM"].values[0]
 
             variacao = st.selectbox("Variação", ["UN", "P", "M", "G", "GG", "EG", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44"])
-            sku = f"{parent}-{variacao}"  # Gerar SKU
-            descricao = f"{produto_pai}-{variacao}"  # Gerar Descrição
+            sku = f"{parent}-{variacao}"
+            descricao = f"{produto_pai}-{variacao}"
 
             # Mostrar os dados gerados
             st.write(f"**Parent:** {parent}")
@@ -183,7 +183,6 @@ with tab2:
             st.write(f"**Categoria:** {categoria}")
             st.write(f"**Valor Unitário:** {vr_unit}")
 
-            # Função para Inserir Produto Variação no Banco
             def insert_variacao(parent, sku, descricao, categoria, vr_unit):
                 try:
                     conn = psycopg2.connect(
