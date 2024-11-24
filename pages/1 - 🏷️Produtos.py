@@ -112,9 +112,10 @@ with tab2:
             produto_pai = st.selectbox("Produto Pai",df["DESCRICAO_PARENT"].unique())
             variacao = st.selectbox("Variação",["UN","P","M","G","GG","EG","34","35","36","37","38","39","40","41","42","43","44"])
 
+# --------------------------------------------------------------------------------------------------------------------
+#INSERIR PRODUTO PAI
 
-
-        def insert_data(descricao_parent, categoria, vr_unit, url):
+        def insert_parent(descricao_parent, categoria, vr_unit, url):
             try:
                 conn = psycopg2.connect(
                     host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
@@ -153,7 +154,7 @@ with tab2:
         # Botão de salvar
         if st.button("Salvar 💾"):
             if descricao_parent and categoria and vr_unit > 0 and url:
-                insert_data(descricao_parent, categoria, vr_unit, url)
+                insert_parent(descricao_parent, categoria, vr_unit, url)
                 st.rerun()
             else:
                 st.warning("Por favor, preencha todos os campos necessários.")
