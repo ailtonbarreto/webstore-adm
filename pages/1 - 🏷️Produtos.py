@@ -81,7 +81,7 @@ with tab1:
                 st.write("Nenhum produto encontrado.")
     
     with col3:
-        st.subheader("Informações")
+        st.subheader("Informações",anchor=False)
 
 # ------------------------------------------------------------------------------------------------------------------
 # CADASTRAR PRODUTO
