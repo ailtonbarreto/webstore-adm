@@ -186,11 +186,14 @@ with tab2:
             if st.button("Cadastrar Variação 💾"):
                 if sku and descricao and categoria and vr_unit > 0:
                     insert_variacao(parent, sku, descricao, categoria, vr_unit)
-                    st.rerun()
+                    st.success("Produto inserido com sucesso!")
+
                 else:
                     st.warning("Por favor, preencha todos os campos necessários.")
 
-
+if st.button("🔁 Atualizar"):
+    st.cache_data.clear()
+    st.rerun()
 # ---------------------------------------------------------------------------------------------------------
 # estilizacao
 
