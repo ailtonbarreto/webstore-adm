@@ -26,7 +26,7 @@ SELECT
     v."SKU_CLIENTE",
     v."EMISSAO",
     v."PARENT",
-    p."DESCRICAO_PARENT",
+    p."DESCRICAO",
     p."CATEGORIA",
     v."QTD",
     v."VR_UNIT",
@@ -35,7 +35,7 @@ SELECT
 FROM 
     tembo.tb_venda AS v
 LEFT JOIN (
-    SELECT DISTINCT ON ("PARENT") "PARENT", "DESCRICAO_PARENT", "CATEGORIA"
+    SELECT DISTINCT ON ("PARENT") "PARENT", "DESCRICAO", "CATEGORIA"
     FROM tembo.tb_produto
     ORDER BY "PARENT"
 ) AS p ON v."PARENT" = p."PARENT"
