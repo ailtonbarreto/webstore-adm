@@ -174,22 +174,22 @@ with tab2:
          cursor1.close()
         if conn:
          conn.close()
+    with col1:
+        if tipo == "Produto Pai":
+                if st.button("Cadastrar Produto 💾"):
+                    if descricao_parent and categoria and vr_unit > 0 and url:
+                        insert_parent(descricao_parent, categoria, vr_unit, url)
+                        st.success("Produto inserido com sucesso!")
+                    else:
+                        st.warning("Por favor, preencha todos os campos necessários.")
+        else:
+                if st.button("Cadastrar Variação 💾"):
+                    if sku and descricao and categoria and vr_unit > 0:
+                        insert_variacao(parent, sku, descricao, categoria, vr_unit)
+                        st.success("Produto inserido com sucesso!")
 
-    if tipo == "Produto Pai":
-            if st.button("Cadastrar Produto 💾"):
-                if descricao_parent and categoria and vr_unit > 0 and url:
-                    insert_parent(descricao_parent, categoria, vr_unit, url)
-                    st.success("Produto inserido com sucesso!")
-                else:
-                    st.warning("Por favor, preencha todos os campos necessários.")
-    else:
-            if st.button("Cadastrar Variação 💾"):
-                if sku and descricao and categoria and vr_unit > 0:
-                    insert_variacao(parent, sku, descricao, categoria, vr_unit)
-                    st.success("Produto inserido com sucesso!")
-
-                else:
-                    st.warning("Por favor, preencha todos os campos necessários.")
+                    else:
+                        st.warning("Por favor, preencha todos os campos necessários.")
 
 if st.button("🔁 Atualizar"):
     st.cache_data.clear()
