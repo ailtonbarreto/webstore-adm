@@ -202,3 +202,32 @@ else:
             st.rerun()
         else:
             st.warning("Por favor, preencha todos os campos necessários.")
+
+# ---------------------------------------------------------------------------------------------------------
+# estilizacao
+
+style1 = """
+    <style>
+    [data-testid="stColumn"]
+    {
+    background-color: #ffffff;
+    padding: 0.5vw 0.5vw;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+    </style>
+"""
+st.markdown(style1, unsafe_allow_html=True)
+
+style2 = """
+    <style>
+    [data-testid="stFullScreenFrame"]
+    {
+    display: flex;
+    justify-content: center;
+    }
+    </style>
+"""
+st.markdown(style2, unsafe_allow_html=True)
+
