@@ -61,7 +61,9 @@ df = load_produtos()
 # PESQUISAR PRODUTO
 
 with tab1:
-    col1, col2, col3 = st.columns(3)
+    col1, = st.columns(1)
+    col2, col3 = st.columns(2)
+    
     
     with col1:
         produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
