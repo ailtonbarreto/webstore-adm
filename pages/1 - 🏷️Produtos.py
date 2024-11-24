@@ -104,8 +104,8 @@ with tab2:
                 vr_unit = st.number_input("Valor Unit", format="%.2f")
                 url = st.text_input("URL da Imagem")
             else:
-                produto_pai = st.selectbox("Produto Pai", df["DESCRICAO"].unique())
-                df_parent = df.query('DESCRICAO == @produto_pai')
+                produto_pai = st.selectbox("Produto Pai", df["DESCRICAO_PARENT"].unique())
+                df_parent = df.query('DESCRICAO_PARENT == @produto_pai')
                 parent = df_parent["PARENT"].values[0]
                 categoria = df_parent["CATEGORIA"].values[0]
                 vr_unit = df_parent["VR_UNIT"].values[0]
