@@ -78,12 +78,12 @@ with tab1:
                 for index, row in df_produto.iterrows():
                     st.image(row['IMAGEM'], width=500)
                     st.subheader(row['DESCRICAO'],anchor=False)
+                with col3:
+                    st.subheader("Informações",anchor=False)
                     st.write(f"SKU: {row['SKU']}")
             else:
                 st.write("Nenhum produto encontrado.")
     
-    with col3:
-        st.subheader("Informações",anchor=False)
 
 # ------------------------------------------------------------------------------------------------------------------
 # CADASTRAR PRODUTO
