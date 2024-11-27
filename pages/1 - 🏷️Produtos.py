@@ -239,6 +239,7 @@ with tab2:
                         insert_parent(descricao_parent, categoria, vr_unit, url)
                         st.success("Produto inserido com sucesso!")
                         sleep(1)
+                        st.cache_data.clear()
                         st.rerun()
                         
                     else:
@@ -249,6 +250,7 @@ with tab2:
                         insert_variacao(parent, sku, descricao, categoria, vr_unit)
                         st.success("Produto inserido com sucesso!")
                         sleep(1)
+                        st.cache_data.clear()
                         st.rerun()
 
                     else:
