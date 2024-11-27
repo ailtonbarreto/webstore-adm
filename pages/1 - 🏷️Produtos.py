@@ -160,14 +160,6 @@ with tab2:
                 sku = f"{parent}-{variacao}"
                 descricao = f"{produto_pai}-{variacao}"
                 
-                
-                st.write(parent)
-                st.write(sku)
-                st.write(descricao)
-                st.write(categoria)
-                st.write(vr_unit)
-                
-               
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR PRODUTO PAI
 
@@ -211,7 +203,6 @@ with tab2:
         cursor1 = conn.cursor()
 
         parent = int(parent)
-        # sku = str(sku)
         descricao = str(descricao)
         vr_unit = float(vr_unit)
 
@@ -235,6 +226,7 @@ with tab2:
                     if descricao_parent and categoria and vr_unit > 0 and url:
                         insert_parent(descricao_parent, categoria, vr_unit, url)
                         st.success("Produto inserido com sucesso!")
+                        st.rerun()
                     else:
                         st.warning("Por favor, preencha todos os campos necessários.")
         else:
