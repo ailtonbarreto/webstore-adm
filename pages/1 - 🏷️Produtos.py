@@ -157,7 +157,7 @@ with tab2:
                 url = st.text_input("URL da Imagem")
             else:
                 produto_pai = st.selectbox("Produto Pai", df_parent["DESCRICAO_PARENT"].unique())
-                df_parent = df.query('DESCRICAO_PARENT == @produto_pai')
+                df_parent = df_parent.query('DESCRICAO_PARENT == @produto_pai')
                 parent = df_parent["DESCRICAO_PARENT"].values[0]
                 categoria = df_parent["CATEGORIA"].values[0]
                 vr_unit = df_parent["VR_UNIT"].values[0]
