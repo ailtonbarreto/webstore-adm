@@ -199,37 +199,35 @@ with tab2:
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
-
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
-            
         conn = psycopg2.connect(
-                    host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
-                    database='postgres',
-                    user='postgres',
-                    password='MeSaIkkB57YSOgLO',
-                    port='5432'
-                )
+            host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+            database='postgres',
+            user='postgres',
+            password='MeSaIkkB57YSOgLO',
+            port='5432'
+        )
 
         cursor1 = conn.cursor()
 
         parent = int(parent)
         descricao = str(descricao)
         vr_unit = float(vr_unit)
-
+        ativo = 1  # Valor definido diretamente na função
 
         insert_query1 = """
-        INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT","ATIVO")
-        VALUES (%s, %s, %s, %s, %s,%s);
+        INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "ATIVO")
+        VALUES (%s, %s, %s, %s, %s, %s);
         """
 
-        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit,1))
+        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit, ativo))
         conn.commit()
 
-   
         if cursor1:
-         cursor1.close()
+            cursor1.close()
         if conn:
-         conn.close()
+            conn.close()
+
          
     with col1:
         if tipo == "Produto Pai":
