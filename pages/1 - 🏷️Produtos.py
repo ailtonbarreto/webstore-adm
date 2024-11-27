@@ -165,6 +165,13 @@ with tab2:
                 sku = f"{parent}-{variacao}"
                 descricao = f"{produto_pai}-{variacao}"
                 
+                
+                st.write(parent)
+                st.write(sku)
+                st.write(descricao)
+                st.write(categoria)
+                st.write(vr_unit)
+                
                
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR PRODUTO PAI
