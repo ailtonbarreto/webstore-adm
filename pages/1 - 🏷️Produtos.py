@@ -246,7 +246,7 @@ with tab2:
         else:
                 if st.button("Cadastrar Variação 💾"):
                     if sku and descricao and categoria and vr_unit > 0:
-                        insert_variacao(parent, sku, descricao, categoria, vr_unit, ativo)
+                        insert_variacao(parent, sku, descricao, categoria, vr_unit)
                         st.success("Produto inserido com sucesso!")
                         sleep(1)
                         st.cache_data.clear()
