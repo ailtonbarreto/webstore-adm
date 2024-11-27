@@ -200,59 +200,63 @@ with tab2:
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
-        conn = psycopg2.connect(
-            host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
-            database='postgres',
-            user='postgres',
-            password='MeSaIkkB57YSOgLO',
-            port='5432'
-        )
+        try:
+            conn = psycopg2.connect(
+                host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+                database='postgres',
+                user='postgres',
+                password='MeSaIkkB57YSOgLO',
+                port='5432'
+            )
 
-        cursor1 = conn.cursor()
+            cursor1 = conn.cursor()
 
-        parent = int(parent)
-        descricao = str(descricao)
-        vr_unit = float(vr_unit)
-        ativo = 1 
+            # Convertendo e ajustando valores
+            parent = int(parent)
+            descricao = str(descricao)
+            vr_unit = float(vr_unit)
+            ativo = 1  # Valor fixo para a coluna "ATIVO"
 
-        insert_query1 = """
-        INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "ATIVO")
-        VALUES (%s, %s, %s, %s, %s, %s);
-        """
+            # Inserção no banco de dados
+            insert_query1 = """
+            INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "ATIVO")
+            VALUES (%s, %s, %s, %s, %s, %s);
+            """
 
-        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit, ativo))
-        conn.commit()
+            cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit, ativo))
+            conn.commit()
+        except Exception as e:
+            st.error(f"Erro ao inserir variação: {e}")
+        finally:
+            if cursor1:
+                cursor1.close()
+            if conn:
+                conn.close()
 
-        if cursor1:
-            cursor1.close()
-        if conn:
-            conn.close()
 
-         
+    # Atualizando a lógica do botão
     with col1:
         if tipo == "Produto Pai":
-                if st.button("Cadastrar Produto 💾"):
-                    if descricao_parent and categoria and vr_unit > 0 and url:
-                        insert_parent(descricao_parent, categoria, vr_unit, url)
-                        st.success("Produto inserido com sucesso!")
-                        sleep(1)
-                        st.cache_data.clear()
-                        st.rerun()
-                        
-                    else:
-                        st.warning("Por favor, preencha todos os campos necessários.")
+            if st.button("Cadastrar Produto 💾"):
+                if descricao_parent and categoria and vr_unit > 0 and url:
+                    insert_parent(descricao_parent, categoria, vr_unit, url)
+                    st.success("Produto inserido com sucesso!")
+                    sleep(1)
+                    st.cache_data.clear()
+                    st.rerun()
+                else:
+                    st.warning("Por favor, preencha todos os campos necessários.")
         else:
-                if st.button("Cadastrar Variação 💾"):
-                    if sku and descricao and categoria and vr_unit > 0:
-                        insert_variacao(parent, sku, descricao, categoria, vr_unit, ativo)
+            if st.button("Cadastrar Variação 💾"):
+                if sku and descricao and categoria and vr_unit > 0:
+                    insert_variacao(parent, sku, descricao, categoria, vr_unit)  # Sem passar "ativo"
+                    st.success("Produto inserido com sucesso!")
+                    sleep(1)
+                    st.cache_data.clear()
+                    st.rerun()
+                else:
+                    st.warning("Por favor, preencha todos os campos necessários.")
 
-                        st.success("Produto inserido com sucesso!")
-                        sleep(1)
-                        st.cache_data.clear()
-                        st.rerun()
-
-                    else:
-                        st.warning("Por favor, preencha todos os campos necessários.")
 
 if st.button("🔁 Atualizar"):
     st.cache_data.clear()
