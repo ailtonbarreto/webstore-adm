@@ -221,6 +221,7 @@ with tab2:
          cursor1.close()
         if conn:
          conn.close()
+         
     with col1:
         if tipo == "Produto Pai":
                 if st.button("Cadastrar Produto 💾"):
