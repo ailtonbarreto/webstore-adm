@@ -161,7 +161,6 @@ with tab2:
                 parent = df_parent["DESCRICAO_PARENT"].values[0]
                 categoria = df_parent["CATEGORIA"].values[0]
                 vr_unit = df_parent["VR_UNIT"].values[0]
-                url = df_parent["IMAGEM"].values[0]
                 variacao = st.selectbox("Variação", ["UN", "P", "M", "G", "GG", "EG", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44"])
                 sku = f"{parent}-{variacao}"
                 descricao = f"{produto_pai}-{variacao}"
@@ -210,7 +209,7 @@ with tab2:
         cursor1 = conn.cursor()
 
         parent = int(parent)
-        sku = str(sku)
+        # sku = str(sku)
         descricao = str(descricao)
         vr_unit = float(vr_unit)
 
