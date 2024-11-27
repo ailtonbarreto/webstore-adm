@@ -164,6 +164,7 @@ with tab2:
                 ativo = 1
                 
                 st.write(f'Sku do Produto: {sku}')
+                st.write(ativo)
       
                 
                 
