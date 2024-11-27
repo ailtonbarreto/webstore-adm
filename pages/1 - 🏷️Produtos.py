@@ -162,11 +162,8 @@ with tab2:
                 sku = f"{parent}-{variacao}"
                 descricao = f"{produto_pai}-{variacao}"
                 
-                st.write(parent)
-                st.write(descricao)
-                st.write(categoria)
-                st.write(sku)
-                st.write(variacao)
+                st.write(f'Sku do Produto: {sku}')
+      
                 
                 
                 
