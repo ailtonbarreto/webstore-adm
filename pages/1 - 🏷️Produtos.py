@@ -222,7 +222,7 @@ with tab2:
         VALUES (%s, %s, %s, %s, %s,%s);
         """
 
-        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit))
+        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit,ativo))
         conn.commit()
 
    
