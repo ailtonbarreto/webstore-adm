@@ -138,114 +138,115 @@ with tab1:
 # ------------------------------------------------------------------------------------------------------------------
 # CADASTRAR PRODUTO
 
-import psycopg2
-from time import sleep
-import streamlit as st
+with tab2:
+    
+    col1, = st.columns(1)
+    
+    with col1:
 
-# Function to connect to the database
-def get_connection():
-    try:
-        return psycopg2.connect(
-            host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
-            database='postgres',
-            user='postgres',
-            password='MeSaIkkB57YSOgLO',
-            port='5432'
-        )
-    except Exception as e:
-        st.error(f"Database connection error: {e}")
-        return None
+            tipo = st.selectbox("Tipo", ["Produto Pai", "Produto Variação"])
 
-# Function to insert parent product
-def insert_parent(descricao_parent, categoria, vr_unit, url):
-    try:
-        conn = get_connection()
-        if not conn:
-            return
+            if tipo == "Produto Pai":
+                descricao_parent = st.text_input("Descrição")
+                categoria = st.selectbox("Categoria", ["Chapéu", "Roupas", "Mochila", "Tênis"])
+                vr_unit = st.number_input("Valor Unit", format="%.2f")
+                url = st.text_input("URL da Imagem")
+            else:
+                produto_pai = st.selectbox("Produto Pai", df_parent["DESCRICAO_PARENT"].unique())
+                df_parent = df_parent.query('DESCRICAO_PARENT == @produto_pai')
+                parent = df_parent["PARENT"].values[0]
+                categoria = df_parent["CATEGORIA"].values[0]
+                vr_unit = df_parent["VR_UNIT"].values[0]
+                variacao = st.selectbox("Variação", ["UN", "P", "M", "G", "GG", "EG", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44"])
+                sku = f"{parent}-{variacao}"
+                descricao = f"{produto_pai}-{variacao}"
+                
+# ---------------------------------------------------------------------------------------------------
+# FUNCAO CADASTRAR PRODUTO PAI
+
+    def insert_parent(descricao_parent, categoria, vr_unit, url):
+   
+        conn = psycopg2.connect(host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',database='postgres',user='postgres',password='MeSaIkkB57YSOgLO',port='5432')
+
         cursor = conn.cursor()
 
         cursor.execute("SELECT MAX(\"PARENT\") FROM tembo.tb_produto_parent")
         max_parent = cursor.fetchone()[0]
+
         parent = max_parent + 1 if max_parent else 1
 
         insert_query = """
-            INSERT INTO tembo.tb_produto_parent ("PARENT", "DESCRICAO_PARENT", "CATEGORIA", "VR_UNIT", "IMAGEM")
-            VALUES (%s, %s, %s, %s, %s);
-        """
+                INSERT INTO tembo.tb_produto_parent ("PARENT", "DESCRICAO_PARENT", "CATEGORIA", "VR_UNIT", "IMAGEM")
+                VALUES (%s, %s, %s, %s, %s);
+                """
+
         cursor.execute(insert_query, (parent, descricao_parent, categoria, vr_unit, url))
         conn.commit()
-    except Exception as e:
-        st.error(f"Error inserting parent product: {e}")
-    finally:
+
         if cursor:
             cursor.close()
         if conn:
             conn.close()
 
-# Function to insert product variation
-def insert_variacao(parent, sku, descricao, categoria, vr_unit):
-    try:
-        conn = get_connection()
-        if not conn:
-            return
-        cursor = conn.cursor()
+# ---------------------------------------------------------------------------------------------------
+# FUNCAO CADASTRAR VARIACAO
 
-        insert_query = """
-            INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
-            VALUES (%s, %s, %s, %s, %s);
+    def insert_variacao(parent, sku, descricao, categoria, vr_unit):
+            
+        conn = psycopg2.connect(
+                    host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+                    database='postgres',
+                    user='postgres',
+                    password='MeSaIkkB57YSOgLO',
+                    port='5432'
+                )
+
+        cursor1 = conn.cursor()
+
+        parent = int(parent)
+        descricao = str(descricao)
+        vr_unit = float(vr_unit)
+
+
+        insert_query1 = """
+        INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT")
+        VALUES (%s, %s, %s, %s, %s);
         """
-        cursor.execute(insert_query, (parent, sku, descricao, categoria, vr_unit))
+
+        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit))
         conn.commit()
-    except Exception as e:
-        st.error(f"Error inserting product variation: {e}")
-    finally:
-        if cursor:
-            cursor.close()
+
+   
+        if cursor1:
+         cursor1.close()
         if conn:
-            conn.close()
+         conn.close()
+         
+    with col1:
+        if tipo == "Produto Pai":
+                if st.button("Cadastrar Produto 💾"):
+                    if descricao_parent and categoria and vr_unit > 0 and url:
+                        insert_parent(parent,descricao_parent, categoria, vr_unit, url)
+                        st.success("Produto inserido com sucesso!")
+                        sleep(1)
+                        st.rerun()
+                        
+                    else:
+                        st.warning("Por favor, preencha todos os campos necessários.")
+        else:
+                if st.button("Cadastrar Variação 💾"):
+                    if sku and descricao and categoria and vr_unit > 0:
+                        insert_variacao(parent, sku, descricao, categoria, vr_unit)
+                        st.success("Produto inserido com sucesso!")
+                        sleep(1)
+                        st.rerun()
 
-# UI for product registration
-with st.container():
-    tipo = st.selectbox("Tipo", ["Produto Pai", "Produto Variação"])
-
-    if tipo == "Produto Pai":
-        descricao_parent = st.text_input("Descrição")
-        categoria = st.selectbox("Categoria", ["Chapéu", "Roupas", "Mochila", "Tênis"])
-        vr_unit = st.number_input("Valor Unit", min_value=0.01, format="%.2f")
-        url = st.text_input("URL da Imagem")
-
-        if st.button("Cadastrar Produto 💾"):
-            if descricao_parent and categoria and vr_unit > 0 and url:
-                insert_parent(descricao_parent, categoria, vr_unit, url)
-                st.success("Produto inserido com sucesso!")
-                sleep(1)
-                st.experimental_rerun()
-            else:
-                st.warning("Por favor, preencha todos os campos necessários.")
-    else:
-        # Assuming df_parent is defined elsewhere in the app
-        produto_pai = st.selectbox("Produto Pai", df_parent["DESCRICAO_PARENT"].unique())
-        df_parent_filtered = df_parent.query('DESCRICAO_PARENT == @produto_pai')
-        parent = df_parent_filtered["PARENT"].values[0]
-        categoria = df_parent_filtered["CATEGORIA"].values[0]
-        vr_unit = df_parent_filtered["VR_UNIT"].values[0]
-        variacao = st.selectbox("Variação", ["UN", "P", "M", "G", "GG", "EG", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44"])
-        sku = f"{parent}-{variacao}"
-        descricao = f"{produto_pai}-{variacao}"
-
-        if st.button("Cadastrar Variação 💾"):
-            if sku and descricao and categoria and vr_unit > 0:
-                insert_variacao(parent, sku, descricao, categoria, vr_unit)
-                st.success("Variação inserida com sucesso!")
-                sleep(1)
-                st.experimental_rerun()
-            else:
-                st.warning("Por favor, preencha todos os campos necessários.")
+                    else:
+                        st.warning("Por favor, preencha todos os campos necessários.")
 
 if st.button("🔁 Atualizar"):
     st.cache_data.clear()
-    st.experimental_rerun()
-
+    st.rerun()
 # ---------------------------------------------------------------------------------------------------------
 # ESTILIZACAO
 
