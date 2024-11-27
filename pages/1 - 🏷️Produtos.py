@@ -1,6 +1,7 @@
 import streamlit as st
 import psycopg2
 import pandas as pd
+from time import sleep
 
 #
 st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide", initial_sidebar_state="collapsed")
@@ -225,8 +226,9 @@ with tab2:
                 if st.button("Cadastrar Produto 💾"):
                     if descricao_parent and categoria and vr_unit > 0 and url:
                         insert_parent(descricao_parent, categoria, vr_unit, url)
-                        st.rerun()
                         st.success("Produto inserido com sucesso!")
+                        sleep(1)
+                        st.rerun()
                         
                     else:
                         st.warning("Por favor, preencha todos os campos necessários.")
