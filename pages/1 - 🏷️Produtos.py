@@ -246,7 +246,7 @@ with tab2:
         if tipo == "Produto Pai":
                 if st.button("Cadastrar Produto 💾"):
                     if descricao_parent and categoria and vr_unit > 0 and url:
-                        insert_parent(parent,descricao_parent, categoria, vr_unit, url)
+                        insert_parent(descricao_parent, categoria, vr_unit, url)
                         st.success("Produto inserido com sucesso!")
                         sleep(1)
                         st.rerun()
