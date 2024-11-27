@@ -187,6 +187,18 @@ with tab2:
             cursor.close()
         if conn:
             conn.close()
+            
+    with col1:
+        if tipo == "Produto Pai":
+                if st.button("Cadastrar Produto 💾"):
+                    if descricao_parent and categoria and vr_unit > 0 and url:
+                        insert_parent(parent,descricao_parent, categoria, vr_unit, url)
+                        st.success("Produto inserido com sucesso!")
+                        sleep(1)
+                        st.rerun()
+                        
+                    else:
+                        st.warning("Por favor, preencha todos os campos necessários.")
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
@@ -221,17 +233,7 @@ with tab2:
          cursor1.close()
         if conn:
          conn.close()
-    with col1:
-        if tipo == "Produto Pai":
-                if st.button("Cadastrar Produto 💾"):
-                    if descricao_parent and categoria and vr_unit > 0 and url:
-                        insert_parent(parent,descricao_parent, categoria, vr_unit, url)
-                        st.success("Produto inserido com sucesso!")
-                        sleep(1)
-                        st.rerun()
-                        
-                    else:
-                        st.warning("Por favor, preencha todos os campos necessários.")
+
         else:
                 if st.button("Cadastrar Variação 💾"):
                     if sku and descricao and categoria and vr_unit > 0:
