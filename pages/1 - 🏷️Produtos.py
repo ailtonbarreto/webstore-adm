@@ -213,7 +213,7 @@ with tab2:
         parent = int(parent)
         descricao = str(descricao)
         vr_unit = float(vr_unit)
-        ativo = 1  # Valor definido diretamente na função
+        ativo = 1 
 
         insert_query1 = """
         INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "ATIVO")
@@ -244,7 +244,7 @@ with tab2:
         else:
                 if st.button("Cadastrar Variação 💾"):
                     if sku and descricao and categoria and vr_unit > 0:
-                        insert_variacao(parent, sku, descricao, categoria, vr_unit, 1)
+                        insert_variacao(parent, sku, descricao, categoria, vr_unit, ativo)
 
                         st.success("Produto inserido com sucesso!")
                         sleep(1)
