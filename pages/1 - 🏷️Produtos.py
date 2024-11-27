@@ -12,6 +12,7 @@ with open("style.css") as f:
 
 tab1, tab2 = st.tabs(["Pesquisar Produto", "Cadastrar Produto"])
 
+# ------------------------------------------------------------------------------------------------------------------
 
 @st.cache_data
 def load_produtos():
@@ -46,10 +47,9 @@ def load_produtos():
                 ON 
                     p."PARENT" = cp."PARENT";
                 """
-        
-        
-        
+     
         df = pd.read_sql_query(query, conn)
+
         
     except Exception as e:
         st.write(f"Erro ao conectar: {e}")
@@ -58,7 +58,58 @@ def load_produtos():
             conn.close()
     return df
 
+
+# ------------------------------------------------------------------------------------------------------------------
+
+
+@st.cache_data
+def load_parent():
+    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
+    database = 'postgres'
+    user = 'postgres'
+    password = 'MeSaIkkB57YSOgLO'
+    port = '5432'
+
+    try:
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            port=port
+        )        
+        
+        queryparent = """
+                SELECT 
+                    cp."PARENT",
+                    cp."IMAGEM",
+                    cp."CATEGORIA",
+                    cp."VR_UNIT",
+                    cp."DESCRICAO_PARENT"
+                FROM 
+                    tembo.tb_produto_parent AS cp
+                """
+        
+        df_parent = pd.read_sql_query(queryparent, conn)
+
+        
+    except Exception as e:
+        st.write(f"Erro ao conectar: {e}")
+    finally:
+        if conn:
+            conn.close()
+    return df_parent
+
+
+df_parent = load_parent()
+
 df = load_produtos()
+
+df_parent
+
+# ------------------------------------------------------------------------------------------------------------------
+
+     
 
 # ------------------------------------------------------------------------------------------------------------------
 # PESQUISAR PRODUTO

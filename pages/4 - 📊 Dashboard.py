@@ -201,13 +201,11 @@ df_produto = df_produto.sort_values(by="QTD",ascending=False)
 
 
 # ---------------------------------------------------------------------------------------------------------
-
+#GRAFICOS
 
 with col4:
     st.subheader("Valor Vendido Por Categoria",anchor=False)
     st.plotly_chart(grafico_barras,use_container_width=True)
-
-
 
 
 with col1:
