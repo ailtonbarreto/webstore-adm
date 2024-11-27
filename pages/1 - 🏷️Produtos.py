@@ -222,7 +222,7 @@ with tab2:
         VALUES (%s, %s, %s, %s, %s,%s);
         """
 
-        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit,ativo))
+        cursor1.execute(insert_query1, (parent, sku, descricao, categoria, vr_unit,1))
         conn.commit()
 
    
@@ -246,7 +246,8 @@ with tab2:
         else:
                 if st.button("Cadastrar Variação 💾"):
                     if sku and descricao and categoria and vr_unit > 0:
-                        insert_variacao(parent, sku, descricao, categoria, vr_unit,ativo)
+                        insert_variacao(parent, sku, descricao, categoria, vr_unit, 1)
+
                         st.success("Produto inserido com sucesso!")
                         sleep(1)
                         st.cache_data.clear()
