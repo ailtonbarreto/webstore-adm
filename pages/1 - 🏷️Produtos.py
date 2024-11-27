@@ -234,16 +234,16 @@ with tab2:
         if conn:
          conn.close()
 
-        else:
-                if st.button("Cadastrar Variação 💾"):
-                    if sku and descricao and categoria and vr_unit > 0:
-                        insert_variacao(parent, sku, descricao, categoria, vr_unit)
-                        st.success("Produto inserido com sucesso!")
-                        sleep(1)
-                        st.rerun()
+    with col1:
+            if st.button("Cadastrar Variação 💾"):
+                if sku and descricao and categoria and vr_unit > 0:
+                    insert_variacao(parent, sku, descricao, categoria, vr_unit)
+                    st.success("Produto inserido com sucesso!")
+                    sleep(1)
+                    st.rerun()
 
-                    else:
-                        st.warning("Por favor, preencha todos os campos necessários.")
+                else:
+                    st.warning("Por favor, preencha todos os campos necessários.")
 
 if st.button("🔁 Atualizar"):
     st.cache_data.clear()
