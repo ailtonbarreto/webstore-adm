@@ -237,6 +237,8 @@ with tab2:
                     if sku and descricao and categoria and vr_unit > 0:
                         insert_variacao(parent, sku, descricao, categoria, vr_unit)
                         st.success("Produto inserido com sucesso!")
+                        sleep(1)
+                        st.rerun()
 
                     else:
                         st.warning("Por favor, preencha todos os campos necessários.")
