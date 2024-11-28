@@ -13,5 +13,5 @@ with open("style.css") as f:
     
 st.title("Dashboard Faturamento",anchor=False)
 bi = "https://app.powerbi.com/view?r=eyJrIjoiMmJiNDhkYWQtNWEzZS00YjQxLTkxNzctYWZiOWZlYWFjZTUyIiwidCI6IjE4Njc3OGFjLWJjNjMtNGE0My1iMmVlLThiMTk0MWVjYTRhOSJ9"
-components.iframe(bi, height=1000)
+components.iframe(bi, height=900)
     
