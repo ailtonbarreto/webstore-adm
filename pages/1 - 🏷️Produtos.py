@@ -113,11 +113,7 @@ df = load_produtos()
 with tab1:
     col1, = st.columns(1)
     col2, col3 = st.columns([1,2.5])
-    
-    with col3:
-        st.subheader("Informações",anchor=False)
-    
-    
+        
     with col1:
         produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
         produto_filtro = produto_filtro.upper()
