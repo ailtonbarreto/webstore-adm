@@ -115,8 +115,10 @@ with tab1:
     col2, col3 = st.columns([1,2.5])
     
     with col3:
+        st.subheader("Informações",anchor=False)
         cola, = st.columns(1)
         colb, = st.columns(1)
+        colc, = st.columns(1)
     
     
     with col1:
@@ -134,11 +136,14 @@ with tab1:
                     st.subheader(row['DESCRICAO'],anchor=False)
             
                     with cola:
-                        st.subheader("Informações",anchor=False)
+                        st.subheader("Produto",anchor=False)
                         st.write(f"SKU: {row['SKU']}")
                     with colb:
                         st.subheader("Estoque",anchor=False)
-                        st.write("QTD: 0")
+                        st.write("0")
+                    with colc:
+                        st.subheader("Localização",anchor=False)
+                        st.write("A.01.01.01")
             else:
                 st.write("Nenhum produto encontrado.")
     
