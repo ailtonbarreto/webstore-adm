@@ -119,6 +119,7 @@ with tab1:
         cola, = st.columns(1)
         colb, = st.columns(1)
         colc, = st.columns(1)
+        cold, = st.columns(1)
     
     
     with col1:
@@ -129,19 +130,28 @@ with tab1:
         st.subheader("Imagem",anchor=False)
         
         if produto_filtro:
-            df_produto = df.query('SKU == @produto_filtro')
-            if not df_produto.empty:
-                for index, row in df_produto.iterrows():
-                    st.image(row['IMAGEM'], width=400)
-                    st.subheader(row['DESCRICAO'],anchor=False)
             
+            df_produto = df.query('SKU == @produto_filtro')
+            
+            if not df_produto.empty:
+                
+                for index, row in df_produto.iterrows():
+                    
+                    st.image(row['IMAGEM'], width=400)
+                    
                     with cola:
                         st.subheader("Produto",anchor=False)
-                        st.write(f"SKU: {row['SKU']}")
+                        st.subheader(row['DESCRICAO'],anchor=False)
+                        
                     with colb:
+                        st.subheader("SKU do Produto",anchor=False)
+                        st.write(f"SKU: {row['SKU']}")
+                        
+                    with colc:
                         st.subheader("Estoque",anchor=False)
                         st.write("0")
-                    with colc:
+                        
+                    with cold:
                         st.subheader("Localização",anchor=False)
                         st.write("A.01.01.01")
             else:
