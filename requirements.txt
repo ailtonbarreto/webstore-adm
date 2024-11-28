@@ -1,4 +1,5 @@
 streamlit
+streamlit.components
 pandas
 psycopg2-binary
 plotly.express
