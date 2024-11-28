@@ -133,8 +133,7 @@ with tab1:
                     
                     with col3:
 
-                        st.subheader("Produto",anchor=False)
-                        st.subheader(row['DESCRICAO'],anchor=False)
+                        st.subheader(f"Produto {row}['DESCRICAO'],anchor=False")
                         
                         st.divider()
            
