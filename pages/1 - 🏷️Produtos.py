@@ -126,7 +126,7 @@ with tab1:
         produto_filtro = produto_filtro.upper()
         
     with col2:
-        st.subheader("Resultado da Pesquisa",anchor=False)
+        st.subheader("Imagem",anchor=False)
         
         if produto_filtro:
             df_produto = df.query('SKU == @produto_filtro')
