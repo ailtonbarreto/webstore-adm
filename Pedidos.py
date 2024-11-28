@@ -180,7 +180,7 @@ with tab1:
 
     with col1:
         if df_filtrado_ped.empty:
-            st.error("Nenhum dado disponível.")
+            st.error("Nenhum Pedido Encontrado.")
         else:
             st.subheader("Pedidos No Período",anchor=False)
             df_filtrado_ped = df_filtrado_ped[["EMISSAO","PEDIDO","CLIENTE","DESCRICAO","QTD","VR_UNIT","TOTAL","STATUS"]]
