@@ -132,7 +132,7 @@ with tab1:
                 for index, row in df_produto.iterrows():
                     st.image(row['IMAGEM'], width=500)
                     st.subheader(row['DESCRICAO'],anchor=False)
-                with col3:
+            
                     with cola:
                         st.subheader("Informações",anchor=False)
                         st.write(f"SKU: {row['SKU']}")
