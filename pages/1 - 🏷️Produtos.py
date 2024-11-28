@@ -130,7 +130,7 @@ with tab1:
             df_produto = df.query('SKU == @produto_filtro')
             if not df_produto.empty:
                 for index, row in df_produto.iterrows():
-                    st.image(row['IMAGEM'], width=500)
+                    st.image(row['IMAGEM'], width=400)
                     st.subheader(row['DESCRICAO'],anchor=False)
             
                     with cola:
