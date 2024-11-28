@@ -116,10 +116,6 @@ with tab1:
     
     with col3:
         st.subheader("Informações",anchor=False)
-        cola, = st.columns(1)
-        colb, = st.columns(1)
-        colc, = st.columns(1)
-        cold, = st.columns(1)
     
     
     with col1:
@@ -139,19 +135,23 @@ with tab1:
                     
                     st.image(row['IMAGEM'], width=400)
                     
-                    with cola:
+                    with col3:
+
                         st.subheader("Produto",anchor=False)
                         st.subheader(row['DESCRICAO'],anchor=False)
                         
-                    with colb:
+                        st.divider
+           
                         st.subheader("SKU do Produto",anchor=False)
                         st.write(f"SKU: {row['SKU']}")
                         
-                    with colc:
+                        st.divider
+        
                         st.subheader("Estoque",anchor=False)
                         st.write("0")
                         
-                    with cold:
+                        st.divider
+                        
                         st.subheader("Localização",anchor=False)
                         st.write("A.01.01.01")
             else:
