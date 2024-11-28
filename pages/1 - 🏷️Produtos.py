@@ -114,6 +114,10 @@ with tab1:
     col1, = st.columns(1)
     col2, col3 = st.columns([2,1])
     
+    with col3:
+        cola, = st.columns(1)
+        colb, = st.columns(1)
+    
     
     with col1:
         produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
@@ -129,12 +133,15 @@ with tab1:
                     st.image(row['IMAGEM'], width=500)
                     st.subheader(row['DESCRICAO'],anchor=False)
                 with col3:
-                    st.subheader("Informações",anchor=False)
-                    st.write(f"SKU: {row['SKU']}")
+                    with cola:
+                        st.subheader("Informações",anchor=False)
+                        st.write(f"SKU: {row['SKU']}")
+                    with colb:
+                        st.subheader("Estoque",anchor=False)
+                        st.write("QTD: 0")
             else:
                 st.write("Nenhum produto encontrado.")
     
-
 # ------------------------------------------------------------------------------------------------------------------
 # CADASTRAR PRODUTO
 
@@ -164,12 +171,7 @@ with tab2:
                 ativo = 1
                 
                 st.write(f'Sku do Produto: {sku}')
-
       
-                
-                
-                
-                
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR PRODUTO PAI
 
