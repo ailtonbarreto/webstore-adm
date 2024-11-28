@@ -2,7 +2,12 @@ section {
     background-color: #d8d9df;
 }
 
-
 .stAppHeader{
     display: none;
+}
+
+/* class="stColumn st-emotion-cache-6vw1hb e1f1d6gn3 */
+
+.st-emotion-cache-6vw1hb {
+    visibility: hidden;
 }
