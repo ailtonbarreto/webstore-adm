@@ -14,7 +14,7 @@ with open("style.css") as f:
 tab1, tab2, tab3 = st.tabs(["Pesquisar Produto", "Cadastrar Produto","Ativar/Inativar"])
 
 # ------------------------------------------------------------------------------------------------------------------
-
+# CARREGAR PRODUTO PAI
 @st.cache_data
 def load_produtos():
     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
@@ -61,7 +61,7 @@ def load_produtos():
 
 
 # ------------------------------------------------------------------------------------------------------------------
-
+# CARREGAR PRODUTOS
 
 @st.cache_data
 def load_parent():
@@ -223,13 +223,13 @@ with tab2:
 
             cursor1 = conn.cursor()
 
-            # Convertendo e ajustando valores
+            
             parent = int(parent)
             descricao = str(descricao)
             vr_unit = float(vr_unit)
-            ativo = 1  # Valor fixo para a coluna "ATIVO"
+            ativo = 0
 
-            # Inserção no banco de dados
+            
             insert_query1 = """
             INSERT INTO tembo.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "ATIVO")
             VALUES (%s, %s, %s, %s, %s, %s);
@@ -246,7 +246,7 @@ with tab2:
                 conn.close()
 
 
-    # Atualizando a lógica do botão
+    
     with col1:
         if tipo == "Produto Pai":
             if st.button("Cadastrar Produto 💾"):
@@ -261,7 +261,7 @@ with tab2:
         else:
             if st.button("Cadastrar Variação 💾"):
                 if sku and descricao and categoria and vr_unit > 0:
-                    insert_variacao(parent, sku, descricao, categoria, vr_unit)  # Sem passar "ativo"
+                    insert_variacao(parent, sku, descricao, categoria, vr_unit)
                     st.success("Produto inserido com sucesso!")
                     sleep(1)
                     st.cache_data.clear()
