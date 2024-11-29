@@ -211,38 +211,8 @@ with tab2:
 # ---------------------------------------------------------------------------------------------------
 
 
-
-# ---------------------------------------------------------------------------------------------------
-# FUNCAO ATIVAR E DESATIVAR PRODUTO
-import psycopg2
-import streamlit as st
-
-# Interface com Streamlit
-with tab3:
-    # Layout
-    cola, colb, colc = st.columns([2, 2, 1])
-
-    with cola:
-        sku_produto = st.text_input("SKU do Produto")
-
-    with colb:
-        situacao = st.selectbox("Situação", ["Ativo", "Inativo"])
-
-    # Mapeia o status
-    status_produtos = 1 if situacao == "Ativo" else 0
-
-    with colc:
-        if st.button("💾 Salvar Edição"):
-            if sku_produto:  # Verifica se o SKU foi preenchido
-                editar_produto(status_produtos, sku_produto)  # Chama a função
-                st.cache_data.clear()  # Limpa cache (se necessário)
-                st.experimental_rerun()  # Reinicia o fluxo
-            else:
-                st.warning("Por favor, insira o SKU do produto.")
-
 # ---------------------------------------------------------------------------------------------------
 # Função para editar o produto no banco de dados
-
 def editar_produto(status_produtos, sku_produto):
     """Função para editar o status de um produto no banco de dados."""
     try:
@@ -276,6 +246,29 @@ def editar_produto(status_produtos, sku_produto):
             cursor.close()
         if conn:
             conn.close()
+
+# ---------------------------------------------------------------------------------------------------
+# Interface com Streamlit
+with tab3:
+    # Layout
+    cola, colb, colc = st.columns([2, 2, 1])
+
+    with cola:
+        sku_produto = st.text_input("SKU do Produto")
+
+    with colb:
+        situacao = st.selectbox("Situação", ["Ativo", "Inativo"])
+
+    # Mapeia o status
+    status_produtos = 1 if situacao == "Ativo" else 0
+
+    with colc:
+        if st.button("💾 Salvar Edição"):
+            if sku_produto:  # Verifica se o SKU foi preenchido
+                editar_produto(status_produtos, sku_produto)  # Chama a função
+                st.cache_data.clear()  # Limpa cache (se necessário)
+            else:
+                st.warning("Por favor, insira o SKU do produto.")
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
