@@ -208,6 +208,47 @@ with tab2:
             cursor.close()
         if conn:
             conn.close()
+# ---------------------------------------------------------------------------------------------------
+
+with tab3:
+    col1, col2 = st.columns(2)
+    col3, = st.columns(1)
+    with col1:
+        sku_produto = st.text_input("Sku do Produto")
+    with col2:
+        situacao = st.selectbox("Situação",["Ativo","Inativo"])
+    
+if situacao == "Ativo":
+    status_produtos = 1
+else:
+    status_produtos = 0    
+    
+
+# ---------------------------------------------------------------------------------------------------
+# FUNCAO ATIVAR E DESATIVAR PRODUTO
+
+    def editar_produto():
+   
+        conn = psycopg2.connect(host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',database='postgres',user='postgres',password='MeSaIkkB57YSOgLO',port='5432')
+
+        cursor = conn.cursor()
+
+
+        insert_query = f""" UPDATE tembo.tb_produto SET "ATIVO" = '{status_produtos}' WHERE "SKU" = '{sku_produto}'; """
+
+        conn.commit()
+
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+    
+with tab3:
+    with col3:      
+        if st.button("💾 Salvar Edição"):
+            editar_produto
+            st.cache_data.clear()
+            st.rerun()
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
