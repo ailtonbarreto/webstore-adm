@@ -91,7 +91,7 @@ def load_produtos():
     finally:
         if conn:
             conn.close()
-    return df_estoque
+    return df
 
 df_estoque = load_produtos()
 # -------------------------------------------------------------------------------------------------------
