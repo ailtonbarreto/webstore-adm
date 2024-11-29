@@ -135,6 +135,8 @@ with tab1:
                     with col3:
 
                         st.subheader(f"{row['DESCRICAO']}",anchor=False)
+                        st.write(f"{row['ATIVO']}",ancor=False)
+                        
                         
                         st.divider()
            
