@@ -146,7 +146,7 @@ with tab1:
                         st.divider()
         
                         st.subheader("Estoque",anchor=False)
-                        st.write(f"{row['SKU']}")
+                        st.write(f"{row['ESTOQUE']}")
                         
                         st.divider()
                         
