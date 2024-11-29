@@ -91,36 +91,11 @@ def load_produtos():
     finally:
         if conn:
             conn.close()
-    return df
+    return df_estoque
 
 df_estoque = load_produtos()
 # -------------------------------------------------------------------------------------------------------
-# PESQUISAR PRODUTO
 
-# with tab1:
-#     col1, col2  = st.columns(2)
-
-#     with col1:
-#         st.subheader("Pesquisa", anchor=False)
-#     with col2:
-#         st.subheader("Estoque", anchor=False)
-
-#     with col1:
-#         produto_filtro = st.text_input("Pesquisar pelo SKU",placeholder="Digite e tecle Enter")
-#         produto_filtro = produto_filtro.upper()
-
-#         if produto_filtro:
-   
-#             df_produto = df.query('SKU == @produto_filtro')
-
-#             if not df_produto.empty:
-#                 with col2:
-#                     df_qtd = df_produto.query('SKU == @produto_filtro')
-#                     df_qtd = df_qtd["QTD"].sum()
-#                     st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
-#             else:
-#                 with col2:
-#                     st.metric("Nenhum produto encontrado.")
 
 #     if st.button("🔁 Atualizar"):
 #         st.cache_data.clear()
