@@ -211,11 +211,11 @@ with tab2:
 # ---------------------------------------------------------------------------------------------------
 
 with tab3:
-    col1, col2 = st.columns(2)
-    col3, = st.columns(1)
-    with col1:
+    cola, colb = st.columns(2)
+    colc, = st.columns(1)
+    with cola:
         sku_produto = st.text_input("Sku do Produto")
-    with col2:
+    with colb:
         situacao = st.selectbox("Situação",["Ativo","Inativo"])
     
 if situacao == "Ativo":
@@ -244,7 +244,7 @@ else:
             conn.close()
     
 with tab3:
-    with col3:      
+    with colc:      
         if st.button("💾 Salvar Edição"):
             editar_produto
             st.cache_data.clear()
@@ -286,29 +286,29 @@ with tab3:
             if conn:
                 conn.close()
 
-    with tab2:
+with tab2:
         
-        with col1:
-            if tipo == "Produto Pai":
-                if st.button("Cadastrar Produto 💾"):
-                    if descricao_parent and categoria and vr_unit > 0 and url:
-                        insert_parent(descricao_parent, categoria, vr_unit, url)
-                        st.success("Produto inserido com sucesso!")
-                        sleep(1)
-                        st.cache_data.clear()
-                        st.rerun()
-                    else:
-                        st.warning("Por favor, preencha todos os campos necessários.")
-            else:
-                if st.button("Cadastrar Variação 💾"):
-                    if sku and descricao and categoria and vr_unit > 0:
-                        insert_variacao(parent, sku, descricao, categoria, vr_unit)
-                        st.success("Produto inserido com sucesso!")
-                        sleep(1)
-                        st.cache_data.clear()
-                        st.rerun()
-                    else:
-                        st.warning("Por favor, preencha todos os campos necessários.")
+    with col1:
+        if tipo == "Produto Pai":
+            if st.button("Cadastrar Produto 💾"):
+                if descricao_parent and categoria and vr_unit > 0 and url:
+                    insert_parent(descricao_parent, categoria, vr_unit, url)
+                    st.success("Produto inserido com sucesso!")
+                    sleep(1)
+                    st.cache_data.clear()
+                    st.rerun()
+                else:
+                    st.warning("Por favor, preencha todos os campos necessários.")
+        else:
+            if st.button("Cadastrar Variação 💾"):
+                if sku and descricao and categoria and vr_unit > 0:
+                    insert_variacao(parent, sku, descricao, categoria, vr_unit)
+                    st.success("Produto inserido com sucesso!")
+                    sleep(1)
+                    st.cache_data.clear()
+                    st.rerun()
+                else:
+                     st.warning("Por favor, preencha todos os campos necessários.")
 
 
 if st.button("🔁 Atualizar"):
