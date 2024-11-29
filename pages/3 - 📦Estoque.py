@@ -12,7 +12,7 @@ with open("style.css") as f:
 tab1, tab2 = st.tabs(["Consultar Estoque", "Adicionar Movimentação"])
 
 
-
+# -------------------------------------------------------------------------------------
 
 @st.cache_data
 def load_estoque():
@@ -44,7 +44,10 @@ def load_estoque():
 
 df = load_estoque()
 
+
+# -----------------------------------------------------------------------------------------
 # CARREGAR PRODUTOS
+
 @st.cache_data
 def load_produtos():
     host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
@@ -90,6 +93,7 @@ def load_produtos():
             conn.close()
     return df
 
+df_estoque = load_produtos()
 # -------------------------------------------------------------------------------------------------------
 # PESQUISAR PRODUTO
 
@@ -138,7 +142,7 @@ with tab1:
         
         if produto_filtro:
             
-            df_produto = df.query('SKU == @produto_filtro')
+            df_produto = df_estoque.query('SKU == @produto_filtro')
             
             if not df_produto.empty:
                 
