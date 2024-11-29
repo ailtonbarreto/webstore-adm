@@ -40,6 +40,7 @@ def load_produtos():
                     cp."IMAGEM",
                     cp."CATEGORIA",
                     cp."VR_UNIT",
+                    p."ATIVO",
                     cp."DESCRICAO_PARENT"
                 FROM 
                     tembo.tb_produto AS p
