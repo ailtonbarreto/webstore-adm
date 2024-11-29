@@ -258,7 +258,7 @@ with tab3:
 
     status_produtos = 1 if situacao == "Ativo" else 0
 
-    df_status = df_produto.query('SKU = @sku_produto')
+    df_status = df_produto.query('SKU == @sku_produto')
     
     if df_status.empty:
         st.error("Nenhum Produto Encontrado.")
