@@ -209,14 +209,12 @@ with tab2:
         if conn:
             conn.close()
 # ---------------------------------------------------------------------------------------------------
+# EDITAR STATUS DO PRODUTO CADASTRADO
 
-
-# ---------------------------------------------------------------------------------------------------
-# Função para editar o produto no banco de dados
 def editar_produto(status_produtos, sku_produto):
-    """Função para editar o status de um produto no banco de dados."""
+    
     try:
-        # Conexão com o banco de dados
+
         conn = psycopg2.connect(
             host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
             database='postgres',
@@ -226,7 +224,6 @@ def editar_produto(status_produtos, sku_produto):
         )
         cursor = conn.cursor()
 
-        # Monta e executa a query
         update_query = """
             UPDATE tembo.tb_produto
             SET "ATIVO" = %s
@@ -241,17 +238,16 @@ def editar_produto(status_produtos, sku_produto):
         st.error(f"Ocorreu um erro ao editar o produto: {e}")
 
     finally:
-        # Fecha conexão e cursor
+      
         if cursor:
             cursor.close()
         if conn:
             conn.close()
 
-# ---------------------------------------------------------------------------------------------------
-# Interface com Streamlit
 with tab3:
-    # Layout
-    cola, colb, colc = st.columns([2, 2, 1])
+ 
+    cola, colb = st.columns(2)
+    colc, = st.columns(1)
 
     with cola:
         sku_produto = st.text_input("SKU do Produto")
@@ -259,14 +255,14 @@ with tab3:
     with colb:
         situacao = st.selectbox("Situação", ["Ativo", "Inativo"])
 
-    # Mapeia o status
+
     status_produtos = 1 if situacao == "Ativo" else 0
 
     with colc:
         if st.button("💾 Salvar Edição"):
-            if sku_produto:  # Verifica se o SKU foi preenchido
-                editar_produto(status_produtos, sku_produto)  # Chama a função
-                st.cache_data.clear()  # Limpa cache (se necessário)
+            if sku_produto:
+                editar_produto(status_produtos, sku_produto)
+                st.cache_data.clear()
             else:
                 st.warning("Por favor, insira o SKU do produto.")
 
