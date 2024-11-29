@@ -258,14 +258,14 @@ with tab3:
 
     status_produtos = 1 if situacao == "Ativo" else 0
     
-    df_status = df.query('SKU == @sku_produto')
+    df_status = df.query('SKU == @sku_produto').drop(columns=["IMAGEM"])
     
 
     with colc:
         if df_status.empty:
             st.error("Nenhum Produto Encontrado.")
         else:
-            df_status
+            st.dataframe(df_status,use_container_width=True,hide_index=True)
 
     with colc:
         if st.button("💾 Salvar Edição"):
