@@ -124,7 +124,7 @@ with tab1:
                     
                     with col3:
 
-                   
+                        st.write(f"{row['Ativo']}",anchor=False)
                         
                         
                         st.divider()
