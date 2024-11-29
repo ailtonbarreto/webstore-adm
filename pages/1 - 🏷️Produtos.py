@@ -213,6 +213,10 @@ with tab2:
 with tab3:
     cola, colb = st.columns(2)
     colc, = st.columns(1)
+    with cola:
+        sku_produto = st.text_input("Sku do Produto")
+
+    
 
 
 # ---------------------------------------------------------------------------------------------------
