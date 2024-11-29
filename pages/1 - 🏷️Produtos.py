@@ -227,29 +227,47 @@ else:
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO ATIVAR E DESATIVAR PRODUTO
 
-    def editar_produto():
-   
-        conn = psycopg2.connect(host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',database='postgres',user='postgres',password='MeSaIkkB57YSOgLO',port='5432')
-
+def editar_produto(status_produtos, sku_produto):
+    """Função para editar um produto no banco de dados."""
+    try:
+        conn = psycopg2.connect(
+            host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+            database='postgres',
+            user='postgres',
+            password='MeSaIkkB57YSOgLO',
+            port='5432'
+        )
         cursor = conn.cursor()
+        
+      
+        update_query = """
+            UPDATE tembo.tb_produto
+            SET "ATIVO" = %s
+            WHERE "SKU" = %s;
+        """
+        
 
-
-        insert_query = f""" UPDATE tembo.tb_produto SET "ATIVO" = '{status_produtos}' WHERE "SKU" = '{sku_produto}'; """
-
+        cursor.execute(update_query, (status_produtos, sku_produto))
         conn.commit()
-
+        
+        st.success("Produto atualizado com sucesso!")
+    
+    except psycopg2.Error as e:
+        st.error(f"Ocorreu um erro ao editar o produto: {e}")
+    
+    finally:
+        # Fecha o cursor e a conexão
         if cursor:
             cursor.close()
         if conn:
             conn.close()
-    
-with tab3:
-    with colc:      
-        if st.button("💾 Salvar Edição"):
-            editar_produto
-            st.cache_data.clear()
-            st.rerun()
 
+
+with tab3:
+    with colc:
+        status_produtos = st.selectbox("Status do Produto", options=["Ativo", "Inativo"])
+        sku_produto = st.text_input("SKU do Produto")
+        if st.button("💾 Salvar Edição"):
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
