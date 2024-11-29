@@ -226,6 +226,8 @@ else:
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO ATIVAR E DESATIVAR PRODUTO
+import psycopg2
+import streamlit as st
 
 # Interface com Streamlit
 with tab3:
@@ -286,7 +288,6 @@ def editar_produto(status_produtos, sku_produto):
             cursor.close()
         if conn:
             conn.close()
-
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
