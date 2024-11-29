@@ -126,10 +126,10 @@ with tab1:
 
     
                         
-                        st.subheader("ESTOOUE",anchor=False)
+                        st.subheader("ESTOQUE",anchor=False)
                         df_qtd = df.query('SKU == @produto_filtro')
                         df_qtd = df_qtd["QTD"].sum()
-                        st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
+                        st.write("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
                         
                         st.divider()
            
