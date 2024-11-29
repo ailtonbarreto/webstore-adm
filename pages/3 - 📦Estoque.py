@@ -97,34 +97,34 @@ df_estoque = load_produtos()
 # -------------------------------------------------------------------------------------------------------
 # PESQUISAR PRODUTO
 
-with tab1:
-    col1, col2  = st.columns(2)
+# with tab1:
+#     col1, col2  = st.columns(2)
 
-    with col1:
-        st.subheader("Pesquisa", anchor=False)
-    with col2:
-        st.subheader("Estoque", anchor=False)
+#     with col1:
+#         st.subheader("Pesquisa", anchor=False)
+#     with col2:
+#         st.subheader("Estoque", anchor=False)
 
-    with col1:
-        produto_filtro = st.text_input("Pesquisar pelo SKU",placeholder="Digite e tecle Enter")
-        produto_filtro = produto_filtro.upper()
+#     with col1:
+#         produto_filtro = st.text_input("Pesquisar pelo SKU",placeholder="Digite e tecle Enter")
+#         produto_filtro = produto_filtro.upper()
 
-        if produto_filtro:
+#         if produto_filtro:
    
-            df_produto = df.query('SKU == @produto_filtro')
+#             df_produto = df.query('SKU == @produto_filtro')
 
-            if not df_produto.empty:
-                with col2:
-                    df_qtd = df_produto.query('SKU == @produto_filtro')
-                    df_qtd = df_qtd["QTD"].sum()
-                    st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
-            else:
-                with col2:
-                    st.metric("Nenhum produto encontrado.")
+#             if not df_produto.empty:
+#                 with col2:
+#                     df_qtd = df_produto.query('SKU == @produto_filtro')
+#                     df_qtd = df_qtd["QTD"].sum()
+#                     st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
+#             else:
+#                 with col2:
+#                     st.metric("Nenhum produto encontrado.")
 
-    if st.button("🔁 Atualizar"):
-        st.cache_data.clear()
-        st.rerun()
+#     if st.button("🔁 Atualizar"):
+#         st.cache_data.clear()
+#         st.rerun()
     
 # ------------------------------------------------------------------------------------------------------------------
 # PESQUISAR PRODUTO
@@ -159,6 +159,9 @@ with tab1:
                         st.divider()
                         
                         st.subheader("ESTOUE",anchor=False)
+                        df_qtd = df_produto.query('SKU == @produto_filtro')
+                        df_qtd = df_qtd["QTD"].sum()
+                        st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
                         st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
            
                         st.subheader("SKU do Produto",anchor=False)
