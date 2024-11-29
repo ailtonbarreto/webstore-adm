@@ -126,7 +126,7 @@ with tab1:
 
     
                         
-                        st.subheader("ESTOUE",anchor=False)
+                        st.subheader("ESTOOUE",anchor=False)
                         df_qtd = df.query('SKU == @produto_filtro')
                         df_qtd = df_qtd["QTD"].sum()
                         st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
