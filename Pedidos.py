@@ -192,8 +192,7 @@ with tab1:
     
 # ---------------------------------------------------------------------------------------
 # ALTERAR STATUS DOS PEDIDOS
-
-           
+          
 with tab2:
     col1, col2 = st.columns(2)
     col3, = st.columns(1)
