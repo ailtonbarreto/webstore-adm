@@ -117,13 +117,14 @@ with tab1:
             if not df_produto.empty:
                 
                 for index, row in df_produto.iterrows():
-                    
-                    st.image(row['IMAGEM'], width=400)
+                    with col2:
+                        st.image(row['IMAGEM'], width=400)
+                        st.write(f"{row['DESCRICAO']}",anchor=False)
+                        # st.write(f"{row['ATIVO']}",ancor=False)
                     
                     with col3:
 
-                        st.subheader(f"{row['DESCRICAO']}",anchor=False)
-                        st.write(f"{row['ATIVO']}",ancor=False)
+                   
                         
                         
                         st.divider()
