@@ -133,6 +133,7 @@ with tab1:
                         df_qtd = df_qtd["QTD"].sum()
                         st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
                         
+                        st.divider()
            
                         st.subheader("SKU do Produto",anchor=False)
                         st.write(f"{row['SKU']}",ancor=False)
