@@ -286,7 +286,7 @@ with tab3:
             if conn:
                 conn.close()
 
-
+with tab2:
     
     with col1:
         if tipo == "Produto Pai":
