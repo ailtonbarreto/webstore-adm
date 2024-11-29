@@ -209,8 +209,6 @@ with tab2:
         if conn:
             conn.close()
 # ---------------------------------------------------------------------------------------------------
-import psycopg2
-import streamlit as st
 
 # Interface com Streamlit
 with tab3:
