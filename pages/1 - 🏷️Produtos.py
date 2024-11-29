@@ -143,11 +143,7 @@ with tab1:
                         st.subheader("SKU do Produto",anchor=False)
                         st.write(f"{row['SKU']}",ancor=False)
                         
-                        st.divider()
-        
-                        st.subheader("Estoque",anchor=False)
-                        st.write(f"{row['ESTOQUE']}")
-                        
+                    
                         st.divider()
                         
                         st.subheader("Localização",anchor=False)
