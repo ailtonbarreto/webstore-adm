@@ -210,19 +210,7 @@ with tab2:
             conn.close()
 # ---------------------------------------------------------------------------------------------------
 
-with tab3:
-    cola, colb = st.columns(2)
-    colc, = st.columns(1)
-    with cola:
-        sku_produto = st.text_input("Sku do Produto")
-    with colb:
-        situacao = st.selectbox("Situação",["Ativo","Inativo"])
-    
-if situacao == "Ativo":
-    status_produtos = 1
-else:
-    status_produtos = 0    
-    
+
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO ATIVAR E DESATIVAR PRODUTO
