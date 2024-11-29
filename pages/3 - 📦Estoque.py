@@ -117,7 +117,7 @@ with tab1:
         
         if produto_filtro:
             
-            df_produto = df_estoque.query('SKU == @produto_filtro')
+            df_produto = df.query('SKU == @produto_filtro')
             
             if not df_produto.empty:
                 
