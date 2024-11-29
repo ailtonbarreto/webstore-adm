@@ -75,9 +75,50 @@ with tab1:
 
     if st.button("🔁 Atualizar"):
         st.cache_data.clear()
-        st.rerun
+        st.rerun()
+    
+# ------------------------------------------------------------------------------------------------------------------
+# PESQUISAR PRODUTO
+
+with tab1:
+    col1, = st.columns(1)
+    col2, col3 = st.columns([1,2.5])
         
+    with col1:
+        produto_filtro = st.text_input("Pesquise SKU", placeholder="Digite e tecle Enter")
+        produto_filtro = produto_filtro.upper()
         
+    with col2:
+        st.subheader("Imagem",anchor=False)
+        
+        if produto_filtro:
+            
+            df_produto = df.query('SKU == @produto_filtro')
+            
+            if not df_produto.empty:
+                
+                for index, row in df_produto.iterrows():
+                    
+                    st.image(row['IMAGEM'], width=400)
+                    
+                    with col3:
+
+                        st.subheader(f"{row['DESCRICAO']}",anchor=False)
+                        st.write(f"{row['ATIVO']}",ancor=False)
+                        
+                        
+                        st.divider()
+           
+                        st.subheader("SKU do Produto",anchor=False)
+                        st.write(f"{row['SKU']}",ancor=False)
+                        
+                    
+                        st.divider()
+                        
+                        st.subheader("Localização",anchor=False)
+                        st.write("A.01.01.01")
+            else:
+                st.write("Nenhum produto encontrado.")
 # ---------------------------------------------------------------------------------------------------------
 # estilizacao
 
