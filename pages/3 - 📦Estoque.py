@@ -44,6 +44,51 @@ def load_estoque():
 
 df = load_estoque()
 
+# CARREGAR PRODUTOS
+@st.cache_data
+def load_produtos():
+    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
+    database = 'postgres'
+    user = 'postgres'
+    password = 'MeSaIkkB57YSOgLO'
+    port = '5432'
+
+    try:
+        conn = psycopg2.connect(
+            host=host,
+            database=database,
+            user=user,
+            password=password,
+            port=port
+        )        
+        
+        query = """
+                SELECT 
+                    cp."PARENT",
+                    p."SKU",
+                    p."DESCRICAO",
+                    cp."IMAGEM",
+                    cp."CATEGORIA",
+                    cp."VR_UNIT",
+                    p."ATIVO",
+                    cp."DESCRICAO_PARENT"
+                FROM 
+                    tembo.tb_produto AS p
+                JOIN 
+                    tembo.tb_produto_parent AS cp
+                ON 
+                    p."PARENT" = cp."PARENT";
+                """
+     
+        df = pd.read_sql_query(query, conn)
+
+        
+    except Exception as e:
+        st.write(f"Erro ao conectar: {e}")
+    finally:
+        if conn:
+            conn.close()
+    return df
 
 # -------------------------------------------------------------------------------------------------------
 # PESQUISAR PRODUTO
