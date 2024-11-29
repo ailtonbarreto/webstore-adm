@@ -157,6 +157,9 @@ with tab1:
                         
                         
                         st.divider()
+                        
+                        st.subheader("ESTOUE",anchor=False)
+                        st.metric("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
            
                         st.subheader("SKU do Produto",anchor=False)
                         st.write(f"{row['SKU']}",ancor=False)
