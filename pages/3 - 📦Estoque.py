@@ -120,14 +120,11 @@ with tab1:
                     with col2:
                         st.image(row['IMAGEM'], width=400)
                         st.write(f"{row['DESCRICAO']}",anchor=False)
-                        # st.write(f"{row['ATIVO']}",ancor=False)
+                        st.write(f"{row['ATIVO']}",ancor=False)
                     
                     with col3:
 
-                        st.write(f"{row['Ativo']}",anchor=False)
-                        
-                        
-                        st.divider()
+    
                         
                         st.subheader("ESTOUE",anchor=False)
                         df_qtd = df.query('SKU == @produto_filtro')
