@@ -209,23 +209,39 @@ with tab2:
         if conn:
             conn.close()
 # ---------------------------------------------------------------------------------------------------
+import psycopg2
+import streamlit as st
 
+# Interface com Streamlit
 with tab3:
-    cola, colb = st.columns(2)
-    colc, = st.columns(1)
+    # Layout
+    cola, colb, colc = st.columns([2, 2, 1])
+
     with cola:
-        sku_produto = st.text_input("Sku do Produto")
+        sku_produto = st.text_input("SKU do Produto")
 
-    
+    with colb:
+        situacao = st.selectbox("Situação", ["Ativo", "Inativo"])
 
+    # Mapeia o status
+    status_produtos = 1 if situacao == "Ativo" else 0
+
+    with colc:
+        if st.button("💾 Salvar Edição"):
+            if sku_produto:  # Verifica se o SKU foi preenchido
+                editar_produto(status_produtos, sku_produto)  # Chama a função
+                st.cache_data.clear()  # Limpa cache (se necessário)
+                st.experimental_rerun()  # Reinicia o fluxo
+            else:
+                st.warning("Por favor, insira o SKU do produto.")
 
 # ---------------------------------------------------------------------------------------------------
-# FUNCAO ATIVAR E DESATIVAR PRODUTO
+# Função para editar o produto no banco de dados
 
 def editar_produto(status_produtos, sku_produto):
-    """Função para editar um produto no banco de dados."""
+    """Função para editar o status de um produto no banco de dados."""
     try:
-        # Estabelece a conexão com o banco de dados
+        # Conexão com o banco de dados
         conn = psycopg2.connect(
             host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
             database='postgres',
@@ -234,43 +250,28 @@ def editar_produto(status_produtos, sku_produto):
             port='5432'
         )
         cursor = conn.cursor()
-        
-        # Monta a query
+
+        # Monta e executa a query
         update_query = """
             UPDATE tembo.tb_produto
             SET "ATIVO" = %s
             WHERE "SKU" = %s;
         """
-        
-        # Executa a query
         cursor.execute(update_query, (status_produtos, sku_produto))
         conn.commit()
-        
+
         st.success("Produto atualizado com sucesso!")
-    
+
     except psycopg2.Error as e:
         st.error(f"Ocorreu um erro ao editar o produto: {e}")
-    
+
     finally:
-        # Fecha o cursor e a conexão
+        # Fecha conexão e cursor
         if cursor:
             cursor.close()
         if conn:
             conn.close()
 
-# Interface Streamlit
-with tab3:
-    with colc:
-        status_produtos = st.selectbox("Status do Produto", options=["Ativo", "Inativo"])  # Exemplo de entrada
-        sku_produto = st.text_input("SKU do Produto")  # Exemplo de entrada
-        
-        if st.button("💾 Salvar Edição"):
-            if status_produtos and sku_produto:
-                editar_produto(status_produtos, sku_produto)  # Chama a função
-                st.cache_data.clear()  # Limpa cache (se necessário)
-                st.experimental_rerun()  # Reinicia o fluxo
-            else:
-                st.warning("Por favor, preencha todos os campos.")
 
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
