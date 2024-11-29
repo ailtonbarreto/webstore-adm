@@ -11,7 +11,7 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 
-tab1, tab2, tab3 = st.tabs(["Pesquisar Produto", "Cadastrar Produto","Ativar/Inativar"])
+tab2, tab3 = st.tabs(["Cadastrar Produto","Ativar/Inativar"])
 
 # ------------------------------------------------------------------------------------------------------------------
 # CARREGAR PRODUTOS
