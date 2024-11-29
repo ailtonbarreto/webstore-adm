@@ -230,6 +230,7 @@ else:
 def editar_produto(status_produtos, sku_produto):
     """Função para editar um produto no banco de dados."""
     try:
+        # Estabelece a conexão com o banco de dados
         conn = psycopg2.connect(
             host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
             database='postgres',
@@ -239,14 +240,14 @@ def editar_produto(status_produtos, sku_produto):
         )
         cursor = conn.cursor()
         
-      
+        # Monta a query
         update_query = """
             UPDATE tembo.tb_produto
             SET "ATIVO" = %s
             WHERE "SKU" = %s;
         """
         
-
+        # Executa a query
         cursor.execute(update_query, (status_produtos, sku_produto))
         conn.commit()
         
@@ -262,12 +263,20 @@ def editar_produto(status_produtos, sku_produto):
         if conn:
             conn.close()
 
-
+# Interface Streamlit
 with tab3:
     with colc:
-        status_produtos = st.selectbox("Status do Produto", options=["Ativo", "Inativo"])
-        sku_produto = st.text_input("SKU do Produto")
+        status_produtos = st.selectbox("Status do Produto", options=["Ativo", "Inativo"])  # Exemplo de entrada
+        sku_produto = st.text_input("SKU do Produto")  # Exemplo de entrada
+        
         if st.button("💾 Salvar Edição"):
+            if status_produtos and sku_produto:
+                editar_produto(status_produtos, sku_produto)  # Chama a função
+                st.cache_data.clear()  # Limpa cache (se necessário)
+                st.experimental_rerun()  # Reinicia o fluxo
+            else:
+                st.warning("Por favor, preencha todos os campos.")
+
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
