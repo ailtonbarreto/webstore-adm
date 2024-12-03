@@ -152,7 +152,7 @@ with card2:
     st.metric("QTD Pedidos",f"📄{qtd_pedidos:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
         
 with card3:
-    st.metric("Ticket Médio", f"📈{ticket_medio:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+    st.metric("Ticket Médio", f"📈R$ {ticket_medio:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
     
 with card4:
     st.metric("QTD Clientes",f'👔{qtd_clientes:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
@@ -209,7 +209,7 @@ with col4:
 
 
 with col1:
-    st.subheader(f"Faturamento Diário {filtro_mes}/{filtro_ano}",anchor=False)
+    st.subheader(f"Faturamento Diário de {filtro_mes} de {filtro_ano}",anchor=False)
     st.plotly_chart(graficocolunas,use_container_width=True)
         
 with col3:
