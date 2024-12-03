@@ -209,7 +209,7 @@ with col4:
 
 
 with col1:
-    st.subheader(f"Faturamento Diário de {filtro_mes} de {filtro_ano}",anchor=False)
+    st.subheader(f"Faturamento Diário {filtro_mes} de {filtro_ano}",anchor=False)
     st.plotly_chart(graficocolunas,use_container_width=True)
         
 with col3:
