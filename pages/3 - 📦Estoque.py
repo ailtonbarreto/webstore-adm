@@ -128,7 +128,9 @@ with tab1:
                         st.subheader("SITUAÇÃO",anchor=False)
                         if row['ATIVO'] == 1:
                             st.write("Ativo",anchor=False)
-                        # st.write(f"{row['ATIVO']}",ancor=False)
+                        else:
+                            st.write("Inativo",anchor=False)
+                            
                         
                         st.subheader("ESTOQUE",anchor=False)
                         df_qtd = df.query('SKU == @produto_filtro')
