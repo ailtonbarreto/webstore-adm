@@ -123,9 +123,9 @@ insert = """
 # ----------------------------------------------------------------------------------
 # PEDIDOS
 
-fuso_horario = pytz.timezone("America/Sao_Paulo")
+# fuso_horario = pytz.timezone("America/Sao_Paulo")
 
-st.write(fuso_horario)
+# st.write(fuso_horario)
 
 with tab1:
     
