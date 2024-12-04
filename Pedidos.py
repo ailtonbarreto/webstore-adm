@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import psycopg2
-import pytz
 
 
 st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide",initial_sidebar_state="collapsed")
@@ -123,9 +122,6 @@ insert = """
 # ----------------------------------------------------------------------------------
 # PEDIDOS
 
-# fuso_horario = pytz.timezone("America/Sao_Paulo")
-
-# st.write(fuso_horario)
 
 with tab1:
     
