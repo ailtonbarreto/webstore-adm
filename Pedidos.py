@@ -123,7 +123,7 @@ insert = """
 # ----------------------------------------------------------------------------------
 # PEDIDOS
 
-dia = pytz.timezone('BR/São Paulo')
+dia = pytz.timezone('America/Sao_Paulo')
 
 st.write(dia)
 
