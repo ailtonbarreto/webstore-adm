@@ -67,6 +67,20 @@ def load_produtos():
         )        
         
         query = """
+
+                WITH estoque_calculado AS (
+                    SELECT 
+                        e."SKU",
+                        SUM(CASE 
+                                WHEN e."TIPO" = 'E' THEN e."QTD"
+                                WHEN e."TIPO" = 'S' THEN -e."QTD"
+                                ELSE 0
+                            END) AS "ESTOQUE_TOTAL"
+                    FROM 
+                        tembo.tb_mov_estoque AS e
+                    GROUP BY 
+                        e."SKU"
+                )
                 SELECT 
                     cp."PARENT",
                     p."SKU",
@@ -75,13 +89,20 @@ def load_produtos():
                     cp."CATEGORIA",
                     cp."VR_UNIT",
                     p."ATIVO",
-                    cp."DESCRICAO_PARENT"
+                    cp."DESCRICAO_PARENT",
+                    COALESCE(ec."ESTOQUE_TOTAL", 0) AS "ESTOQUE"
                 FROM 
                     tembo.tb_produto AS p
                 JOIN 
                     tembo.tb_produto_parent AS cp
                 ON 
-                    p."PARENT" = cp."PARENT";
+                    p."PARENT" = cp."PARENT"
+                LEFT JOIN 
+                    estoque_calculado AS ec
+                ON 
+                    p."SKU" = ec."SKU";
+
+                    
                 """
      
         df = pd.read_sql_query(query, conn)
