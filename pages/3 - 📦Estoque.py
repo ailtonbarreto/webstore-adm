@@ -140,6 +140,7 @@ with tab1:
                 
                 for index, row in df_produto.iterrows():
                     with col2:
+                        
                         st.image(row['IMAGEM'], width=400)
                         st.write(f"{row['DESCRICAO']}",anchor=False)
                         
@@ -151,7 +152,9 @@ with tab1:
                             st.write("Ativo",anchor=False)
                         else:
                             st.write("Inativo",anchor=False)
-                            
+                        
+                        st.divider()
+                        
                         
                         st.subheader("ESTOQUE",anchor=False)
                         df_qtd = df.query('SKU == @produto_filtro')
