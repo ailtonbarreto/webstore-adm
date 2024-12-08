@@ -197,6 +197,9 @@ df_dispersao = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
 # df_dispersao = df_dispersao.sort_values(by="TOTAL",ascending=False)
 
 dispersao_chart = px.scatter(df_dispersao,x="TOTAL",y="CLIENTE",size="TOTAL")
+dispersao_chart.update_yaxes(showgrid=False,visible=True,title="")
+dispersao_chart.layout.xaxis.fixedrange = True
+dispersao_chart.layout.yaxis.fixedrange = True
 
 st.plotly_chart(dispersao_chart)
 
