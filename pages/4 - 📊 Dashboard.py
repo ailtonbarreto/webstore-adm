@@ -203,7 +203,7 @@ df_dispersao = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
 
 dispersao_chart = px.scatter(df_dispersao,x="TOTAL",y="CLIENTE",size="TOTAL",color="CLIENTE")
 
-dispersao_chart.update_yaxes(showgrid=False,visible=False,title="")
+dispersao_chart.update_yaxes(showgrid=False,visible=False,title="",legend="False")
 dispersao_chart.layout.xaxis.fixedrange = True
 dispersao_chart.layout.yaxis.fixedrange = True
 
