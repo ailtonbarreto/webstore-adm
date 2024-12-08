@@ -193,15 +193,19 @@ df_tb = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
 df_tb = df_tb.sort_values(by="TOTAL",ascending=False)
 df_tb["TOTAL"] = df_tb["TOTAL"].apply(lambda x: f'R$ {x:,.2f}')
 
+
+
+# ---------------------------------------------------------------------------------------------------------
+# grafico de dispersao
+
 df_dispersao = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
-# df_dispersao = df_dispersao.sort_values(by="TOTAL",ascending=False)
 
 dispersao_chart = px.scatter(df_dispersao,x="TOTAL",y="CLIENTE",size="TOTAL")
 dispersao_chart.update_yaxes(showgrid=False,visible=False,title="")
 dispersao_chart.layout.xaxis.fixedrange = True
 dispersao_chart.layout.yaxis.fixedrange = True
 
-st.plotly_chart(dispersao_chart)
+
 
 # ---------------------------------------------------------------------------------------------------------
 # ranking produtos
@@ -228,7 +232,8 @@ with col3:
 
 with col2:
     st.subheader("Valor Vendido Por Clientes",anchor=False)
-    st.dataframe(df_tb,use_container_width=True,hide_index=True)
+    st.plotly_chart(dispersao_chart,use_container_width=True)
+    # st.dataframe(df_tb,use_container_width=True,hide_index=True)
 
 
 if st.button("🔁 Atualizar"):
