@@ -193,6 +193,12 @@ df_tb = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
 df_tb = df_tb.sort_values(by="TOTAL",ascending=False)
 df_tb["TOTAL"] = df_tb["TOTAL"].apply(lambda x: f'R$ {x:,.2f}')
 
+df_dispersao = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
+# df_dispersao = df_dispersao.sort_values(by="TOTAL",ascending=False)
+
+dispersao_chart = px.scatter(df_dispersao,x="CLIENTE",y="TOTAL",size="pop")
+
+st.plotly_chart(dispersao_chart)
 
 # ---------------------------------------------------------------------------------------------------------
 # ranking produtos
