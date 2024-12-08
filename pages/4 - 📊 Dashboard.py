@@ -199,7 +199,6 @@ df_tb["TOTAL"] = df_tb["TOTAL"].apply(lambda x: f'R$ {x:,.2f}')
 # grafico de dispersao
 
 df_dispersao = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
-df_dispersao["TOTAL"] = df_dispersao["TOTAL"].apply(lambda x: f'R$ {x:,.2f}')
 
 
 dispersao_chart = px.scatter(df_dispersao,x="TOTAL",y="CLIENTE",size="TOTAL",color="CLIENTE")
