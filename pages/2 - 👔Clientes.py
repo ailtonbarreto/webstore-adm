@@ -43,4 +43,17 @@ def load_clientes():
 
 df = load_clientes()
 
-st.dataframe(df,use_container_width=True,hide_index=True)
+# -----------------------------------------------------------------------------------------------------
+
+
+with tab1:
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        filtro_cliente = st.selectbox("Pesuisar Cleinte",df["CLIENTE"].unique())
+
+        df_resultado = df.query('CLIENTE == @filtro_cliente')
+        
+        st.dataframe(df_resultado,use_container_width=True,hide_index=True)
