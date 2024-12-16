@@ -177,15 +177,47 @@ with tab1:
 # -------------------------------------------------------------------------------------------------------
 # MOVIMENTACAO
 
-with tab2:
-    st.title("Movimentação de Estoque",anchor=False)
-    produto = st.selectbox("Produto",df_estoque["SKU"].unique())
-   
-    insert = """INSERT INTO tembo.tb_mov_estoque
-                ("DATA","QTD","TIPO","SKU","LOCALIZACAO")
-                VALUES ('2024-12-16','1','E','44-40','A.01.01.01')"""
 
+# Configuração de conexão com o banco de dados
+def get_db_connection():
+    return psycopg2.connect(
+        host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+        database='postgres',
+        user='postgres',
+        password='MeSaIkkB57YSOgLO',
+        port='5432'
+    )
 
+# Função para realizar o INSERT
+def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
+    query = """
+        INSERT INTO tembo.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO")
+        VALUES (%s, %s, %s, %s, %s)
+    """
+    try:
+        with get_db_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query, (data, quantidade, tipo, sku, localizacao))
+                conn.commit()
+                return "Movimentação inserida com sucesso!"
+    except Exception as e:
+        return f"Erro ao inserir movimentação: {e}"
+
+# Interface Streamlit
+with st.container():
+    st.title("Movimentação de Estoque", anchor=False)
+
+    # Seleção de SKU e outros parâmetros
+    produto = st.selectbox("Produto", df_estoque["SKU"].unique())
+    quantidade = st.number_input("Quantidade", min_value=1, step=1)
+    tipo = st.selectbox("Tipo de Movimentação", ["E", "S"])  # 'E' para entrada, 'S' para saída
+    localizacao = st.text_input("Localização", value="A.01.01.01")
+    data = st.date_input("Data", value=datetime.today())
+
+    # Botão para inserir no banco
+    if st.button("Registrar Movimentação"):
+        resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
+        st.success(resultado)
 
 # -------------------------------------------------------------------------------------------------------
 # ATUALIZAR VISUAL
