@@ -9,7 +9,6 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 
-st.subheader("Estoque",anchor=False)
 
 tab1, tab2 = st.tabs(["Consultar Estoque", "Adicionar Movimentação"])
 
