@@ -204,18 +204,18 @@ def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
     except Exception as e:
         return f"Erro ao inserir movimentação: {e}"
 
-# Interface Streamlit
-with st.container():
-    st.title("Movimentação de Estoque", anchor=False)
+# -------------------------------------------------------------------------------------------------------
 
-    # Seleção de SKU e outros parâmetros
+with tab2:
+
+ 
     produto = st.selectbox("Produto", df_estoque["SKU"].unique())
     quantidade = st.number_input("Quantidade", min_value=1, step=1)
-    tipo = st.selectbox("Tipo de Movimentação", ["E", "S"])  # 'E' para entrada, 'S' para saída
+    tipo = st.selectbox("Tipo de Movimentação", ["E", "S"]) 
     localizacao = st.text_input("Localização", value="A.01.01.01")
     data = st.date_input("Data", value=datetime.today())
 
-    # Botão para inserir no banco
+    
     if st.button("Registrar Movimentação"):
         resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
         st.success(resultado)
