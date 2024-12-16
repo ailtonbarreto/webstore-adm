@@ -179,7 +179,7 @@ with tab1:
 
 with tab2:
     st.title("Movimentação de Estoque",anchor=False)
-    produto = st.selectbox("Produto",df_produto["SKU"].unique())
+    produto = st.selectbox("Produto",df_estoque["SKU"].unique())
    
     insert = """INSERT INTO tembo.tb_mov_estoque
                 ("DATA","QTD","TIPO","SKU","LOCALIZACAO")
