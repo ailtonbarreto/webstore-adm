@@ -215,8 +215,12 @@ with tab2:
         localizacao = st.text_input("Localização", value="")
         data = datetime.today()
 
+        if tipo == "E":
+            texto_btn = "Entrada"
+        else:
+            texto_btn = "Saída"
     
-        if st.button("Registrar Movimentação"):
+        if st.button(f"Registrar {texto_btn}"):
             resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
             st.success(resultado)
 
