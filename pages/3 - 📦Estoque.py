@@ -216,9 +216,9 @@ with tab2:
         data = datetime.today()
 
     
-    if st.button("Registrar Movimentação"):
-        resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
-        st.success(resultado)
+        if st.button("Registrar Movimentação"):
+            resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
+            st.success(resultado)
 
 # -------------------------------------------------------------------------------------------------------
 # ATUALIZAR VISUAL
