@@ -177,8 +177,6 @@ with tab1:
 # -------------------------------------------------------------------------------------------------------
 # MOVIMENTACAO
 
-
-# Configuração de conexão com o banco de dados
 def get_db_connection():
     return psycopg2.connect(
         host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
@@ -188,7 +186,6 @@ def get_db_connection():
         port='5432'
     )
 
-# Função para realizar o INSERT
 def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
     query = """
         INSERT INTO tembo.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO")
@@ -208,7 +205,7 @@ def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
 with tab2:
     col1, = st.columns(1)
     with col1:
-        produto = st.selectbox("Produto", df_estoque["SKU"].unique())
+        produto = st.selectbox("Produto", df_estoque["SKU"].unique(),value="")
         quantidade = st.number_input("Quantidade", min_value=1, step=1)
         tipo = st.selectbox("Tipo de Movimentação", ["E", "S"]) 
         localizacao = st.text_input("Localização", value="")
@@ -224,13 +221,13 @@ with tab2:
             st.success(resultado)
 
 # -------------------------------------------------------------------------------------------------------
-# ATUALIZAR VISUAL
+# ATUALIZAR
 
 if st.button("🔁 Atualizar"):
     st.cache_data.clear()
     st.rerun()
 # ---------------------------------------------------------------------------------------------------------
-# estilizacao
+# ESTILIZACAO
 
 style1 = """
     <style>
