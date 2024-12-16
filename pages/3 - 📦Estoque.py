@@ -178,7 +178,13 @@ with tab1:
 # MOVIMENTACAO
 
 with tab2:
-    st.title("Movimentação de Estoque")
+    st.title("Movimentação de Estoque",anchor=False)
+    produto = st.selectbox("Produto",df_produto["SKU"].unique())
+   
+    insert = """INSERT INTO tembo.tb_mov_estoque
+                ("DATA","QTD","TIPO","SKU","LOCALIZACAO")
+                VALUES ('2024-12-16','1','E','44-40','A.01.01.01')"""
+
 
 
 # -------------------------------------------------------------------------------------------------------
