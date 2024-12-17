@@ -194,7 +194,7 @@ def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
     try:
         with get_db_connection() as conn:
             with conn.cursor() as cursor:
-                cursor.execute(query, (data, quantidade, tipo, sku, localizacao))
+                cursor.execute(query, (data, quantidade, tipo, sku, localizacao,variacao))
                 conn.commit()
                 return "Movimentação inserida com sucesso!"
     except Exception as e:
