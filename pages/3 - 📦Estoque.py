@@ -203,25 +203,35 @@ def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
 # -------------------------------------------------------------------------------------------------------
 
 with tab2:
+    
     col1, = st.columns(1)
+    
     with col1:
-        # Opções do selectbox
+
+        
         opcoes = [""] + list(df_estoque["SKU"].unique())
+        
         produto = st.selectbox("Produto", opcoes)
+        
         quantidade = st.number_input("Quantidade", min_value=1, step=1)
+        
         tipo = st.selectbox("Tipo de Movimentação", ["E", "S"]) 
+        
         localizacao = st.text_input("Localização", value="").upper()
+        
         data = datetime.today()
 
-        # Texto do botão com base no tipo
-        texto_btn = "Entrada" if tipo == "E" else "Saída"
 
-        # Verificar ao clicar no botão
+        texto_btn = "Entrada" if tipo == "E" else "Saída"
+        
         if st.button(f"Registrar {texto_btn}"):
-            if produto == "":  # Se nenhum produto foi selecionado
+            
+            if produto == "":
+                
                 st.error("Por favor, selecione um produto antes de registrar a movimentação.")
+                
             else:
-                # Chama a função se tudo estiver preenchido
+          
                 resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
                 st.success(resultado)
 
