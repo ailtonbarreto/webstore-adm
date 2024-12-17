@@ -208,7 +208,7 @@ with tab3:
     colc, = st.columns(1)
 
     with cola:
-        sku_produto = st.text_input("SKU do Produto")
+        sku_produto = st.text_input("SKU do Produto").upper()
 
     with colb:
         situacao = st.selectbox("Situação", ["Ativo", "Inativo"])
