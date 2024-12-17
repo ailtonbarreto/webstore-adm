@@ -234,8 +234,8 @@ with col3:
 
 with col2:
     st.subheader("Valor Vendido Por Clientes",anchor=False)
-    st.plotly_chart(dispersao_chart,use_container_width=True)
-    # st.dataframe(df_tb,use_container_width=True,hide_index=True)
+    # st.plotly_chart(dispersao_chart,use_container_width=True)
+    st.dataframe(df_tb,use_container_width=True,hide_index=True)
 
 
 if st.button("🔁 Atualizar"):
