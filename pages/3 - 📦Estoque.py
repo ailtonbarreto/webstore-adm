@@ -188,8 +188,8 @@ def get_db_connection():
 
 def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
     query = """
-        INSERT INTO tembo.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO")
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO tembo.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO","VARIACAO")
+        VALUES (%s, %s, %s, %s, %s,%s)
     """
     try:
         with get_db_connection() as conn:
@@ -208,7 +208,6 @@ with tab2:
     
     with col1:
 
-        
         opcoes = [""] + list(df_estoque["SKU"].unique())
         
         produto = st.selectbox("Produto", opcoes)
@@ -220,6 +219,8 @@ with tab2:
         localizacao = st.text_input("Localização", value="").upper()
         
         data = datetime.today()
+        
+        variacao = opcoes.split("-")[1]
 
 
         texto_btn = "Entrada" if tipo == "E" else "Saída"
@@ -232,7 +233,7 @@ with tab2:
                 
             else:
           
-                resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
+                resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao,variacao)
                 st.success(resultado)
 
 # -------------------------------------------------------------------------------------------------------
