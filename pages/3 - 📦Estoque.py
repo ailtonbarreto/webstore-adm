@@ -208,7 +208,7 @@ with tab2:
         produto = st.selectbox("Produto", df_estoque["SKU"].unique())
         quantidade = st.number_input("Quantidade", min_value=1, step=1)
         tipo = st.selectbox("Tipo de Movimentação", ["E", "S"]) 
-        localizacao = st.text_input("Localização", value="")
+        localizacao = st.text_input("Localização", value="").upper()
         data = datetime.today()
 
         if tipo == "E":
