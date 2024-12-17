@@ -224,7 +224,7 @@ with tab2:
 
         texto_btn = "Entrada" if tipo == "E" else "Saída"
         
-        if st.button(f"Registrar {texto_btn}"):
+        if st.button(f"Registrar {texto_btn} 💾"):
             
             if produto == "":
                 
