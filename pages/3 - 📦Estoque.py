@@ -205,7 +205,7 @@ def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
 with tab2:
     col1, = st.columns(1)
     with col1:
-        produto = st.selectbox("Produto", df_estoque["SKU"].unique(),value="")
+        produto = st.selectbox("Produto", df_estoque["SKU"].unique(),index="")
         quantidade = st.number_input("Quantidade", min_value=1, step=1)
         tipo = st.selectbox("Tipo de Movimentação", ["E", "S"]) 
         localizacao = st.text_input("Localização", value="")
