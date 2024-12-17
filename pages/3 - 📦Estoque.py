@@ -186,7 +186,7 @@ def get_db_connection():
         port='5432'
     )
 
-def insert_movimentacao(data, quantidade, tipo, sku, localizacao):
+def insert_movimentacao(data, quantidade, tipo, sku, localizacao,variacao):
     query = """
         INSERT INTO tembo.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO","VARIACAO")
         VALUES (%s, %s, %s, %s, %s,%s)
