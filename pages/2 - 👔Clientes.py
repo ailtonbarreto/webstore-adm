@@ -7,6 +7,7 @@ st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layo
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+st.subheader("Clientes",anchor=False)
 
 tab1, tab2, tab3 = st.tabs(["Pesquisar Cliente", "Cadastrar Cliente", "Editar Cliente"])
 
