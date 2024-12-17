@@ -220,6 +220,8 @@ with tab2:
         if st.button(f"Registrar {texto_btn}") and produto != "":
             resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao)
             st.success(resultado)
+        else:
+            st.error("Preencha o Produto Corretamenta")
 
 # -------------------------------------------------------------------------------------------------------
 # ATUALIZAR
