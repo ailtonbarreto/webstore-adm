@@ -220,7 +220,7 @@ with tab2:
         
         data = datetime.today()
         
-        variacao = opcoes.split("-")[1]
+        variacao = opcoes.split("-")
 
 
         texto_btn = "Entrada" if tipo == "E" else "Saída"
