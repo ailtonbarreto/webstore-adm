@@ -220,7 +220,7 @@ with tab2:
         
         data = datetime.today()
         
-        variacao = produto.split("-")[1]
+        variacao = produto.split("-")
 
         st.write(variacao)
         
