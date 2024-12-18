@@ -221,9 +221,7 @@ with tab2:
         data = datetime.today()
         
         variacao = produto.split("-")[1]
-
-        st.write(variacao)
-        
+    
  
         texto_btn = "Entrada" if tipo == "E" else "Saída"
         
