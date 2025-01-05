@@ -79,6 +79,8 @@ df['EMISSAO'] = pd.to_datetime(df['EMISSAO'])
 df["Ano"] = df["EMISSAO"].dt.year
 df["Mês"] = df["EMISSAO"].dt.month
 df["Dia"] = df["EMISSAO"].dt.day
+df = df.sort_values("Ano",ascending=True)
+
 
 
 def determinar_mês(valor):
