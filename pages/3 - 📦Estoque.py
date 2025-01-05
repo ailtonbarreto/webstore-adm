@@ -46,9 +46,9 @@ def load_estoque():
 df = load_estoque()
 
 
-if df["TIPO"] == "S":
-    df["QTD"] * -1
-    
+if "TIPO" in df.columns and "QTD" in df.columns:
+    df.loc[df["TIPO"] == "S", "QTD"] *= -1
+
 df
 # -----------------------------------------------------------------------------------------
 # CARREGAR PRODUTOS
