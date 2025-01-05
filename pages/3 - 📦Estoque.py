@@ -44,7 +44,9 @@ def load_estoque():
     return df
 
 df = load_estoque()
-
+if df["TIPO"] == "E":
+    df["QTD"] * -1
+    
 df
 # -----------------------------------------------------------------------------------------
 # CARREGAR PRODUTOS
