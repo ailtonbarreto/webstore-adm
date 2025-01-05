@@ -49,7 +49,6 @@ df = load_estoque()
 if "TIPO" in df.columns and "QTD" in df.columns:
     df.loc[df["TIPO"] == "S", "QTD"] *= -1
 
-df
 # -----------------------------------------------------------------------------------------
 # CARREGAR PRODUTOS
 
