@@ -157,7 +157,7 @@ with tab1:
                         
                         
                         st.subheader("ESTOQUE",anchor=False)
-                        df_qtd = df.query('SKU == @produto_filtro')
+                        df_qtd = df_estoque.query('SKU == @produto_filtro')
                         df_qtd = df_qtd["QTD"].sum()
                         st.write("",f'{df_qtd:,.0f}'.replace(',', 'X').replace('.', ',').replace('X', '.'))
                         
