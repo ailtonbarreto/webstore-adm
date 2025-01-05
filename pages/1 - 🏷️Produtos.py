@@ -11,6 +11,8 @@ with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 
+st.subheader("Produtos",anchor=False)
+
 tab2, tab3 = st.tabs(["Cadastrar Produto","Ativar/Inativar"])
 
 # ------------------------------------------------------------------------------------------------------------------
@@ -206,7 +208,7 @@ with tab3:
     colc, = st.columns(1)
 
     with cola:
-        sku_produto = st.text_input("SKU do Produto")
+        sku_produto = st.text_input("SKU do Produto").upper()
 
     with colb:
         situacao = st.selectbox("Situação", ["Ativo", "Inativo"])

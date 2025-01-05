@@ -1,14 +1,14 @@
 import streamlit as st
 import psycopg2
 import pandas as pd
+from datetime import datetime
 
 st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layout="wide",initial_sidebar_state="collapsed")
 
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-
-st.subheader("Estoque",anchor=False)
+st.subheader("ESTOQUE",anchor=False)
 
 tab1, tab2 = st.tabs(["Consultar Estoque", "Adicionar Movimentação"])
 
@@ -67,6 +67,20 @@ def load_produtos():
         )        
         
         query = """
+
+                WITH estoque_calculado AS (
+                    SELECT 
+                        e."SKU",
+                        SUM(CASE 
+                                WHEN e."TIPO" = 'E' THEN e."QTD"
+                                WHEN e."TIPO" = 'S' THEN -e."QTD"
+                                ELSE 0
+                            END) AS "ESTOQUE_TOTAL"
+                    FROM 
+                        tembo.tb_mov_estoque AS e
+                    GROUP BY 
+                        e."SKU"
+                )
                 SELECT 
                     cp."PARENT",
                     p."SKU",
@@ -75,13 +89,20 @@ def load_produtos():
                     cp."CATEGORIA",
                     cp."VR_UNIT",
                     p."ATIVO",
-                    cp."DESCRICAO_PARENT"
+                    cp."DESCRICAO_PARENT",
+                    COALESCE(ec."ESTOQUE_TOTAL", 0) AS "ESTOQUE"
                 FROM 
                     tembo.tb_produto AS p
                 JOIN 
                     tembo.tb_produto_parent AS cp
                 ON 
-                    p."PARENT" = cp."PARENT";
+                    p."PARENT" = cp."PARENT"
+                LEFT JOIN 
+                    estoque_calculado AS ec
+                ON 
+                    p."SKU" = ec."SKU";
+
+                    
                 """
      
         df = pd.read_sql_query(query, conn)
@@ -119,6 +140,7 @@ with tab1:
                 
                 for index, row in df_produto.iterrows():
                     with col2:
+                        
                         st.image(row['IMAGEM'], width=400)
                         st.write(f"{row['DESCRICAO']}",anchor=False)
                         
@@ -130,7 +152,9 @@ with tab1:
                             st.write("Ativo",anchor=False)
                         else:
                             st.write("Inativo",anchor=False)
-                            
+                        
+                        st.divider()
+                        
                         
                         st.subheader("ESTOQUE",anchor=False)
                         df_qtd = df.query('SKU == @produto_filtro')
@@ -149,15 +173,77 @@ with tab1:
                         st.write("A.01.01.01")
             else:
                 st.write("Nenhum produto encontrado.")
-                
+
 # -------------------------------------------------------------------------------------------------------
-# ATUALIZAR VISUAL
+# MOVIMENTACAO
+
+def get_db_connection():
+    return psycopg2.connect(
+        host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
+        database='postgres',
+        user='postgres',
+        password='MeSaIkkB57YSOgLO',
+        port='5432'
+    )
+
+def insert_movimentacao(data, quantidade, tipo, sku, localizacao,variacao):
+    query = """
+        INSERT INTO tembo.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO","VARIACAO")
+        VALUES (%s, %s, %s, %s, %s,%s)
+    """
+    try:
+        with get_db_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query, (data, quantidade, tipo, sku, localizacao,variacao))
+                conn.commit()
+                return "Movimentação inserida com sucesso!"
+    except Exception as e:
+        return f"Erro ao inserir movimentação: {e}"
+
+# -------------------------------------------------------------------------------------------------------
+
+with tab2:
+    
+    col1, = st.columns(1)
+    
+    with col1:
+
+        opcoes = list(df_estoque["SKU"].unique())
+        
+        produto = st.selectbox("Produto", opcoes)
+        
+        quantidade = st.number_input("Quantidade", min_value=1, step=1)
+        
+        tipo = st.selectbox("Tipo de Movimentação", ["E", "S"]) 
+        
+        localizacao = st.text_input("Localização", value="").upper()
+        
+        data = datetime.today()
+        
+        variacao = produto.split("-")[1]
+    
+ 
+        texto_btn = "Entrada" if tipo == "E" else "Saída"
+        
+        if st.button(f"Registrar {texto_btn} 💾"):
+            
+            if produto == "":
+                
+                st.error("Por favor, selecione um produto antes de registrar a movimentação.")
+                
+            else:
+          
+                resultado = insert_movimentacao(data, quantidade, tipo, produto, localizacao,variacao)
+                st.success(resultado)
+
+# -------------------------------------------------------------------------------------------------------
+# ATUALIZAR
 
 if st.button("🔁 Atualizar"):
     st.cache_data.clear()
     st.rerun()
 # ---------------------------------------------------------------------------------------------------------
-# estilizacao
+# ESTILIZACAO
 
 style1 = """
     <style>

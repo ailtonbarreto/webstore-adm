@@ -7,6 +7,7 @@ st.set_page_config(page_title="Painel de Adm - Webstore", page_icon="📊", layo
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+st.subheader("Clientes",anchor=False)
 
 tab1, tab2, tab3 = st.tabs(["Pesquisar Cliente", "Cadastrar Cliente", "Editar Cliente"])
 
@@ -43,4 +44,17 @@ def load_clientes():
 
 df = load_clientes()
 
-st.dataframe(df,use_container_width=True,hide_index=True)
+# -----------------------------------------------------------------------------------------------------
+
+
+with tab1:
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        filtro_cliente = st.selectbox("Pesuisar Cleinte",df["CLIENTE"].unique())
+
+        df_resultado = df.query('CLIENTE == @filtro_cliente')
+        
+        st.dataframe(df_resultado,use_container_width=True,hide_index=True)
