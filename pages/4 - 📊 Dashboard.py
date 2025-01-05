@@ -11,6 +11,7 @@ st.set_page_config(page_title="ERP MODELO", page_icon="📊", layout="wide",init
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
 
+st.subheader("Live Dashboard",anchor=False)
 
 card1, card2, card3, card4, card6, card7, = st.columns([2,2,2,2,1,1])
 col1, col2 = st.columns(2)
