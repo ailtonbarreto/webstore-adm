@@ -112,12 +112,55 @@ with tab3:
 
 
 
+def inserir_pedido(pedido, emissao, entrega, sku_cliente, sku, parent, qtd, vr_unit, sequencia, status):
+    conn = load_data()
+    cursor = conn.cursor()
     insert = """
         INSERT INTO tembo.tb_venda ("PEDIDO", "EMISSAO", "ENTREGA", 
         "SKU_CLIENTE", "SKU", "PARENT", "QTD", "VR_UNIT", "SEQUENCIA", "STATUS")
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING *;
-        """
+    """
+    valores = (pedido, emissao, entrega, sku_cliente, sku, parent, qtd, vr_unit, sequencia, status)
+    
+    cursor.execute(insert, valores)
+    conn.commit()
+    
+    # Retorna o resultado da inserção
+    resultado = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    
+    return resultado  # Retorna os dados do pedido inserido
+
+# Interface Streamlit
+with tab3():
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        lista = [""] + df["CLIENTE"].unique().tolist()  # Supondo que df seja um DataFrame com clientes
+        cliente = st.selectbox("Cliente", lista)
+
+    with col2:
+        pedido = st.text_input("Número do Pedido")
+        emissao = st.date_input("Data de Emissão")
+        entrega = st.date_input("Data de Entrega")
+        sku_cliente = st.text_input("SKU Cliente")
+        sku = st.text_input("SKU Produto")
+        parent = st.text_input("Parent SKU")
+        qtd = st.number_input("Quantidade", min_value=1, value=1)
+        vr_unit = st.number_input("Valor Unitário", min_value=0.01, value=0.0)
+        sequencia = st.number_input("Sequência", min_value=1, value=1)
+        status = st.selectbox("Status", ["Pendente", "Em Processamento", "Concluído", "Cancelado"])
+
+    if st.button("Add Pedido"):
+        if cliente and pedido and emissao and entrega and sku_cliente and sku:
+            # Chama a função para inserir o pedido no banco de dados
+            resultado = inserir_pedido(pedido, emissao, entrega, sku_cliente, sku, parent, qtd, vr_unit, sequencia, status)
+            
+            st.success(f"Pedido {resultado[0]} inserido com sucesso!")
+        else:
+            st.error("Por favor, preencha todos os campos obrigatórios!")
 
     if st.button("Add Pedido"):
         pass
