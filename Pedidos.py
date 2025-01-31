@@ -143,7 +143,7 @@ with tab3:
         sku = st.text_input("SKU Produto")
         parent = st.text_input("Parent SKU")
         qtd = st.number_input("Quantidade", min_value=1, value=1)
-        vr_unit = st.number_input("Valor Unitário", min_value=0.01, value=0.0)
+        vr_unit = st.number_input("Valor Unitário")
         sequencia = st.number_input("Sequência", min_value=1, value=1)
         status = st.selectbox("Status", ["Pendente", "Em Processamento", "Concluído", "Cancelado"])
 
