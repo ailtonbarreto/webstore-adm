@@ -156,8 +156,7 @@ with tab3:
         else:
             st.error("Por favor, preencha todos os campos obrigatórios!")
 
-    if st.button("Add Pedido"):
-        pass
+
             
 
 # ----------------------------------------------------------------------------------
