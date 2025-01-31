@@ -103,12 +103,6 @@ df["Mês"] = df["Mês"].apply(determinar_mês)
 # -------------------------------------------------------------------------------------------------------
 # INSERIR PEDIDO
 
-with tab3:
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        lista = [""] + df["CLIENTE"].unique().tolist()
-        cliente = st.selectbox("Cliente",lista)
 
 
 
