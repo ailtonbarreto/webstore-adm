@@ -134,7 +134,7 @@ def inserir_pedido(pedido, emissao, entrega, sku_cliente, sku, parent, qtd, vr_u
     return resultado  # Retorna os dados do pedido inserido
 
 # Interface Streamlit
-with tab3():
+with tab3:
     col1, col2 = st.columns(2)
     
     with col1:
