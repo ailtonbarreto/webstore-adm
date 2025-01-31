@@ -112,15 +112,15 @@ with tab3:
 
 
 
-insert = """
-    INSERT INTO tembo.tb_venda ("PEDIDO", "EMISSAO", "ENTREGA", 
-    "SKU_CLIENTE", "SKU", "PARENT", "QTD", "VR_UNIT", "SEQUENCIA", "STATUS")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-    RETURNING *;
-    """
-    
-if st.button("Add Pedido"):
-                    pass
+    insert = """
+        INSERT INTO tembo.tb_venda ("PEDIDO", "EMISSAO", "ENTREGA", 
+        "SKU_CLIENTE", "SKU", "PARENT", "QTD", "VR_UNIT", "SEQUENCIA", "STATUS")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+        RETURNING *;
+        """
+
+    if st.button("Add Pedido"):
+        pass
             
 
 # ----------------------------------------------------------------------------------
