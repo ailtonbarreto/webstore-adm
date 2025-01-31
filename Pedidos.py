@@ -119,9 +119,8 @@ insert = """
     RETURNING *;
     """
     
-    with col2:
-        if st.button("Add Pedido"):
-                pass
+if st.button("Add Pedido"):
+                    pass
             
 
 # ----------------------------------------------------------------------------------
