@@ -5,7 +5,6 @@ import plotly_express as px
 import datetime
 
 
-
 st.set_page_config(page_title="ERP MODELO", page_icon="📊", layout="wide",initial_sidebar_state="collapsed")
 
 with open("style.css") as f:
