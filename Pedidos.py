@@ -104,8 +104,6 @@ df["Mês"] = df["Mês"].apply(determinar_mês)
 # INSERIR PEDIDO
 
 
-
-
 def inserir_pedido(pedido, emissao, entrega, sku_cliente, sku, parent, qtd, vr_unit, sequencia, status):
     conn = load_data()
     cursor = conn.cursor()
