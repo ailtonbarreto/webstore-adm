@@ -137,14 +137,14 @@ with tab3:
         qtd = st.number_input("Quantidade", min_value=1, value=1)
         status = st.selectbox("Status", ["Pendente", "Em Processamento", "Concluído", "Cancelado"])
 
-    if st.button("Add Pedido"):
-        if cliente and emissao and emissao + 10 and sku_cliente and sku:
-            # Chama a função para inserir o pedido no banco de dados
-            resultado = inserir_pedido(emissao, emissao + 10, sku_cliente, sku,  qtd, status)
-            
-            st.success(f"Pedido {resultado[0]} inserido com sucesso!")
-        else:
-            st.error("Por favor, preencha todos os campos obrigatórios!")
+        if st.button("Add Pedido"):
+            if cliente and emissao and emissao + 10 and sku_cliente and sku:
+        
+                resultado = inserir_pedido(emissao, emissao + 10, sku_cliente, sku,  qtd, status)
+                
+                st.success(f"Pedido {resultado[0]} inserido com sucesso!")
+            else:
+                st.error("Por favor, preencha todos os campos obrigatórios!")
 
 
 
