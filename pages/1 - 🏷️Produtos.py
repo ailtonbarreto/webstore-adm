@@ -206,6 +206,7 @@ with tab3:
  
     cola, colb = st.columns(2)
     colc, = st.columns(1)
+    cold, = st.columns(1)
 
     with cola:
         sku_produto = st.text_input("SKU do Produto").upper()
@@ -234,6 +235,9 @@ with tab3:
             else:
                 st.warning("Por favor, insira o SKU do produto.")
 
+    with cold:
+        st.subheader("Produtos")
+        st.dataframe(df,use_container_width=True,hide_index=True)
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
