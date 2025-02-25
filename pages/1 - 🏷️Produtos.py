@@ -236,7 +236,7 @@ with tab3:
                 st.warning("Por favor, insira o SKU do produto.")
 
     with cold:
-        st.subheader("Produtos")
+        st.subheader("Produtos",anchor=False)
         st.dataframe(df,use_container_width=True,hide_index=True)
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
