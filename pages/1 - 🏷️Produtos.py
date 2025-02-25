@@ -237,6 +237,7 @@ with tab3:
 
     with cold:
         st.subheader("Produtos",anchor=False)
+        df = df.drop(columns = "IMAGEM")
         st.dataframe(df,use_container_width=True,hide_index=True)
 # ---------------------------------------------------------------------------------------------------
 # FUNCAO CADASTRAR VARIACAO
