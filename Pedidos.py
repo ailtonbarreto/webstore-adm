@@ -11,7 +11,7 @@ with open("style.css") as f:
 
 st.subheader("Pedidos",anchor=False)
 
-tab1, tab2,tab3 = st.tabs(["Pedidos", "Alterar Status","Inserir Pedido"])
+tab1, tab2 = st.tabs(["Pedidos", "Alterar Status"])
 
 
 
@@ -99,53 +99,6 @@ def determinar_mês(valor):
 
 
 df["Mês"] = df["Mês"].apply(determinar_mês)
-
-# -------------------------------------------------------------------------------------------------------
-# INSERIR PEDIDO
-
-def inserir_pedido(pedido, emissao, entrega, sku_cliente, sku, parent, qtd, vr_unit, sequencia, status):
-    conn = load_data()
-    cursor = conn.cursor()
-    insert = """
-        INSERT INTO tembo.tb_venda ("PEDIDO", "EMISSAO", "ENTREGA", 
-        "SKU_CLIENTE", "SKU", "PARENT", "QTD", "VR_UNIT", "SEQUENCIA", "STATUS")
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        RETURNING *;
-    """
-    valores = (pedido, emissao, entrega, sku_cliente, sku, parent, qtd, vr_unit, sequencia, status)
-    
-    cursor.execute(insert, valores)
-    conn.commit()
-    
- 
-    resultado = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    
-    return resultado
-
-
-with tab3:
-    col1, = st.columns(1)
-    
-    with col1:
-        lista = [""] + df["CLIENTE"].unique().tolist()
-        cliente = st.selectbox("Cliente", lista)
-        emissao = st.date_input("Data de Emissão")
-        sku_cliente = st.text_input("SKU Cliente")
-        sku = st.text_input("SKU Produto")
-        qtd = st.number_input("Quantidade", min_value=1, value=1)
-        status = st.selectbox("Status", ["Pendente", "Em Processamento", "Concluído", "Cancelado"])
-
-        if st.button("Add Pedido"):
-            if cliente and emissao and emissao + 10 and sku_cliente and sku:
-        
-                resultado = inserir_pedido(emissao, emissao + 10, sku_cliente, sku,  qtd, status)
-                
-                st.success(f"Pedido {resultado[0]} inserido com sucesso!")
-            else:
-                st.error("Por favor, preencha todos os campos obrigatórios!")
-
 
 
 # ----------------------------------------------------------------------------------
