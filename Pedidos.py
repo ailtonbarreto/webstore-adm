@@ -136,7 +136,7 @@ with tab1:
     qtd_pedido_planejados = qtd_pedido_planejados["PEDIDO"].nunique()
 
 
-    qtd_pedido_aguardando_conf = df_filtrado_ped.query('STATUS == "AGUARDANDO CONFIRMACAO"')
+    qtd_pedido_aguardando_conf = df_filtrado_ped.query('STATUS == "AGUARDANDO APROVAÇÃO"')
     qtd_pedido_aguardando_conf = qtd_pedido_aguardando_conf["PEDIDO"].nunique()
 
 
@@ -153,7 +153,7 @@ with tab1:
     with cardpd1:
         st.metric("Concluídos",f"🟢{qtd_pedido_concluido:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
     with cardpd2:
-        st.metric("Aguardando Confirmação",f"🟡{qtd_pedido_aguardando_conf:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
+        st.metric("Aguardando APROVAÇÃO",f"🟡{qtd_pedido_aguardando_conf:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))   
     with cardpd3:
         st.metric("Pagamento Em Aberto",f"🔵{qtd_pg_aberto:,.0f}".replace(',', 'X').replace('.', ',').replace('X', '.'))    
     with cardpd4:
@@ -184,7 +184,7 @@ with tab2:
     with col2:
         novo_status = st.selectbox(
             "Status",
-            ["AGUARDANDO CONFIRMACAO", "AGUARDANDO PAGAMENTO","PLANEJADO" ,"CONCLUIDO","CANCELADO"]
+            ["AGUARDANDO APROVAÇÃO", "AGUARDANDO PAGAMENTO","PLANEJADO" ,"CONCLUIDO","CANCELADO"]
         )
     with col3:
         def update_pedido(filtro_pedido, novo_status):
