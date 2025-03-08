@@ -213,7 +213,7 @@ dispersao_chart.layout.yaxis.fixedrange = True
 
 # ---------------------------------------------------------------------------------------------------------
 # ranking produtos
-df_produto = df_filtrado.groupby("DESCRICAO")["QTD"].count().reset_index()
+df_produto = df_filtrado.groupby("DESCRICAO")["QTD"].sum().reset_index()
 df_produto = df_produto.sort_values(by="QTD",ascending=False)
 
 
