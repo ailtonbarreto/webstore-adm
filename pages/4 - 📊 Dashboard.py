@@ -192,7 +192,7 @@ grafico_barras.layout.yaxis.fixedrange = True
 # ---------------------------------------------------------------------------------------------------------
 # tabela
 
-df_tb = df_filtrado.groupby("CLIENTE")["TOTAL"].sum().reset_index()
+df_tb = df_filtrado.groupby(["CLIENTE","REP"])["TOTAL"].sum().reset_index()
 df_tb = df_tb.sort_values(by="TOTAL",ascending=False)
 df_tb["TOTAL"] = df_tb["TOTAL"].apply(lambda x: f'R$ {x:,.2f}')
 
