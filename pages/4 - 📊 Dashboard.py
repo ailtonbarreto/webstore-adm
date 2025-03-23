@@ -263,20 +263,6 @@ style1 = """
 st.markdown(style1, unsafe_allow_html=True)
 
 
-# style2 = """
-#     <style>
-#     [data-testid="stFullScreenFrame"]
-#     {
-#     display: flex;
-#     justify-content: center;
-#     }
-#     </style>
-# """
-# st.markdown(style2, unsafe_allow_html=True)
-
-
-
-
 style4 = """
     <style>
     [data-testid="stMetricValue"]
