@@ -3,6 +3,7 @@ import pandas as pd
 import psycopg2
 import plotly_express as px
 import datetime
+import streamlit.components.v1 as components
 
 
 st.set_page_config(page_title="ERP MODELO", page_icon="📊", layout="wide",initial_sidebar_state="collapsed")
@@ -12,10 +13,13 @@ with open("style.css") as f:
 
 st.subheader("Live Dashboard",anchor=False)
 
-card1, card2, card3, card4, card6, card7, = st.columns([2,2,2,2,1,1])
-col1, col2 = st.columns(2)
-col3, col4= st.columns(2)
-st.divider()
+tab1, tab2 = st.tabs(["Live Dasboard","BI Análitico"])
+
+with tab1:
+    card1, card2, card3, card4, card6, card7, = st.columns([2,2,2,2,1,1])
+    col1, col2 = st.columns(2)
+    col3, col4= st.columns(2)
+    st.divider()
       
 # -------------------------------------------------------------------------------------------------------
 # SELECT CARREGAR DATAFRAME
