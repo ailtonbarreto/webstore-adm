@@ -29,7 +29,8 @@ SELECT
     v."QTD",
     v."VR_UNIT",
     v."STATUS",
-    c."CLIENTE"
+    c."CLIENTE",
+    c."REP"
 FROM 
     tembo.tb_venda AS v
 LEFT JOIN (
