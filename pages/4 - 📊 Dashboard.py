@@ -20,7 +20,11 @@ with tab1:
     col1, col2 = st.columns(2)
     col3, col4= st.columns(2)
     st.divider()
-      
+
+with tab2:
+    st.title("Dashboard Faturamento",anchor=False)
+    bi = "https://app.powerbi.com/view?r=eyJrIjoiMmJiNDhkYWQtNWEzZS00YjQxLTkxNzctYWZiOWZlYWFjZTUyIiwidCI6IjE4Njc3OGFjLWJjNjMtNGE0My1iMmVlLThiMTk0MWVjYTRhOSJ9"
+    components.iframe(bi, height=800)
 # -------------------------------------------------------------------------------------------------------
 # SELECT CARREGAR DATAFRAME
 
