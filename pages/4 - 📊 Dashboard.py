@@ -24,7 +24,7 @@ with tab1:
 with tab2:
     st.title("Dashboard Faturamento",anchor=False)
     bi = "https://app.powerbi.com/view?r=eyJrIjoiMmJiNDhkYWQtNWEzZS00YjQxLTkxNzctYWZiOWZlYWFjZTUyIiwidCI6IjE4Njc3OGFjLWJjNjMtNGE0My1iMmVlLThiMTk0MWVjYTRhOSJ9"
-    components.iframe(bi, height=800)
+    components.iframe(bi, height=100)
 # -------------------------------------------------------------------------------------------------------
 # SELECT CARREGAR DATAFRAME
 
