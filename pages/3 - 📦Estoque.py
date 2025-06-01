@@ -17,10 +17,10 @@ tab1, tab2 = st.tabs(["Consultar Estoque", "Adicionar Movimentação"])
 
 @st.cache_data
 def load_estoque():
-    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
-    database = 'postgres'
-    user = 'postgres'
-    password = 'MeSaIkkB57YSOgLO'
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
+    database = 'webstore_b2b',
+    user = 'webstore_b2b_owner',
+    password = 'npg_iYEzyaTLg4f8',
     port = '5432'
 
     try:
@@ -32,7 +32,7 @@ def load_estoque():
             port=port
         )        
       
-        query = """ SELECT * FROM tembo.tb_mov_estoque;"""
+        query = """ SELECT * FROM publi.tb_mov_estoque;"""
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
@@ -54,10 +54,10 @@ if "TIPO" in df.columns and "QTD" in df.columns:
 
 @st.cache_data
 def load_produtos():
-    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
-    database = 'postgres'
-    user = 'postgres'
-    password = 'MeSaIkkB57YSOgLO'
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
+    database = 'webstore_b2b',
+    user = 'webstore_b2b_owner',
+    password = 'npg_iYEzyaTLg4f8',
     port = '5432'
 
     try:
@@ -80,7 +80,7 @@ def load_produtos():
                                 ELSE 0
                             END) AS "ESTOQUE_TOTAL"
                     FROM 
-                        tembo.tb_mov_estoque AS e
+                        publi.tb_mov_estoque AS e
                     GROUP BY 
                         e."SKU"
                 )
@@ -95,9 +95,9 @@ def load_produtos():
                     cp."DESCRICAO_PARENT",
                     COALESCE(ec."ESTOQUE_TOTAL", 0) AS "ESTOQUE"
                 FROM 
-                    tembo.tb_produto AS p
+                    publi.tb_produto AS p
                 JOIN 
-                    tembo.tb_produto_parent AS cp
+                    publi.tb_produto_parent AS cp
                 ON 
                     p."PARENT" = cp."PARENT"
                 LEFT JOIN 
@@ -182,16 +182,16 @@ with tab1:
 
 def get_db_connection():
     return psycopg2.connect(
-        host='gluttonously-bountiful-sloth.data-1.use1.tembo.io',
-        database='postgres',
-        user='postgres',
-        password='MeSaIkkB57YSOgLO',
-        port='5432'
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
+    database = 'webstore_b2b',
+    user = 'webstore_b2b_owner',
+    password = 'npg_iYEzyaTLg4f8',
+    port = '5432'
     )
 
 def insert_movimentacao(data, quantidade, tipo, sku, localizacao,variacao):
     query = """
-        INSERT INTO tembo.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO","VARIACAO")
+        INSERT INTO publi.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO","VARIACAO")
         VALUES (%s, %s, %s, %s, %s,%s)
     """
     try:

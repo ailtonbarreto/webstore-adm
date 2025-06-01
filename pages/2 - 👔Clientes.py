@@ -16,10 +16,10 @@ tab1, tab2, tab3 = st.tabs(["Pesquisar Cliente", "Cadastrar Cliente", "Editar Cl
 
 @st.cache_data
 def load_clientes():
-    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
-    database = 'postgres'
-    user = 'postgres'
-    password = 'MeSaIkkB57YSOgLO'
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
+    database = 'webstore_b2b',
+    user = 'webstore_b2b_owner',
+    password = 'npg_iYEzyaTLg4f8',
     port = '5432'
 
     try:
@@ -31,7 +31,7 @@ def load_clientes():
             port=port
         )        
       
-        query = "SELECT * FROM tembo.tb_cliente;"
+        query = "SELECT * FROM publi.tb_cliente;"
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:

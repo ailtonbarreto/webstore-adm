@@ -32,13 +32,13 @@ SELECT
     c."CLIENTE",
     c."REP"
 FROM 
-    tembo.tb_venda AS v
+    publi.tb_venda AS v
 LEFT JOIN (
     SELECT DISTINCT ON ("PARENT") "PARENT", "DESCRICAO", "CATEGORIA"
-    FROM tembo.tb_produto
+    FROM publi.tb_produto
     ORDER BY "PARENT"
 ) AS p ON v."PARENT" = p."PARENT"
-LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
+LEFT JOIN publi.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 """
 
 
@@ -46,10 +46,10 @@ LEFT JOIN tembo.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 
 @st.cache_data
 def load_data():
-    host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
-    database = 'postgres'
-    user = 'postgres'
-    password = 'MeSaIkkB57YSOgLO'
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech'
+    database = 'webstore_b2b'
+    user = 'webstore_b2b_owner'
+    password = 'npg_iYEzyaTLg4f8'
     port = '5432'
 
     try:
@@ -189,7 +189,7 @@ with tab2:
         )
     with col3:
         def update_pedido(filtro_pedido, novo_status):
-            host = 'gluttonously-bountiful-sloth.data-1.use1.tembo.io'
+            host = 'gluttonously-bountiful-sloth.data-1.use1.publi.io'
             database = 'postgres'
             user = 'postgres'
             password = 'MeSaIkkB57YSOgLO'
@@ -207,7 +207,7 @@ with tab2:
 
                 # Atualiza o pedido com o novo status
                 query = f"""
-                UPDATE tembo.tb_venda
+                UPDATE publi.tb_venda
                 SET "STATUS" = '{novo_status}'
                 WHERE "PEDIDO" = '{filtro_pedido}';
                 """
@@ -217,7 +217,7 @@ with tab2:
 
                 # Consulta atualizada
                 consulta_query = f"""
-                SELECT * FROM tembo.tb_venda WHERE "PEDIDO" = '{filtro_pedido}';
+                SELECT * FROM publi.tb_venda WHERE "PEDIDO" = '{filtro_pedido}';
                 """
                 df = pd.read_sql_query(consulta_query, conn)
                 return df
