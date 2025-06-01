@@ -47,7 +47,7 @@ LEFT JOIN public.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 
 # -------------------------------------------------------------------------------------------------------
 
-@st.cache_data
+# @st.cache_data
 def load_data():
     host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
     database = 'webstore_b2b',
