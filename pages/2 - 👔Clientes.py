@@ -16,10 +16,10 @@ tab1, tab2, tab3 = st.tabs(["Pesquisar Cliente", "Cadastrar Cliente", "Editar Cl
 
 @st.cache_data
 def load_clientes():
-    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
-    database = 'webstore_b2b',
-    user = 'webstore_b2b_owner',
-    password = 'npg_iYEzyaTLg4f8',
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech'
+    database = 'webstore_b2b'
+    user = 'webstore_b2b_owner'
+    password = 'npg_iYEzyaTLg4f8'
     port = '5432'
 
     try:
