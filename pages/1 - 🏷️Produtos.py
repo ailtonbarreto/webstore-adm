@@ -19,10 +19,10 @@ tab2, tab3 = st.tabs(["Cadastrar Produto","Ativar/Inativar"])
 # CARREGAR PRODUTOS
 @st.cache_data
 def load_produtos():
-    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
-    database = 'webstore_b2b',
-    user = 'webstore_b2b_owner',
-    password = 'npg_iYEzyaTLg4f8',
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech'
+    database = 'webstore_b2b'
+    user = 'webstore_b2b_owner'
+    password = 'npg_iYEzyaTLg4f8'
     port = '5432'
 
     try:
