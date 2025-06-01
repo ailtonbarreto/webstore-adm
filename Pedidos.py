@@ -46,10 +46,10 @@ LEFT JOIN public.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 
 @st.cache_data
 def load_data():
-    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech'
-    database = 'webstore_b2b'
-    user = 'webstore_b2b_owner'
-    password = 'npg_iYEzyaTLg4f8'
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
+    database = 'webstore_b2b',
+    user = 'webstore_b2b_owner',
+    password = 'npg_iYEzyaTLg4f8',
     port = '5432'
 
     try:
