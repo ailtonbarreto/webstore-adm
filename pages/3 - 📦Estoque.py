@@ -17,10 +17,10 @@ tab1, tab2 = st.tabs(["Consultar Estoque", "Adicionar Movimentação"])
 
 @st.cache_data
 def load_estoque():
-    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
-    database = 'webstore_b2b',
-    user = 'webstore_b2b_owner',
-    password = 'npg_iYEzyaTLg4f8',
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech'
+    database = 'webstore_b2b'
+    user = 'webstore_b2b_owner'
+    password = 'npg_iYEzyaTLg4f8'
     port = '5432'
 
     try:
@@ -54,10 +54,10 @@ if "TIPO" in df.columns and "QTD" in df.columns:
 
 @st.cache_data
 def load_produtos():
-    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech',
-    database = 'webstore_b2b',
-    user = 'webstore_b2b_owner',
-    password = 'npg_iYEzyaTLg4f8',
+    host = 'ep-long-salad-aczix9aa-pooler.sa-east-1.aws.neon.tech'
+    database = 'webstore_b2b'
+    user = 'webstore_b2b_owner'
+    password = 'npg_iYEzyaTLg4f8'
     port = '5432'
 
     try:
