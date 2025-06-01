@@ -13,18 +13,13 @@ with open("style.css") as f:
 
 st.subheader("Live Dashboard",anchor=False)
 
-tab1, tab2 = st.tabs(["Live Dasboard","BI Análitico"])
 
-with tab1:
-    card1, card2, card3, card4, card6, card7, = st.columns([2,2,2,2,1,1])
-    col1, col2 = st.columns(2)
-    col3, col4= st.columns(2)
-    st.divider()
+card1, card2, card3, card4, card6, card7, = st.columns([2,2,2,2,1,1])
+col1, col2 = st.columns(2)
+col3, col4= st.columns(2)
+st.divider()
 
-with tab2:
-    st.title("Dashboard Análitico",anchor=False)
-    bi = "https://app.powerbi.com/view?r=eyJrIjoiMmJiNDhkYWQtNWEzZS00YjQxLTkxNzctYWZiOWZlYWFjZTUyIiwidCI6IjE4Njc3OGFjLWJjNjMtNGE0My1iMmVlLThiMTk0MWVjYTRhOSJ9"
-    components.iframe(bi, height=900)
+
 # -------------------------------------------------------------------------------------------------------
 # SELECT CARREGAR DATAFRAME
 
