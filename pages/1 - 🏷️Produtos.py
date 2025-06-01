@@ -45,9 +45,9 @@ def load_produtos():
                     p."ATIVO",
                     cp."DESCRICAO_PARENT"
                 FROM 
-                    publi.tb_produto AS p
+                    public.tb_produto AS p
                 JOIN 
-                    publi.tb_produto_parent AS cp
+                    public.tb_produto_parent AS cp
                 ON 
                     p."PARENT" = cp."PARENT";
                 """
@@ -91,7 +91,7 @@ def load_parent():
                     cp."VR_UNIT",
                     cp."DESCRICAO_PARENT"
                 FROM 
-                    publi.tb_produto_parent AS cp
+                    public.tb_produto_parent AS cp
                 """
         
         df_parent = pd.read_sql_query(queryparent, conn)
@@ -145,17 +145,17 @@ with tab2:
 
     def insert_parent(descricao_parent, categoria, vr_unit, url):
    
-        conn = psycopg2.connect(host='gluttonously-bountiful-sloth.data-1.use1.publi.io',database='postgres',user='postgres',password='MeSaIkkB57YSOgLO',port='5432')
+        conn = psycopg2.connect(host='gluttonously-bountiful-sloth.data-1.use1.public.io',database='postgres',user='postgres',password='MeSaIkkB57YSOgLO',port='5432')
 
         cursor = conn.cursor()
 
-        cursor.execute("SELECT MAX(\"PARENT\") FROM publi.tb_produto_parent")
+        cursor.execute("SELECT MAX(\"PARENT\") FROM public.tb_produto_parent")
         max_parent = cursor.fetchone()[0]
 
         parent = max_parent + 1 if max_parent else 1
 
         insert_query = """
-                INSERT INTO publi.tb_produto_parent ("PARENT", "DESCRICAO_PARENT", "CATEGORIA", "VR_UNIT", "IMAGEM")
+                INSERT INTO public.tb_produto_parent ("PARENT", "DESCRICAO_PARENT", "CATEGORIA", "VR_UNIT", "IMAGEM")
                 VALUES (%s, %s, %s, %s, %s);
                 """
 
@@ -183,7 +183,7 @@ def editar_produto(status_produtos, sku_produto):
         cursor = conn.cursor()
 
         update_query = """
-            UPDATE publi.tb_produto
+            UPDATE public.tb_produto
             SET "ATIVO" = %s
             WHERE "SKU" = %s;
         """
@@ -244,7 +244,7 @@ with tab3:
     def insert_variacao(parent, sku, descricao, categoria, vr_unit):
         try:
             conn = psycopg2.connect(
-                host='gluttonously-bountiful-sloth.data-1.use1.publi.io',
+                host='gluttonously-bountiful-sloth.data-1.use1.public.io',
                 database='postgres',
                 user='postgres',
                 password='MeSaIkkB57YSOgLO',
@@ -261,7 +261,7 @@ with tab3:
 
             
             insert_query1 = """
-            INSERT INTO publi.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "ATIVO")
+            INSERT INTO public.tb_produto ("PARENT", "SKU", "DESCRICAO", "CATEGORIA", "VR_UNIT", "ATIVO")
             VALUES (%s, %s, %s, %s, %s, %s);
             """
 

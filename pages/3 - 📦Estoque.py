@@ -32,7 +32,7 @@ def load_estoque():
             port=port
         )        
       
-        query = """ SELECT * FROM publi.tb_mov_estoque;"""
+        query = """ SELECT * FROM public.tb_mov_estoque;"""
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:
@@ -80,7 +80,7 @@ def load_produtos():
                                 ELSE 0
                             END) AS "ESTOQUE_TOTAL"
                     FROM 
-                        publi.tb_mov_estoque AS e
+                        public.tb_mov_estoque AS e
                     GROUP BY 
                         e."SKU"
                 )
@@ -95,9 +95,9 @@ def load_produtos():
                     cp."DESCRICAO_PARENT",
                     COALESCE(ec."ESTOQUE_TOTAL", 0) AS "ESTOQUE"
                 FROM 
-                    publi.tb_produto AS p
+                    public.tb_produto AS p
                 JOIN 
-                    publi.tb_produto_parent AS cp
+                    public.tb_produto_parent AS cp
                 ON 
                     p."PARENT" = cp."PARENT"
                 LEFT JOIN 
@@ -191,7 +191,7 @@ def get_db_connection():
 
 def insert_movimentacao(data, quantidade, tipo, sku, localizacao,variacao):
     query = """
-        INSERT INTO publi.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO","VARIACAO")
+        INSERT INTO public.tb_mov_estoque ("DATA", "QTD", "TIPO", "SKU", "LOCALIZACAO","VARIACAO")
         VALUES (%s, %s, %s, %s, %s,%s)
     """
     try:

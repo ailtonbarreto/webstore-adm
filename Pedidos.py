@@ -32,13 +32,13 @@ SELECT
     c."CLIENTE",
     c."REP"
 FROM 
-    publi.tb_venda AS v
+    public.tb_venda AS v
 LEFT JOIN (
     SELECT DISTINCT ON ("PARENT") "PARENT", "DESCRICAO", "CATEGORIA"
-    FROM publi.tb_produto
+    FROM public.tb_produto
     ORDER BY "PARENT"
 ) AS p ON v."PARENT" = p."PARENT"
-LEFT JOIN publi.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
+LEFT JOIN public.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 """
 
 
@@ -189,7 +189,7 @@ with tab2:
         )
     with col3:
         def update_pedido(filtro_pedido, novo_status):
-            host = 'gluttonously-bountiful-sloth.data-1.use1.publi.io'
+            host = 'gluttonously-bountiful-sloth.data-1.use1.public.io'
             database = 'postgres'
             user = 'postgres'
             password = 'MeSaIkkB57YSOgLO'
@@ -207,7 +207,7 @@ with tab2:
 
                 # Atualiza o pedido com o novo status
                 query = f"""
-                UPDATE publi.tb_venda
+                UPDATE public.tb_venda
                 SET "STATUS" = '{novo_status}'
                 WHERE "PEDIDO" = '{filtro_pedido}';
                 """
@@ -217,7 +217,7 @@ with tab2:
 
                 # Consulta atualizada
                 consulta_query = f"""
-                SELECT * FROM publi.tb_venda WHERE "PEDIDO" = '{filtro_pedido}';
+                SELECT * FROM public.tb_venda WHERE "PEDIDO" = '{filtro_pedido}';
                 """
                 df = pd.read_sql_query(consulta_query, conn)
                 return df

@@ -31,7 +31,7 @@ def load_clientes():
             port=port
         )        
       
-        query = "SELECT * FROM publi.tb_cliente;"
+        query = "SELECT * FROM public.tb_cliente;"
         
         df = pd.read_sql_query(query, conn)
     except Exception as e:

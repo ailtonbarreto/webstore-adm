@@ -42,13 +42,13 @@ SELECT
     c."CLIENTE",
     c."REP"
 FROM 
-    publi.tb_venda AS v
+    public.tb_venda AS v
 LEFT JOIN (
     SELECT DISTINCT ON ("PARENT") "PARENT", "DESCRICAO", "CATEGORIA"
-    FROM publi.tb_produto
+    FROM public.tb_produto
     ORDER BY "PARENT"
 ) AS p ON v."PARENT" = p."PARENT"
-LEFT JOIN publi.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
+LEFT JOIN public.tb_cliente AS c ON v."SKU_CLIENTE" = c."SKU_CLIENTE";
 """
 
 # -------------------------------------------------------------------------------------------------------
