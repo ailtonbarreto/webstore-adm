@@ -306,7 +306,7 @@ style5 = """
     <style>
     [data-testid="stToolbarActions"]
     {
-    margin-top: 0.4vw;
+    display: none;
     }
     </style>
 """
