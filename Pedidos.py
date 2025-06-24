@@ -300,3 +300,14 @@ style4 = """
     </style>
 """
 st.markdown(style4, unsafe_allow_html=True)
+
+
+style5 = """
+    <style>
+    [data-testid="stToolbarActions"]
+    {
+    margin-top: 0.4vw;
+    }
+    </style>
+"""
+st.markdown(style5, unsafe_allow_html=True)
